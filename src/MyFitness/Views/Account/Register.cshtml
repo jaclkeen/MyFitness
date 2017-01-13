@@ -3,36 +3,131 @@
     ViewData["Title"] = "Register";
 }
 
-<h2>@ViewData["Title"].</h2>
+<h2>@ViewData["Title"]</h2>
 
 <form asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
-    <h4>Create a new account.</h4>
-    <hr />
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="Email" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="Email" class="form-control" />
-            <span asp-validation-for="Email" class="text-danger"></span>
+    <div class="InitialRegister">
+
+        <h4>Create a new account</h4>
+        <hr />
+        <div class="form-group">
+            <label asp-for="FirstName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label asp-for="Password" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="Password" class="form-control" />
-            <span asp-validation-for="Password" class="text-danger"></span>
+        <div class="form-group">
+            <label asp-for="LastName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label asp-for="ConfirmPassword" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="ConfirmPassword" class="form-control" />
-            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        <div class="form-group">
+            <label asp-for="Email" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
         </div>
+        <div class="form-group">
+            <label asp-for="Password" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ConfirmPassword" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-9">
+                <button type="button" class="btn btn-default ShowNextRegister">Next</button>
+            </div>
+        </div>
+
     </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <button type="submit" class="btn btn-default">Register</button>
+
+    <div class="SecondaryLogin">
+        <div class="form-group">
+            <label asp-for="CurrentWeight" class="col-md-2 control-label"></label>
+            <div class="col-md-3">
+                <input type="number" asp-for="CurrentWeight" class="form-control" />
+                <span asp-validation-for="CurrentWeight" class="text-danger"></span>
+            </div>
+
+            <label asp-for="GoalWeight" class="col-md-2 control-label"></label>
+            <div class="col-md-3">
+                <input type="number" asp-for="GoalWeight" class="form-control" />
+                <span asp-validation-for="GoalWeight" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="HeightFeet" class="col-md-2 control-label"></label>
+            <div class="col-md-3">
+                <select asp-for="HeightInches" class="form-control">
+                    <option value="-1">Please select a value...</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                </select>
+                <span asp-validation-for="HeightFeet" class="text-danger"></span>
+            </div>
+
+            <label asp-for="HeightInches" class="col-md-2 control-label"></label>
+            <div class="col-md-3">
+                <select asp-for="HeightInches" class="form-control">
+                    <option value="None">Please select a value...</option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                </select>
+                <span asp-validation-for="HeightInches" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Gender" class="col-md-2 control-label"></label>
+            <div class="col-md-3">
+                <select asp-for="Gender" class="form-control">
+                    <option value="Null">Please select your gender..</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                </select>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+
+            <label asp-for="Age" class="col-md-2 control-label"></label>
+            <div class="col-md-3">
+                <input type="number" asp-for="Age" class="form-control" />
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-2">
+                <a class="BackToMainLogin">Back</a>
+            </div>
+            <div class="col-md-offset-2 col-md-5">
+                <button type="submit" class="btn btn-default">Register</button>
+            </div>
         </div>
     </div>
 </form>

@@ -1,22 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using MyFitness.Data;
 
-namespace MyFitness.Data.Migrations
+namespace MyFitness.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("00000000000000_CreateIdentitySchema")]
-    partial class CreateIdentitySchema
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.0.0-rc3")
+                .HasAnnotation("ProductVersion", "1.0.1")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
@@ -132,13 +129,32 @@ namespace MyFitness.Data.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
+                    b.Property<int>("Age");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
+
+                    b.Property<double>("CurrentWeight");
 
                     b.Property<string>("Email")
                         .HasAnnotation("MaxLength", 256);
 
                     b.Property<bool>("EmailConfirmed");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired();
+
+                    b.Property<string>("Gender")
+                        .IsRequired();
+
+                    b.Property<double>("GoalWeight");
+
+                    b.Property<int>("HeightFeet");
+
+                    b.Property<int>("HeightInches");
+
+                    b.Property<string>("LastName")
+                        .IsRequired();
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -155,6 +171,9 @@ namespace MyFitness.Data.Migrations
                     b.Property<string>("PhoneNumber");
 
                     b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<string>("ProfileImg")
+                        .IsRequired();
 
                     b.Property<string>("SecurityStamp");
 
@@ -173,6 +192,123 @@ namespace MyFitness.Data.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("MyFitness.Models.DailyNutrition", b =>
+                {
+                    b.Property<int>("DailyNutritionId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("DailyNutritionDate");
+
+                    b.Property<int>("TotalCaloriesRemaining");
+
+                    b.Property<int>("UserId");
+
+                    b.Property<string>("UserId1");
+
+                    b.HasKey("DailyNutritionId");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("DailyNutrition");
+                });
+
+            modelBuilder.Entity("MyFitness.Models.Exercise", b =>
+                {
+                    b.Property<int>("ExerciseId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CaloriesBurned");
+
+                    b.Property<int>("DailyNutritionId");
+
+                    b.Property<double>("DistanceTraveled");
+
+                    b.Property<double>("ExerciseLengthInHours");
+
+                    b.Property<string>("ExerciseType")
+                        .IsRequired();
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<int>("Reps");
+
+                    b.Property<int>("Sets");
+
+                    b.Property<int>("UserId");
+
+                    b.Property<string>("UserId1");
+
+                    b.Property<int>("WeightLifted");
+
+                    b.HasKey("ExerciseId");
+
+                    b.HasIndex("DailyNutritionId");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("Exercise");
+                });
+
+            modelBuilder.Entity("MyFitness.Models.Foods", b =>
+                {
+                    b.Property<int>("FoodId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Calories");
+
+                    b.Property<int>("DailyNutritionId");
+
+                    b.Property<DateTime>("DateEaten");
+
+                    b.Property<double>("FoodCarbs");
+
+                    b.Property<double>("FoodFat");
+
+                    b.Property<string>("FoodName")
+                        .IsRequired();
+
+                    b.Property<double>("FoodProtein");
+
+                    b.Property<int>("Servings");
+
+                    b.Property<int>("UserId");
+
+                    b.Property<string>("UserId1");
+
+                    b.HasKey("FoodId");
+
+                    b.HasIndex("DailyNutritionId");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("Foods");
+                });
+
+            modelBuilder.Entity("MyFitness.Models.Relationship", b =>
+                {
+                    b.Property<int>("RelationshipId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("RecievingUserId");
+
+                    b.Property<string>("RecievingUserId1");
+
+                    b.Property<int>("RelationshipStatus");
+
+                    b.Property<int>("SendingUserId");
+
+                    b.Property<string>("SendingUserId1");
+
+                    b.HasKey("RelationshipId");
+
+                    b.HasIndex("RecievingUserId1");
+
+                    b.HasIndex("SendingUserId1");
+
+                    b.ToTable("Relationship");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
@@ -210,6 +346,48 @@ namespace MyFitness.Data.Migrations
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MyFitness.Models.DailyNutrition", b =>
+                {
+                    b.HasOne("MyFitness.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId1");
+                });
+
+            modelBuilder.Entity("MyFitness.Models.Exercise", b =>
+                {
+                    b.HasOne("MyFitness.Models.DailyNutrition")
+                        .WithMany("DailyExercises")
+                        .HasForeignKey("DailyNutritionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("MyFitness.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId1");
+                });
+
+            modelBuilder.Entity("MyFitness.Models.Foods", b =>
+                {
+                    b.HasOne("MyFitness.Models.DailyNutrition", "DailyNutrition")
+                        .WithMany("DailyFoods")
+                        .HasForeignKey("DailyNutritionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("MyFitness.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId1");
+                });
+
+            modelBuilder.Entity("MyFitness.Models.Relationship", b =>
+                {
+                    b.HasOne("MyFitness.Models.ApplicationUser", "RecievingUser")
+                        .WithMany()
+                        .HasForeignKey("RecievingUserId1");
+
+                    b.HasOne("MyFitness.Models.ApplicationUser", "SendingUser")
+                        .WithMany()
+                        .HasForeignKey("SendingUserId1");
                 });
         }
     }
