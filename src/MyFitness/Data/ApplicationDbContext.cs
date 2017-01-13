@@ -22,5 +22,10 @@ namespace MyFitness.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+        public DbSet<DailyNutrition> DailyNutrition { get; set; }
+        public DbSet<Exercise> Exercise { get; set; }
+        public DbSet<Foods> Foods { get; set; }
+        public DbSet<Relationship> Relationship { get; set; }
     }
 }

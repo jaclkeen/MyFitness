@@ -28,3 +28,16 @@ SearchForFoods("bread")
     .then(function (FoodNutritionValue) {
     })
 })
+
+$(".SecondaryLogin").hide()
+$(".ShowNextRegister").on("click", function () {
+    $(".InitialRegister").fadeOut(1000, function () {
+        $(".SecondaryLogin").fadeIn(1000)
+    })
+})
+
+$(".BackToMainLogin").on("click", function () {
+    $(".SecondaryLogin").fadeOut(1000, function () {
+        $(".InitialRegister").fadeIn(1000)
+    })
+})

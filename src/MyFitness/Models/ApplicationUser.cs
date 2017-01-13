@@ -16,6 +16,9 @@ namespace MyFitness.Models
         public string LastName { get; set; }
 
         [Required]
+        public string ProfileImg { get; set; }
+
+        [Required]
         public double CurrentWeight { get; set; }
 
         [Required]
@@ -32,5 +35,10 @@ namespace MyFitness.Models
 
         [Required]
         public int Age { get; set; }
+
+        public ApplicationUser()
+        {
+            this.ProfileImg = "/images/egg.png";
+        }
     }
 }

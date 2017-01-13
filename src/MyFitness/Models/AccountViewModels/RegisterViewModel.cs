@@ -23,5 +23,41 @@ namespace MyFitness.Models.AccountViewModels
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "Current Weight")]
+        public double CurrentWeight { get; set; }
+
+        [Required]
+        [Display(Name = "Goal Weight")]
+        public double GoalWeight { get; set; }
+
+        [Required]
+        [Display(Name = "Height (Feet)")]
+        public int HeightFeet { get; set; }
+
+        [Required]
+        [Display(Name = "Height (Inches)")]
+        public int HeightInches { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Gender")]
+        public string Gender { get; set; }
+
+        [Required]
+        [Display(Name = "Age")]
+        public int Age { get; set; }
+
     }
 }
