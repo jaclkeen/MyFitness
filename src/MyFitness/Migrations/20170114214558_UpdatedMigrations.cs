@@ -163,8 +163,8 @@ namespace MyFitness.Migrations
                 {
                     DailyNutritionId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    DailyNutritionDate = table.Column<DateTime>(nullable: false),
-                    TotalCaloriesRemaining = table.Column<int>(nullable: false),
+                    DailyNutritionDate = table.Column<string>(nullable: false),
+                    TotalCaloriesRemaining = table.Column<double>(nullable: false),
                     UserId = table.Column<int>(nullable: false),
                     UserId1 = table.Column<string>(nullable: true)
                 },
@@ -222,8 +222,7 @@ namespace MyFitness.Migrations
                     Name = table.Column<string>(nullable: false),
                     Reps = table.Column<int>(nullable: false),
                     Sets = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false),
-                    UserId1 = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: false),
                     WeightLifted = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -236,11 +235,11 @@ namespace MyFitness.Migrations
                         principalColumn: "DailyNutritionId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Exercise_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_Exercise_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -251,7 +250,7 @@ namespace MyFitness.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Calories = table.Column<int>(nullable: false),
                     DailyNutritionId = table.Column<int>(nullable: false),
-                    DateEaten = table.Column<DateTime>(nullable: false),
+                    DateEaten = table.Column<string>(nullable: false),
                     FoodCarbs = table.Column<double>(nullable: false),
                     FoodFat = table.Column<double>(nullable: false),
                     FoodName = table.Column<string>(nullable: false),
@@ -329,9 +328,9 @@ namespace MyFitness.Migrations
                 column: "DailyNutritionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Exercise_UserId1",
+                name: "IX_Exercise_UserId",
                 table: "Exercise",
-                column: "UserId1");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Foods_DailyNutritionId",

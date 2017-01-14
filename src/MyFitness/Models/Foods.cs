@@ -22,7 +22,7 @@ namespace MyFitness.Models
         public int Servings { get; set; }
 
         [Required]
-        public DateTime DateEaten { get; set; }
+        public string DateEaten { get; set; }
 
         [Required]
         public int DailyNutritionId { get; set; }
