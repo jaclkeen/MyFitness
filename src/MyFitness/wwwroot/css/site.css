@@ -15,6 +15,13 @@ textarea {
     max-width: 280px;
 }
 
+
+
+.ChangeProfileImg{
+    width: 24%;
+    margin: auto;
+}
+
 tr{
     border: 2px solid black;
 }
@@ -60,6 +67,9 @@ td:nth-child(1), th:nth-child(1){
 
 .ProfileImg{
     border: 2px solid black;
+    cursor: pointer;
+    max-width: 100%;
+
 }
 
 .HomeHead{

@@ -41,3 +41,7 @@ $(".BackToMainLogin").on("click", function () {
         $(".InitialRegister").fadeIn(1000)
     })
 })
+
+$(".ChangePImageInput").on("change", function () {
+    $(".ChangeProfileImg").submit()
+})

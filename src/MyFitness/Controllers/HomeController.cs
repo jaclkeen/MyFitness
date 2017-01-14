@@ -8,17 +8,21 @@ using Microsoft.AspNetCore.Identity;
 using MyFitness.Data;
 using Microsoft.AspNetCore.Authorization;
 using MyFitness.Models.AppViewModels;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace MyFitness.Controllers
 {
     public class HomeController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
-
         private ApplicationDbContext context;
+        private IHostingEnvironment _environment;
 
-        public HomeController(UserManager<ApplicationUser> userManager, ApplicationDbContext ctx)
+        public HomeController(IHostingEnvironment env, UserManager<ApplicationUser> userManager, ApplicationDbContext ctx)
         {
+            _environment = env;
             context = ctx;
             _userManager = userManager;
         }
@@ -60,6 +64,26 @@ namespace MyFitness.Controllers
 
             model.TodayNutrition = n;
             return View(model);
+        }
+
+        public async Task<IActionResult> ChangeProfileImage(IFormFile ProfileImg)
+        {
+            var uploads = Path.Combine(_environment.WebRootPath, "images");
+            ApplicationUser CurrentDbUser = await GetCurrentUserAsync();
+            //ApplicationUser CurrentDbUser = context.Users.Where(u => u == user).SingleOrDefault();
+
+            if (ProfileImg != null && ProfileImg.ContentType.Contains("image"))
+            {
+                using (var fileStream = new FileStream(Path.Combine(uploads, ProfileImg.FileName), FileMode.Create))
+                {
+                    await ProfileImg.CopyToAsync(fileStream);
+                    CurrentDbUser.ProfileImg = $"/images/{ProfileImg.FileName}";
+                    context.SaveChanges();
+                }
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Index");
         }
 
         public IActionResult About()

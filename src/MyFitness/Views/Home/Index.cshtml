@@ -2,7 +2,12 @@
 
 <div class="Profile">
     <div class="HomeHead">
-        <img class="ProfileImg" src="@Model.CurrentUser.ProfileImg" />
+        <form class="ChangeProfileImg" asp-controller="Home" asp-action="ChangeProfileImage" enctype="multipart/form-data">
+            <label for="ChangePImageInput">
+                <input id="ChangePImageInput" name="ProfileImg" class="ChangePImageInput hidden" type="file" />
+                <img class="ProfileImg" src="@Model.CurrentUser.ProfileImg" />
+            </label>
+        </form>
         <h2>@Model.CurrentUser.FirstName @Model.CurrentUser.LastName</h2>
         <h5>@Model.CurrentUser.UserName</h5>
     </div>
