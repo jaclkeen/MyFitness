@@ -16,7 +16,7 @@ namespace MyFitness.Models
         public ApplicationUser User { get; set; }
 
         [Required]
-        public string DailyNutritionDate { get; set; }
+        public DateTime DailyNutritionDate { get; set; }
 
         [Required]
         public double TotalCaloriesRemaining { get; set; }

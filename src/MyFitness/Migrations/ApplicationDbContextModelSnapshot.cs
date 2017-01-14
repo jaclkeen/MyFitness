@@ -199,8 +199,7 @@ namespace MyFitness.Migrations
                     b.Property<int>("DailyNutritionId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("DailyNutritionDate")
-                        .IsRequired();
+                    b.Property<DateTime>("DailyNutritionDate");
 
                     b.Property<double>("TotalCaloriesRemaining");
 
@@ -238,8 +237,9 @@ namespace MyFitness.Migrations
 
                     b.Property<int>("Sets");
 
-                    b.Property<string>("UserId")
-                        .IsRequired();
+                    b.Property<int>("UserId");
+
+                    b.Property<string>("UserId1");
 
                     b.Property<int>("WeightLifted");
 
@@ -247,7 +247,7 @@ namespace MyFitness.Migrations
 
                     b.HasIndex("DailyNutritionId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId1");
 
                     b.ToTable("Exercise");
                 });
@@ -367,8 +367,7 @@ namespace MyFitness.Migrations
 
                     b.HasOne("MyFitness.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("UserId1");
                 });
 
             modelBuilder.Entity("MyFitness.Models.Foods", b =>

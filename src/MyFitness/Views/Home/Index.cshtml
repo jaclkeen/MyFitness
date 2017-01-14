@@ -5,7 +5,7 @@
         <img class="ProfileImg" src="@Model.CurrentUser.ProfileImg" />
         <h2>@Model.CurrentUser.FirstName @Model.CurrentUser.LastName</h2>
         <h5>@Model.CurrentUser.UserName</h5>
-
+    </div>
         <div class="HomeNav">
             <div class="NavItem">
                 <p class="NavValue">@Model.CurrentUser.Age</p>
@@ -31,11 +31,48 @@
                 <p class="NavValue">@Model.CurrentUser.GoalWeight</p>
                 <p class="NavLabel">Goal Weight</p>
             </div>
-        </div>
     </div>
 
     <div class="HomeBody">
-        <h3>Today - @Model.Today</h3>
-        <h4>Calories Remaining: @Model.TodayNutrition.TotalCaloriesRemaining</h4>
+        <div class="HomeBodyHead">
+            <h3>Today - @Model.Today</h3>
+            <h4>Calories Remaining: @Model.TodayNutrition.TotalCaloriesRemaining</h4>
+        </div>
+        <div class="HomeBodyBody">
+            <table class="NutritionTable table-condensed table-inverse">
+                <thead>
+                    <tr class="row">
+                        <th>Food Name</th>
+                        <th>Calories</th>
+                        <th>Fat</th>
+                        <th>Protein</th>
+                        <th>Carbs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="row">
+                        <th>Good stuff</th>
+                        <td>89</td>
+                        <td>9</td>
+                        <td>90</td>
+                        <td>2</td>
+                    </tr>
+                    <tr class="row">
+                        <th>Good stuff</th>
+                        <td>89</td>
+                        <td>9</td>
+                        <td>90</td>
+                        <td>2</td>
+                    </tr>
+                    <tr class="row">
+                        <th>Total: </th>
+                        <td>@Model.CalorieTotal</td>
+                        <td>@Model.FatTotal</td>
+                        <td>@Model.ProteinTotal</td>
+                        <td>@Model.CarbTotal</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

@@ -35,7 +35,7 @@ namespace MyFitness.Controllers
             model.CurrentUser = CurrentUser;
             model.Today = model.FormatTodayDate(today);
 
-            DailyNutrition n = context.DailyNutrition.Where(dn => dn.DailyNutritionDate == model.Today).SingleOrDefault();
+            DailyNutrition n = context.DailyNutrition.Where(dn => dn.DailyNutritionDate == today).SingleOrDefault();
 
             if(n == null)
             {
@@ -46,7 +46,7 @@ namespace MyFitness.Controllers
 
                 DailyNutrition NewNutrition = new DailyNutrition
                 {
-                    DailyNutritionDate = model.FormatTodayDate(today),
+                    DailyNutritionDate = today,
                     TotalCaloriesRemaining = UserCalories,
                     User = CurrentUser
                 };

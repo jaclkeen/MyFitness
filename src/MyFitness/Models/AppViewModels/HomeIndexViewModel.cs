@@ -13,6 +13,22 @@ namespace MyFitness.Models.AppViewModels
 
         public DailyNutrition TodayNutrition { get; set; }
 
+        public int FatTotal { get; set; }
+
+        public int CalorieTotal { get; set; }
+
+        public int CarbTotal { get; set; }
+
+        public int ProteinTotal { get; set; }
+
+        public HomeIndexViewModel()
+        {
+            this.FatTotal = 0;
+            this.CalorieTotal = 0;
+            this.CarbTotal = 0;
+            this.ProteinTotal = 0;
+        }
+
         public string FormatTodayDate(DateTime today)
         {
             string MonthName = (today.Month == 1) ? "January" :

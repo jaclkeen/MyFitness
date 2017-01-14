@@ -15,6 +15,24 @@ textarea {
     max-width: 280px;
 }
 
+tr{
+    border: 2px solid black;
+}
+
+th{
+    border-left: 1px solid black;
+    background-color: darkcyan;
+}
+
+td{
+    text-align: center;
+    border-left: 1px solid black;
+}
+
+td:nth-child(1), th:nth-child(1){
+    border-left: none;
+}
+
 .UserSearch{
     width: 120%;
     color: black;
@@ -48,12 +66,17 @@ textarea {
     text-align: center;
 }
 
+.NavItem:nth-child(1){
+    border-left: none;
+}
+
 .NavItem{
-    background-color: darkcyan;
+    background-color: snow;
     display: inline-block;
-    width: 19%;
+    width: 20.46%;
+    text-align: center;
+    margin-right: -1%;
     border-left: 2px solid black;
-    border-right: 2px solid black;
 }
 
 .NavItem:hover{
