@@ -136,14 +136,52 @@ td:nth-child(1), th:nth-child(1){
     cursor: pointer;
 }
 
-.AddExerciseModal, .AddFoodModal{
+.AddFoodModal{
     padding: 1%;
     position: fixed;
     z-index: 3;
     border: 2px solid black;
     background: darkgrey;
     margin-top: -25%;
-    width: 60%;
-    margin-left: 5%;
+    width: 50%;
+    margin-left: 10%;
     box-shadow: 6px 6px 6px black;
+}
+
+.AddExerciseModal{
+    padding: 1%;
+    position: fixed;
+    z-index: 3;
+    border: 2px solid black;
+    background: darkgrey;
+    margin-top: -25%;
+    width: 50%;
+    margin-left: 10%;
+    box-shadow: 6px 6px 6px black;
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+.AddExerciseModal h4{
+    margin-top: 0;
+    font-weight: bolder;
+}
+
+.AddFoodModal h3, .AddExerciseModal h3{
+    margin-top: 0;
+    display: inline-block;
+}
+
+.AddFoodModal span, .AddExerciseModal span{
+    float: right;
+    font-size: 3em;
+    cursor: pointer;
+}
+
+.AddFoodModal span:hover, .AddExerciseModal span:hover{
+    color: red;
+}
+
+.SubmitNewFood{
+    margin-top: 15%;
 }

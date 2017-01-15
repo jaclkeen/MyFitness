@@ -1,8 +1,86 @@
-﻿<h3>Exercise Modal</h3>
-<form>
-    <input type="text" />
-    <input type="text" />
-    <input type="text" />
-    <input type="text" />
-    <input type="text" />
+﻿<h3>What exercise did you do?</h3>
+<span class="glyphicon glyphicon-remove CloseExerciseModal"></span>
+<br />
+<h4>* is required</h4>
+<form asp-action="AddExercise" asp-controller="Home">
+    <div class="form-group">
+        <label for="ExerciseBeingAdded.Name" class="col-md-4 control-label">*Exercise Name: </label>
+        <div class="col-md-8">
+            <input name="ExerciseBeingAdded.Name" class="form-control" />
+            <span validation-for="ExerciseBeingAdded.Name" class="text-danger"></span>
+        </div>
+    </div>
+
+    <br /><br /><br />
+    <div class="form-group">
+        <label for="ExerciseBeingAdded.ExerciseType" class="col-md-4 control-label">*Exercise Type: </label>
+        <div class="col-md-8">
+            <select name="ExerciseBeingAdded.ExerciseType" class="form-control">
+                <option value="0">Please select an exercise type..</option>
+                <option>Cardio</option>
+                <option>Weights</option>
+            </select>
+        </div>
+    </div>
+
+    <br /><br />
+    <div class="form-group">
+        <label for="ExerciseBeingAdded.ExerciseLengthInHours" class="col-md-4 control-label">*Length (Hours): </label>
+        <div class="col-md-8">
+            <input name="ExerciseBeingAdded.ExerciseLengthInHours" type="number" min="0" class="form-control" />
+            <span validation-for="ExerciseBeingAdded.ExerciseLengthInHours" class="text-danger"></span>
+        </div>
+    </div>
+
+    <br /><br />
+    <div class="form-group">
+        <label for="ExerciseBeingAdded.CaloriesBurned" class="col-md-4 control-label">*Calories Burned: </label>
+        <div class="col-md-8">
+            <input name="ExerciseBeingAdded.CaloriesBurned" type="number" min="0" class="form-control" />
+            <span validation-for="ExerciseBeingAdded.CaloriesBurned" class="text-danger"></span>
+        </div>
+    </div>
+
+    <br /><br />
+    <div class="form-group">
+        <label for="ExerciseBeingAdded.DistanceTraveled" class="col-md-4 control-label">Mileage Traveled: </label>
+        <div class="col-md-8">
+            <input name="ExerciseBeingAdded.DistanceTraveled" type="number" min="0" class="form-control" />
+            <span validation-for="ExerciseBeingAdded.DistanceTraveled" class="text-danger"></span>
+        </div>
+    </div>
+
+    <br /><br />
+    <div class="form-group">
+        <label for="ExerciseBeingAdded.WeightLifted" class="col-md-4 control-label">Total Weight Lifted: </label>
+        <div class="col-md-8">
+            <input name="ExerciseBeingAdded.WeightLifted" type="number" min="0" class="form-control" />
+            <span validation-for="ExerciseBeingAdded.WeightLifted" class="text-danger"></span>
+        </div>
+    </div>
+
+    <br /><br />
+    <div class="form-group">
+        <label for="ExerciseBeingAdded.Sets" class="col-md-4 control-label">Sets: </label>
+        <div class="col-md-8">
+            <input name="ExerciseBeingAdded.Sets" type="number" min="0" class="form-control" />
+            <span validation-for="ExerciseBeingAdded.Sets" class="text-danger"></span>
+        </div>
+    </div>
+
+    <br /><br />
+    <div class="form-group">
+        <label for="ExerciseBeingAdded.Reps" class="col-md-4 control-label">Reps: </label>
+        <div class="col-md-8">
+            <input name="ExerciseBeingAdded.Reps" type="number" min="0" class="form-control" />
+            <span validation-for="ExerciseBeingAdded.Reps" class="text-danger"></span>
+        </div>
+    </div>
+
+    <br /><br />
+    <div class="form-group">
+        <div class="col-md-offset-4 col-md-4">
+            <input type="submit" class="form-control btn-primary" />
+        </div>
+    </div>
 </form>

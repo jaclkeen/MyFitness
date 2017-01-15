@@ -68,15 +68,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var foods in Model.TodayNutrition.DailyFoods)
+                    @if (Model.TodayNutrition.DailyFoods != null)
                     {
-                        <tr class="row">
-                            <th>@foods.FoodName</th>
-                            <td>@foods.Calories</td>
-                            <td>@foods.FoodFat</td>
-                            <td>@foods.FoodProtein</td>
-                            <td>@foods.FoodCarbs</td>
-                        </tr>
+                        @foreach (var foods in Model.TodayNutrition.DailyFoods)
+                        {
+                            <tr class="row">
+                                <th>@foods.FoodName</th>
+                                <td>@foods.Calories</td>
+                                <td>@foods.FoodFat</td>
+                                <td>@foods.FoodProtein</td>
+                                <td>@foods.FoodCarbs</td>
+                            </tr>
+                        }
                     }
                     <tr class="row">
                         <th>Total: </th>

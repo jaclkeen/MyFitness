@@ -9,9 +9,13 @@ namespace MyFitness.Models.AppViewModels
     {
         public ApplicationUser CurrentUser { get; set; }
 
-        public string Today { get; set; }
+        public Foods FoodBeingAdded { get; set; }
 
         public DailyNutrition TodayNutrition { get; set; }
+
+        public Exercise ExerciseBeingAdded { get; set; }
+
+        public string Today { get; set; }
 
         public double FatTotal { get; set; }
 

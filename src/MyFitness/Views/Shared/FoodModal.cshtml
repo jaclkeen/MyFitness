@@ -1,8 +1,39 @@
-﻿<h3>Food Modal</h3>
-<form>
-    <input type="text" />
-    <input type="text" />
-    <input type="text" />
-    <input type="text" />
-    <input type="text" />
+﻿<h3>What did you eat?</h3>
+<span class="glyphicon glyphicon-remove CloseFoodModal"></span>
+<br />
+<h4>* is required</h4>
+<form asp-action="AddEatenFoods" asp-controller="Home">
+    <div class="form-group">
+        <label for="FoodBeingAdded.FoodName" class="col-md-3 control-label">*Food Name: </label>
+        <div class="col-md-9">
+            <input for="FoodBeingAdded.FoodName" class="form-control" />
+            <span validation-for="FoodBeingAdded.FoodName" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="FoodSearchResults"></div>
+    <br /><br />
+    <div class="form-group ServingsFormDiv">
+        <label for="FoodBeingAdded.Servings" class="col-md-3 control-label">*Servings: </label>
+        <div class="col-md-9">
+            <input for="FoodBeingAdded.Servings" type="number" min="0" class="form-control Servings" />
+            <span validation-for="FoodBeingAdded.Servings" class="text-danger"></span>
+        </div>
+    </div>
+
+    <input for="FoodBeingAdded.FoodFat" class="form-control hidden Fat" />
+
+    <input for="FoodBeingAdded.Calories" class="form-control hidden Calories" />
+
+    <input for="FoodBeingAdded.FoodProtein" class="form-control hidden Protein" />
+
+    <input for="FoodBeingAdded.FoodCarbs" class="form-control hidden Carbs" />
+
+    <br /><br />
+    <div class="form-group">
+        <div class="col-md-offset-4 col-md-4">
+            <input type="submit" class="form-control btn-primary" />
+        </div>
+    </div>
+
 </form>

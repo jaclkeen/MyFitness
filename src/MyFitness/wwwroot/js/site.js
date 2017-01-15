@@ -29,6 +29,14 @@ SearchForFoods("bread")
     })
 })
 
+$(".CloseFoodModal").on("click", function () {
+    $(".AddFoodModal").fadeOut(1000)
+})
+
+$(".CloseExerciseModal").on("click", function () {
+    $(".AddExerciseModal").fadeOut(1000)
+})
+
 $(".AddFood").on("click", function () {
     $(".AddExerciseModal").hide()
     $(".AddFoodModal").fadeIn(1000)
