@@ -8,7 +8,7 @@
                 <img class="ProfileImg" src="@Model.CurrentUser.ProfileImg" />
             </label>
         </form>
-        <h2>@Model.CurrentUser.FirstName @Model.CurrentUser.LastName</h2>
+        <h2 class="UserName">@Model.CurrentUser.FirstName @Model.CurrentUser.LastName</h2>
         <h5>@Model.CurrentUser.UserName</h5>
     </div>
         <div class="HomeNav">
@@ -39,8 +39,21 @@
     </div>
 
     <div class="HomeBody">
+
+        <div class="AddFoodModal">
+            @{Html.RenderPartial("FoodModal");}
+        </div>
+
+        <div class="AddExerciseModal">
+            @{Html.RenderPartial("ExerciseModal");}
+        </div>
+
         <div class="HomeBodyHead">
-            <h3>Today - @Model.Today</h3>
+            <h3 class="Today">Today - @Model.Today</h3>
+            <div class="AddEmblems">
+                <span class="AddFood">Add food</span>
+                <span class="AddWorkout">Add a workout</span>
+            </div>
             <h4>Calories Remaining: @Model.TodayNutrition.TotalCaloriesRemaining</h4>
         </div>
         <div class="HomeBodyBody">
@@ -55,20 +68,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="row">
-                        <th>Good stuff</th>
-                        <td>89</td>
-                        <td>9</td>
-                        <td>90</td>
-                        <td>2</td>
-                    </tr>
-                    <tr class="row">
-                        <th>Good stuff</th>
-                        <td>89</td>
-                        <td>9</td>
-                        <td>90</td>
-                        <td>2</td>
-                    </tr>
+                    @foreach (var foods in Model.TodayNutrition.DailyFoods)
+                    {
+                        <tr class="row">
+                            <th>@foods.FoodName</th>
+                            <td>@foods.Calories</td>
+                            <td>@foods.FoodFat</td>
+                            <td>@foods.FoodProtein</td>
+                            <td>@foods.FoodCarbs</td>
+                        </tr>
+                    }
                     <tr class="row">
                         <th>Total: </th>
                         <td>@Model.CalorieTotal</td>

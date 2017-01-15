@@ -40,6 +40,12 @@ namespace MyFitness.Controllers
             model.Today = model.FormatTodayDate(today);
 
             DailyNutrition n = context.DailyNutrition.Where(dn => dn.DailyNutritionDate == today).SingleOrDefault();
+            n.DailyExercises = context.Exercise.Where(e => e.DailyNutritionId == n.DailyNutritionId).ToList();
+            n.DailyFoods = context.Foods.Where(f => f.DailyNutritionId == n.DailyNutritionId).ToList();
+            model.CalorieTotal = n.DailyFoods.Sum(df => df.Calories);
+            model.CarbTotal = n.DailyFoods.Sum(df => df.FoodCarbs);
+            model.FatTotal = n.DailyFoods.Sum(df => df.FoodFat);
+            model.ProteinTotal = n.DailyFoods.Sum(df => df.FoodProtein);
 
             if(n == null)
             {

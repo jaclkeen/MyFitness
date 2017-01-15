@@ -29,7 +29,17 @@ SearchForFoods("bread")
     })
 })
 
-$(".SecondaryLogin").hide()
+$(".AddFood").on("click", function () {
+    $(".AddExerciseModal").hide()
+    $(".AddFoodModal").fadeIn(1000)
+})
+
+$(".AddWorkout").on("click", function () {
+    $(".AddFoodModal").hide()
+    $(".AddExerciseModal").fadeIn(1000)
+})
+
+$(".SecondaryLogin, .AddFoodModal, .AddExerciseModal").hide()
 $(".ShowNextRegister").on("click", function () {
     $(".InitialRegister").fadeOut(1000, function () {
         $(".SecondaryLogin").fadeIn(1000)

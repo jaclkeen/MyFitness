@@ -13,13 +13,13 @@ namespace MyFitness.Models.AppViewModels
 
         public DailyNutrition TodayNutrition { get; set; }
 
-        public int FatTotal { get; set; }
+        public double FatTotal { get; set; }
 
         public int CalorieTotal { get; set; }
 
-        public int CarbTotal { get; set; }
+        public double CarbTotal { get; set; }
 
-        public int ProteinTotal { get; set; }
+        public double ProteinTotal { get; set; }
 
         public HomeIndexViewModel()
         {
