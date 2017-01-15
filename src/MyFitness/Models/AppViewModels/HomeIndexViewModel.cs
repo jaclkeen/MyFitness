@@ -16,14 +16,18 @@ namespace MyFitness.Models.AppViewModels
         public Exercise ExerciseBeingAdded { get; set; }
 
         public string Today { get; set; }
-
         public double FatTotal { get; set; }
-
         public int CalorieTotal { get; set; }
-
         public double CarbTotal { get; set; }
-
         public double ProteinTotal { get; set; }
+
+        public int ExerciseTypeTotal { get; set; }
+        public double ExerciseLengthInHoursTotal { get; set; }
+        public double CaloriesBurnedTotal { get; set; }
+        public double DistanceTraveledTotal { get; set; }
+        public double WeightLiftedTotal { get; set; }
+        public double SetsTotal { get; set; }
+        public double RepsTotal { get; set; }
 
         public HomeIndexViewModel()
         {
@@ -31,6 +35,13 @@ namespace MyFitness.Models.AppViewModels
             this.CalorieTotal = 0;
             this.CarbTotal = 0;
             this.ProteinTotal = 0;
+            this.ExerciseTypeTotal = 0;
+            this.ExerciseLengthInHoursTotal = 0;
+            this.CaloriesBurnedTotal = 0;
+            this.DistanceTraveledTotal = 0;
+            this.WeightLiftedTotal = 0;
+            this.SetsTotal = 0;
+            this.RepsTotal = 0;
         }
 
         public string FormatTodayDate(DateTime today)

@@ -62,12 +62,22 @@ namespace MyFitness.Controllers
                 return View(model);
             }
 
-            n.DailyExercises = context.Exercise.Where(e => e.DailyNutritionId == n.DailyNutritionId).ToList();
+            //USED TO GET TOTALS OF FOOD NUTRITION
             n.DailyFoods = context.Foods.Where(f => f.DailyNutritionId == n.DailyNutritionId).ToList();
             model.CalorieTotal = n.DailyFoods.Sum(df => df.Calories);
             model.CarbTotal = n.DailyFoods.Sum(df => df.FoodCarbs);
             model.FatTotal = n.DailyFoods.Sum(df => df.FoodFat);
             model.ProteinTotal = n.DailyFoods.Sum(df => df.FoodProtein);
+
+            //USED TO GET DAILY EXERCISE TOTALS
+            n.DailyExercises = context.Exercise.Where(e => e.DailyNutritionId == n.DailyNutritionId).ToList();
+            model.CaloriesBurnedTotal = n.DailyExercises.Sum(de => de.CaloriesBurned);
+            model.ExerciseLengthInHoursTotal = n.DailyExercises.Sum(de => de.ExerciseLengthInHours);
+            model.RepsTotal = n.DailyExercises.Sum(de => de.Reps);
+            model.SetsTotal = n.DailyExercises.Sum(de => de.Sets);
+            model.DistanceTraveledTotal = n.DailyExercises.Sum(de => de.DistanceTraveled);
+            model.WeightLiftedTotal = n.DailyExercises.Sum(de => de.WeightLifted);
+            model.ExerciseTypeTotal = n.DailyExercises.Count();
 
             model.TodayNutrition = n;
             return View(model);
@@ -77,8 +87,7 @@ namespace MyFitness.Controllers
         {
             var uploads = Path.Combine(_environment.WebRootPath, "images");
             ApplicationUser CurrentDbUser = await GetCurrentUserAsync();
-            //ApplicationUser CurrentDbUser = context.Users.Where(u => u == user).SingleOrDefault();
-
+            
             if (ProfileImg != null && ProfileImg.ContentType.Contains("image"))
             {
                 using (var fileStream = new FileStream(Path.Combine(uploads, ProfileImg.FileName), FileMode.Create))
@@ -93,11 +102,32 @@ namespace MyFitness.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult About()
+        public async Task<IActionResult> AddExercise(Exercise ExerciseBeingAdded)
         {
-            ViewData["Message"] = "Your application description page.";
+            DateTime today = DateTime.Today;
+            ApplicationUser CurrentUser = await GetCurrentUserAsync();
+            DailyNutrition n = context.DailyNutrition.Where(dn => dn.DailyNutritionDate == today && dn.User == CurrentUser).SingleOrDefault();
 
-            return View();
+
+            ExerciseBeingAdded.User = CurrentUser;
+            ExerciseBeingAdded.DailyNutritionId = n.DailyNutritionId;
+
+            if (ModelState.IsValid)
+            {
+                context.Exercise.Add(ExerciseBeingAdded);
+            }
+
+            try
+            {
+                await context.SaveChangesAsync();
+            }
+
+            catch
+            {
+                throw;
+            }
+
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult Contact()

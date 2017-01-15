@@ -90,6 +90,49 @@
                     </tr>
                 </tbody>
             </table>
+            <br />
+            <table class="NutritionTable table-condensed table-inverse">
+                <thead>
+                    <tr class="row">
+                        <th>Exercise</th>
+                        <th>Type</th>
+                        <th>Length</th>
+                        <th>Calories Burned</th>
+                        <th>Distance Traveled</th>
+                        <th>Weight Lifted</th>
+                        <th>Sets</th>
+                        <th>Reps</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.TodayNutrition.DailyExercises != null)
+                    {
+                        @foreach (var exercise in Model.TodayNutrition.DailyExercises)
+                        {
+                            <tr class="row">
+                                <th>@exercise.Name</th>
+                                <td>@exercise.ExerciseType</td>
+                                <td>@exercise.ExerciseLengthInHours</td>
+                                <td>@exercise.CaloriesBurned</td>
+                                <td>@exercise.DistanceTraveled</td>
+                                <td>@exercise.WeightLifted</td>
+                                <td>@exercise.Sets</td>
+                                <td>@exercise.Reps</td>
+                            </tr>
+                        }
+                    }
+                    <tr class="row">
+                        <th>Total: </th>
+                        <td>@Model.ExerciseTypeTotal</td>
+                        <td>@Model.ExerciseLengthInHoursTotal</td>
+                        <td>@Model.CaloriesBurnedTotal</td>
+                        <td>@Model.DistanceTraveledTotal</td>
+                        <td>@Model.WeightLiftedTotal</td>
+                        <td>@Model.SetsTotal</td>
+                        <td>@Model.RepsTotal</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
