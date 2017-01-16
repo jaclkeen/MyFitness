@@ -64,6 +64,7 @@ namespace MyFitness.Controllers
 
             //USED TO GET TOTALS OF FOOD NUTRITION
             n.DailyFoods = context.Foods.Where(f => f.DailyNutritionId == n.DailyNutritionId).ToList();
+            n.DailyFoods.ForEach(f => n.TotalCaloriesRemaining -= f.Calories);
             model.CalorieTotal = n.DailyFoods.Sum(df => df.Calories);
             model.CarbTotal = n.DailyFoods.Sum(df => df.FoodCarbs);
             model.FatTotal = n.DailyFoods.Sum(df => df.FoodFat);
@@ -108,7 +109,6 @@ namespace MyFitness.Controllers
             ApplicationUser CurrentUser = await GetCurrentUserAsync();
             DailyNutrition n = context.DailyNutrition.Where(dn => dn.DailyNutritionDate == today && dn.User == CurrentUser).SingleOrDefault();
 
-
             ExerciseBeingAdded.User = CurrentUser;
             ExerciseBeingAdded.DailyNutritionId = n.DailyNutritionId;
 
@@ -130,11 +130,37 @@ namespace MyFitness.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult Contact()
+        public async Task<IActionResult> AddEatenFoods(Foods FoodBeingAdded)
         {
-            ViewData["Message"] = "Your contact page.";
+            DateTime today = DateTime.Today;
+            ApplicationUser CurrentUser = await GetCurrentUserAsync();
+            DailyNutrition n = context.DailyNutrition.Where(dn => dn.DailyNutritionDate == today && dn.User == CurrentUser).SingleOrDefault();
 
-            return View();
+            Foods NewEatenFood = new Foods
+            {
+                Calories = FoodBeingAdded.Calories * FoodBeingAdded.Servings,
+                FoodFat = FoodBeingAdded.FoodFat * FoodBeingAdded.Servings,
+                FoodCarbs = FoodBeingAdded.FoodCarbs * FoodBeingAdded.Servings,
+                FoodProtein = FoodBeingAdded.FoodProtein * FoodBeingAdded.Servings,
+                FoodName = FoodBeingAdded.FoodName,
+                DateEaten = today,
+                Servings = FoodBeingAdded.Servings,
+                DailyNutritionId = n.DailyNutritionId,
+                User = CurrentUser,
+            };
+            context.Foods.Add(NewEatenFood);
+
+            try
+            {
+                await context.SaveChangesAsync();
+            }
+            catch
+            {
+                throw;
+            }
+
+
+            return RedirectToAction("Index");
         }
 
         public IActionResult Error()

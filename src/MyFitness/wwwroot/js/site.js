@@ -1,7 +1,7 @@
 ﻿function SearchForFoods(FoodName) {
     return new Promise(function (resolve, reject) {
         $.ajax({
-            url: `http://api.nal.usda.gov/ndb/search/?format=json&q=${FoodName}&sort=n&max=25&offset=0&api_key=lW6xOCdaknhH5uu4AEzm17xeoeKD5szhgveUQ7ja`
+            url: `http://api.nal.usda.gov/ndb/search/?format=json&q=${FoodName}&sort=n&max=10&offset=0&api_key=lW6xOCdaknhH5uu4AEzm17xeoeKD5szhgveUQ7ja`
         }).done(function (foods) {
             resolve(foods.list.item)
         }).error(function (err) {
@@ -22,11 +22,57 @@ function FindFoodNutritionalValue(FoodId) {
     })
 }
 
-SearchForFoods("bread")
-.then(function (foods) {
-    FindFoodNutritionalValue("45044694")
-    .then(function (FoodNutritionValue) {
-    })
+function AppendFoodToDOM(food) {
+    $(".FoodSearchResults").append(`
+        <div class='FoodResult' id='${food.ndbno}'>
+            <p class='FoodResultText'>${food.name}</p>
+        </div>
+    `)
+}
+
+$(".FoodSearch").on("input", function () {
+    let InputValue = $(this).val()
+
+    if (InputValue.length > 2) {
+        SearchForFoods(InputValue)
+        .then(function (foods) {
+            $(".FoodSearchResults").html("")
+            foods.forEach(function (food) {
+                AppendFoodToDOM(food)
+            })
+        })
+    }
+    else {
+        $(".FoodSearchResults").html("")
+    }
+})
+
+$(".FoodSearchResults").on("click", function (e) {
+    let context = $(e.target)
+    if (context.hasClass("FoodResult")) {
+        let FoodId = context.attr("id")
+        FindFoodNutritionalValue(FoodId)
+        .then(function (FoodNutritionValues) {
+            $(".FoodSearchResults").html("")
+            $(".FoodSearch").val(`${FoodNutritionValues[0].name}`)
+            $(".Fat").val(`${FoodNutritionValues[0].nutrients[2].gm}`)
+            $(".Calories").val(`${FoodNutritionValues[0].nutrients[0].gm}`)
+            //$(".Protein").val(`${FoodNutritionValues[0].nutrients[2].value}`)
+            $(".Carbs").val(`${FoodNutritionValues[0].nutrients[3].gm}`)
+        })
+    }
+    else if (context.hasClass("FoodResultText")) {
+        let FoodId = context.parent().attr("id")
+        FindFoodNutritionalValue(FoodId)
+        .then(function (FoodNutritionValues) {
+            $(".FoodSearchResults").html("")
+            $(".FoodSearch").val(`${FoodNutritionValues[0].name}`)
+            $(".Fat").val(`${FoodNutritionValues[0].nutrients[2].gm}`)
+            $(".Calories").val(`${FoodNutritionValues[0].nutrients[0].gm}`)
+            //$(".Protein").val(`${FoodNutritionValues[0].nutrients[2].value}`)
+            $(".Carbs").val(`${FoodNutritionValues[0].nutrients[3].gm}`)
+        })
+    }
 })
 
 $(".CloseFoodModal").on("click", function () {

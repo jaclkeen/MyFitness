@@ -9,7 +9,7 @@
     padding-right: 15px;
 }
 
-input,
+/*input,*/
 select,
 textarea {
     max-width: 280px;
@@ -24,6 +24,10 @@ textarea {
 
 tr{
     border: 2px solid black;
+}
+
+.NutritionTable{
+    width: 65%;
 }
 
 th{
@@ -146,6 +150,9 @@ td:nth-child(1), th:nth-child(1){
     width: 50%;
     margin-left: 10%;
     box-shadow: 6px 6px 6px black;
+    max-height: 300px;
+    overflow-y: overlay;
+    overflow-x:hidden;
 }
 
 .AddExerciseModal{
@@ -174,7 +181,8 @@ td:nth-child(1), th:nth-child(1){
 
 .AddFoodModal span, .AddExerciseModal span{
     float: right;
-    font-size: 3em;
+    font-size: 2.5em;
+    margin-right: 2%;
     cursor: pointer;
 }
 
@@ -184,4 +192,25 @@ td:nth-child(1), th:nth-child(1){
 
 .SubmitNewFood{
     margin-top: 15%;
+}
+
+.Hoverable:hover{
+    background: darkgrey;
+    cursor: pointer;
+}
+
+.AddFoodModal input, .AddExerciseModal input, .AddFoodModal select, .AddExerciseModal select{
+    border: 2px solid black;
+}
+
+.FoodResult{
+    cursor: pointer;
+    background: darkcyan;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+    width: 70%;
+    margin-left: 27.55%;
+    font-weight: bolder;
+    text-align: center;
 }

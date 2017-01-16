@@ -8,7 +8,7 @@ using MyFitness.Data;
 namespace MyFitness.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170115203509_Updated Migrations")]
+    [Migration("20170116001303_Updated Migrations")]
     partial class UpdatedMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -259,8 +259,7 @@ namespace MyFitness.Migrations
 
                     b.Property<int>("DailyNutritionId");
 
-                    b.Property<string>("DateEaten")
-                        .IsRequired();
+                    b.Property<DateTime>("DateEaten");
 
                     b.Property<double>("FoodCarbs");
 
@@ -273,15 +272,13 @@ namespace MyFitness.Migrations
 
                     b.Property<int>("Servings");
 
-                    b.Property<int>("UserId");
-
-                    b.Property<string>("UserId1");
+                    b.Property<string>("UserId");
 
                     b.HasKey("FoodId");
 
                     b.HasIndex("DailyNutritionId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Foods");
                 });
@@ -378,7 +375,7 @@ namespace MyFitness.Migrations
 
                     b.HasOne("MyFitness.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("MyFitness.Models.Relationship", b =>

@@ -72,7 +72,7 @@
                     {
                         @foreach (var foods in Model.TodayNutrition.DailyFoods)
                         {
-                            <tr class="row">
+                            <tr class="row Hoverable" id="@foods.FoodId">
                                 <th>@foods.FoodName</th>
                                 <td>@foods.Calories</td>
                                 <td>@foods.FoodFat</td>
@@ -109,7 +109,7 @@
                     {
                         @foreach (var exercise in Model.TodayNutrition.DailyExercises)
                         {
-                            <tr class="row">
+                            <tr class="row Hoverable" id="@exercise.ExerciseId">
                                 <th>@exercise.Name</th>
                                 <td>@exercise.ExerciseType</td>
                                 <td>@exercise.ExerciseLengthInHours</td>
