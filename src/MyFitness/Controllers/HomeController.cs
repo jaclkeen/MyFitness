@@ -109,6 +109,7 @@ namespace MyFitness.Controllers
             ApplicationUser CurrentUser = await GetCurrentUserAsync();
             DailyNutrition n = context.DailyNutrition.Where(dn => dn.DailyNutritionDate == today && dn.User == CurrentUser).SingleOrDefault();
 
+            n.TotalCaloriesRemaining += ExerciseBeingAdded.CaloriesBurned;
             ExerciseBeingAdded.User = CurrentUser;
             ExerciseBeingAdded.DailyNutritionId = n.DailyNutritionId;
 

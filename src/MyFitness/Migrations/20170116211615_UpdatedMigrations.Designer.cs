@@ -8,7 +8,7 @@ using MyFitness.Data;
 namespace MyFitness.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170116001303_Updated Migrations")]
+    [Migration("20170116211615_UpdatedMigrations")]
     partial class UpdatedMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -161,6 +161,8 @@ namespace MyFitness.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
+                    b.Property<double>("MonthlyWeightLost");
+
                     b.Property<string>("NormalizedEmail")
                         .HasAnnotation("MaxLength", 256);
 
@@ -178,10 +180,18 @@ namespace MyFitness.Migrations
 
                     b.Property<string>("SecurityStamp");
 
+                    b.Property<double>("TotalWeightLost");
+
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
                         .HasAnnotation("MaxLength", 256);
+
+                    b.Property<double>("WeeklyWeightLost");
+
+                    b.Property<double>("WeightLostToday");
+
+                    b.Property<double>("YearlyWeightLost");
 
                     b.HasKey("Id");
 

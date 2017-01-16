@@ -57,7 +57,6 @@ $(".FoodSearchResults").on("click", function (e) {
             $(".FoodSearch").val(`${FoodNutritionValues[0].name}`)
             $(".Fat").val(`${FoodNutritionValues[0].nutrients[2].gm}`)
             $(".Calories").val(`${FoodNutritionValues[0].nutrients[0].gm}`)
-            //$(".Protein").val(`${FoodNutritionValues[0].nutrients[2].value}`)
             $(".Carbs").val(`${FoodNutritionValues[0].nutrients[3].gm}`)
         })
     }
@@ -69,7 +68,6 @@ $(".FoodSearchResults").on("click", function (e) {
             $(".FoodSearch").val(`${FoodNutritionValues[0].name}`)
             $(".Fat").val(`${FoodNutritionValues[0].nutrients[2].gm}`)
             $(".Calories").val(`${FoodNutritionValues[0].nutrients[0].gm}`)
-            //$(".Protein").val(`${FoodNutritionValues[0].nutrients[2].value}`)
             $(".Carbs").val(`${FoodNutritionValues[0].nutrients[3].gm}`)
         })
     }

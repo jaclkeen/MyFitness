@@ -3,39 +3,71 @@
 <div class="Profile">
     <div class="HomeHead">
         <form class="ChangeProfileImg" asp-controller="Home" asp-action="ChangeProfileImage" enctype="multipart/form-data">
-            <label for="ChangePImageInput">
+            <label for="ChangePImageInput" class="ChangeImageLabel">
                 <input id="ChangePImageInput" name="ProfileImg" class="ChangePImageInput hidden" type="file" />
                 <img class="ProfileImg" src="@Model.CurrentUser.ProfileImg" />
             </label>
         </form>
-        <h2 class="UserName">@Model.CurrentUser.FirstName @Model.CurrentUser.LastName</h2>
-        <h5>@Model.CurrentUser.UserName</h5>
-    </div>
+        
+        <div class="HomeHeadUserInformation">
+            <h2 class="UserName">@Model.CurrentUser.FirstName @Model.CurrentUser.LastName</h2>
+            <h5>@Model.CurrentUser.UserName</h5>
+        </div>
+
         <div class="HomeNav">
+            <p class="ProfileHeader">@Model.CurrentUser.FirstName's Information: </p>
             <div class="NavItem">
-                <p class="NavValue">@Model.CurrentUser.Age</p>
-                <p class="NavLabel">Age</p>
+                <p class="NavLabel">Age: </p>
+                <span class="NavValue">@Model.CurrentUser.Age</span>
             </div>
 
             <div class="NavItem">
-                <p class="NavValue">@Model.CurrentUser.Gender</p>
-                <p class="NavLabel">Gender</p>
+                <p class="NavLabel">Gender: </p>
+                <span class="NavValue">@Model.CurrentUser.Gender</span>
             </div>
 
             <div class="NavItem">
-                <p class="NavValue">@Model.CurrentUser.HeightFeet feet @Model.CurrentUser.HeightInches inches</p>
-                <p class="NavLabel">Height</p>
+                <p class="NavLabel">Height: </p>
+                <span class="NavValue">@Model.CurrentUser.HeightFeet ft. @Model.CurrentUser.HeightInches in.</span>
             </div>
 
             <div class="NavItem">
-                <p class="NavValue">@Model.CurrentUser.CurrentWeight</p>
-                <p class="NavLabel">Current Weight</p>
+                <span class="NavLabel">Current Weight: </span><br />
+                <span class="NavValue">@Model.CurrentUser.CurrentWeight</span>
+            </div>
+
+            <p class="ProfileHeader">Weight Lost: </p>
+
+            <div class="NavItem">
+                <span class="NavLabel special">Total Weight Lost: </span><br />
+                <strong class="NavValue">@Model.CurrentUser.TotalWeightLost</strong>
             </div>
 
             <div class="NavItem">
-                <p class="NavValue">@Model.CurrentUser.GoalWeight</p>
-                <p class="NavLabel">Goal Weight</p>
+                <span class="NavLabel special">Yearly Weight Lost: </span><br />
+                <strong class="NavValue">@Model.CurrentUser.YearlyWeightLost</strong>
             </div>
+
+            <div class="NavItem">
+                <span class="NavLabel special">Monthly Weight Lost: </span><br />
+                <strong class="NavValue">@Model.CurrentUser.MonthlyWeightLost</strong>
+            </div>
+
+            <div class="NavItem">
+                <span class="NavLabel special">Weekly Weight Lost: </span><br />
+                <strong class="NavValue">@Model.CurrentUser.WeeklyWeightLost</strong>
+            </div>
+
+            <div class="NavItem">
+                <span class="NavLabel special">Daily Weight Lost: </span><br />
+                <strong class="NavValue">@Model.CurrentUser.WeightLostToday</strong>
+            </div>
+
+            <div class="NavItem">
+                <span class="NavLabel special">Goal Weight: </span><br />
+                <strong class="NavValue">@Model.CurrentUser.GoalWeight</strong>
+            </div>
+        </div>
     </div>
 
     <div class="HomeBody">
@@ -96,9 +128,9 @@
                     <tr class="row">
                         <th>Exercise</th>
                         <th>Type</th>
-                        <th>Length</th>
+                        <th>Time (Hours)</th>
                         <th>Calories Burned</th>
-                        <th>Distance Traveled</th>
+                        <th>Miles Traveled</th>
                         <th>Weight Lifted</th>
                         <th>Sets</th>
                         <th>Reps</th>
