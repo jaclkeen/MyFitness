@@ -36,9 +36,28 @@ namespace MyFitness.Models
         [Required]
         public int Age { get; set; }
 
+        [Required]
+        public double TotalWeightLost { get; set; }
+
+        [Required]
+        public double WeeklyWeightLost { get; set; }
+
+        [Required]
+        public double MonthlyWeightLost { get; set; }
+
+        [Required]
+        public double YearlyWeightLost { get; set; }
+
+        [Required]
+        public double WeightLostToday { get; set; }
+
         public ApplicationUser()
         {
             this.ProfileImg = "/images/egg.png";
+            this.TotalWeightLost = 0;
+            this.WeeklyWeightLost = 0;
+            this.MonthlyWeightLost = 0;
+            this.WeightLostToday = 0;
         }
     }
 }

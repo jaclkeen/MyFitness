@@ -9,25 +9,32 @@
     padding-right: 15px;
 }
 
-/*input,*/
 select,
 textarea {
     max-width: 280px;
 }
 
-
+.ChangeImageLabel{
+    min-width: 100%;
+}
 
 .ChangeProfileImg{
-    width: 24%;
-    margin: auto;
+    display: inline-block;
+    margin-top: -2%;
+    width: 100%;
 }
 
 tr{
     border: 2px solid black;
 }
 
+.special{
+    font-size: 1em!important;
+}
+
 .NutritionTable{
-    width: 65%;
+    display: inline-block;
+    width: 55%;
 }
 
 th{
@@ -69,31 +76,39 @@ td:nth-child(1), th:nth-child(1){
     border-right: 2px solid black;
     padding-top: 2%;
     background-color: gainsboro;
-    width: 80%;
+    width: 100%;
     margin: auto;
 }
 
 .ProfileImg{
-    border: 2px solid black;
     cursor: pointer;
     max-width: 100%;
+    min-width: 100%;
 }
 
 .HomeHead{
+    width: 20%;
+    margin-top: -2%;
     text-align: center;
+    border-right: 2px solid black;
+    display: inline-block;
 }
 
-.NavItem:nth-child(1){
-    border-left: none;
+.NavItem:nth-child(3), .NavItem:nth-child(5), .NavItem:nth-child(8), .NavItem:nth-child(10), .NavItem:nth-child(12){
+    border-right: none;
 }
 
 .NavItem{
     background-color: snow;
-    display: inline-block;
-    width: 20.46%;
     text-align: center;
-    margin-right: -1%;
-    border-left: 2px solid black;
+    border-right: 2px solid black;
+    width: 50%;
+    float: left;
+    height: 70px;
+    padding: 3%;
+    border-bottom: 2px solid black;
+    background-color: white;
+    display: inline-block;
 }
 
 .NavItem:hover{
@@ -102,20 +117,27 @@ td:nth-child(1), th:nth-child(1){
 }
 
 .NavValue{
-    font-size: 1.5em;
+    color: darkcyan;
+    font-weight: bolder;
+    font-size: 1em;
 }
 
 .NavLabel{
-    font-size: 1.2em;
+    font-size: 1em;
     font-weight: bolder;
 }
 
 .HomeBody{
+    width: 62%;
     padding: 1%;
+    display: inline-block;
+    position: absolute;
+    margin-top: -2%;
 }
 
 .Today{
     display: inline-block;
+    font-weight: bolder;
 }
 
 .AddEmblems{
@@ -146,7 +168,7 @@ td:nth-child(1), th:nth-child(1){
     z-index: 3;
     border: 2px solid black;
     background: darkgrey;
-    margin-top: -25%;
+    margin-top: 5%;
     width: 50%;
     margin-left: 10%;
     box-shadow: 6px 6px 6px black;
@@ -161,7 +183,7 @@ td:nth-child(1), th:nth-child(1){
     z-index: 3;
     border: 2px solid black;
     background: darkgrey;
-    margin-top: -25%;
+    margin-top: 5%;
     width: 50%;
     margin-left: 10%;
     box-shadow: 6px 6px 6px black;
@@ -213,4 +235,45 @@ td:nth-child(1), th:nth-child(1){
     margin-left: 27.55%;
     font-weight: bolder;
     text-align: center;
+}
+
+.HomeHeadUserInformation{
+    padding: 1%;
+    border-top: 3.5px solid black;
+    background: silver;
+    margin-top: -3%;
+    padding-top: 3%;
+}
+
+.line{
+    border-bottom: 1.5px solid darkcyan;
+}
+
+.HomeBodyBody{
+    width: 116%;
+}
+
+.HomeBodyHead h4{
+    font-weight: bolder;
+}
+
+.ProfileHeader{
+    font-size: 1.3em;
+    text-align: left;
+    background: grey;
+    padding: 2%;
+    border-bottom: 2px solid black;
+    margin-bottom: 0%;
+}
+
+.FirstPieChart{
+    height: 260px!important;
+    width: 400px!important;
+}
+
+.PieChartContainer{
+    width: 50%;
+    margin-top: -36%;
+    margin-left: 63%;
+    position: absolute;
 }

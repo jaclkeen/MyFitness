@@ -1,28 +1,4 @@
-﻿function SearchForFoods(FoodName) {
-    return new Promise(function (resolve, reject) {
-        $.ajax({
-            url: `http://api.nal.usda.gov/ndb/search/?format=json&q=${FoodName}&sort=n&max=10&offset=0&api_key=lW6xOCdaknhH5uu4AEzm17xeoeKD5szhgveUQ7ja`
-        }).done(function (foods) {
-            resolve(foods.list.item)
-        }).error(function (err) {
-            resolve(err)
-        })
-    })
-}
-
-function FindFoodNutritionalValue(FoodId) {
-    return new Promise(function (resolve, reject) {
-        $.ajax({
-            url: `http://api.nal.usda.gov/ndb/nutrients/?format=json&api_key=lW6xOCdaknhH5uu4AEzm17xeoeKD5szhgveUQ7ja&nutrients=205&nutrients=204&nutrients=208&nutrients=269&ndbno=${FoodId}`
-        }).done(function (item) {
-            resolve(item.report.foods)
-        }).error(function (err) {
-            resolve(err)
-        })
-    })
-}
-
-function AppendFoodToDOM(food) {
+﻿function AppendFoodToDOM(food) {
     $(".FoodSearchResults").append(`
         <div class='FoodResult' id='${food.ndbno}'>
             <p class='FoodResultText'>${food.name}</p>
@@ -57,7 +33,6 @@ $(".FoodSearchResults").on("click", function (e) {
             $(".FoodSearch").val(`${FoodNutritionValues[0].name}`)
             $(".Fat").val(`${FoodNutritionValues[0].nutrients[2].gm}`)
             $(".Calories").val(`${FoodNutritionValues[0].nutrients[0].gm}`)
-            //$(".Protein").val(`${FoodNutritionValues[0].nutrients[2].value}`)
             $(".Carbs").val(`${FoodNutritionValues[0].nutrients[3].gm}`)
         })
     }
@@ -69,7 +44,6 @@ $(".FoodSearchResults").on("click", function (e) {
             $(".FoodSearch").val(`${FoodNutritionValues[0].name}`)
             $(".Fat").val(`${FoodNutritionValues[0].nutrients[2].gm}`)
             $(".Calories").val(`${FoodNutritionValues[0].nutrients[0].gm}`)
-            //$(".Protein").val(`${FoodNutritionValues[0].nutrients[2].value}`)
             $(".Carbs").val(`${FoodNutritionValues[0].nutrients[3].gm}`)
         })
     }
@@ -108,4 +82,9 @@ $(".BackToMainLogin").on("click", function () {
 
 $(".ChangePImageInput").on("change", function () {
     $(".ChangeProfileImg").submit()
+})
+
+CaloriesEatenAndRemaining()
+.then(function (CalRemaining) {
+    MakePieChart(CalRemaining)
 })

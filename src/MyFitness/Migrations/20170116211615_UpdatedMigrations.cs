@@ -56,6 +56,7 @@ namespace MyFitness.Migrations
                     LastName = table.Column<string>(nullable: false),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    MonthlyWeightLost = table.Column<double>(nullable: false),
                     NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
                     PasswordHash = table.Column<string>(nullable: true),
@@ -63,8 +64,12 @@ namespace MyFitness.Migrations
                     PhoneNumberConfirmed = table.Column<bool>(nullable: false),
                     ProfileImg = table.Column<string>(nullable: false),
                     SecurityStamp = table.Column<string>(nullable: true),
+                    TotalWeightLost = table.Column<double>(nullable: false),
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true)
+                    UserName = table.Column<string>(maxLength: 256, nullable: true),
+                    WeeklyWeightLost = table.Column<double>(nullable: false),
+                    WeightLostToday = table.Column<double>(nullable: false),
+                    YearlyWeightLost = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
