@@ -14,11 +14,11 @@ namespace MyFitness.Models
         public int RelationshipId { get; set; }
 
         [Required]
-        public int SendingUserId { get; set; }
+        public int? SendingUserId { get; set; }
         public ApplicationUser SendingUser { get; set; }
 
         [Required]
-        public int RecievingUserId { get; set; }
+        public int? RecievingUserId { get; set; }
         public ApplicationUser RecievingUser { get; set; }
 
         [Required]

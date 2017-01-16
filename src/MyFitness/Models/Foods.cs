@@ -37,8 +37,6 @@ namespace MyFitness.Models
         [Required]
         public double FoodCarbs { get; set; }
 
-        [Required]
-        public int UserId { get; set; }
         public ApplicationUser User { get; set; }
     }
 }

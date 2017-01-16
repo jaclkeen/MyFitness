@@ -1,67 +1,138 @@
-﻿<div>
-    <h2>MyFitness</h2>
-</div>
+﻿@model MyFitness.Models.AppViewModels.HomeIndexViewModel
 
+<div class="Profile">
+    <div class="HomeHead">
+        <form class="ChangeProfileImg" asp-controller="Home" asp-action="ChangeProfileImage" enctype="multipart/form-data">
+            <label for="ChangePImageInput">
+                <input id="ChangePImageInput" name="ProfileImg" class="ChangePImageInput hidden" type="file" />
+                <img class="ProfileImg" src="@Model.CurrentUser.ProfileImg" />
+            </label>
+        </form>
+        <h2 class="UserName">@Model.CurrentUser.FirstName @Model.CurrentUser.LastName</h2>
+        <h5>@Model.CurrentUser.UserName</h5>
+    </div>
+        <div class="HomeNav">
+            <div class="NavItem">
+                <p class="NavValue">@Model.CurrentUser.Age</p>
+                <p class="NavLabel">Age</p>
+            </div>
 
-@*<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-        <li data-target="#myCarousel" data-slide-to="3"></li>
-    </ol>
-    <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <img src="~/images/banner1.svg" alt="ASP.NET" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how to build ASP.NET apps that can run anywhere.
-                    <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkID=525028&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
+            <div class="NavItem">
+                <p class="NavValue">@Model.CurrentUser.Gender</p>
+                <p class="NavLabel">Gender</p>
             </div>
+
+            <div class="NavItem">
+                <p class="NavValue">@Model.CurrentUser.HeightFeet feet @Model.CurrentUser.HeightInches inches</p>
+                <p class="NavLabel">Height</p>
+            </div>
+
+            <div class="NavItem">
+                <p class="NavValue">@Model.CurrentUser.CurrentWeight</p>
+                <p class="NavLabel">Current Weight</p>
+            </div>
+
+            <div class="NavItem">
+                <p class="NavValue">@Model.CurrentUser.GoalWeight</p>
+                <p class="NavLabel">Goal Weight</p>
+            </div>
+    </div>
+
+    <div class="HomeBody">
+
+        <div class="AddFoodModal">
+            @{Html.RenderPartial("FoodModal");}
         </div>
-        <div class="item">
-            <img src="~/images/banner2.svg" alt="Visual Studio" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    There are powerful new features in Visual Studio for building modern web apps.
-                    <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkID=525030&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
+
+        <div class="AddExerciseModal">
+            @{Html.RenderPartial("ExerciseModal");}
         </div>
-        <div class="item">
-            <img src="~/images/banner3.svg" alt="Package Management" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Bring in libraries from NuGet, Bower, and npm, and automate tasks using Grunt or Gulp.
-                    <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkID=525029&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
+
+        <div class="HomeBodyHead">
+            <h3 class="Today">Today - @Model.Today</h3>
+            <div class="AddEmblems">
+                <span class="AddFood">Add food</span>
+                <span class="AddWorkout">Add a workout</span>
             </div>
+            <h4>Calories Remaining: @Model.TodayNutrition.TotalCaloriesRemaining</h4>
         </div>
-        <div class="item">
-            <img src="~/images/banner4.svg" alt="Microsoft Azure" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how Microsoft's Azure cloud platform allows you to build, deploy, and scale web apps.
-                    <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkID=525027&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
+        <div class="HomeBodyBody">
+            <table class="NutritionTable table-condensed table-inverse">
+                <thead>
+                    <tr class="row">
+                        <th>Food Name</th>
+                        <th>Calories</th>
+                        <th>Fat</th>
+                        <th>Protein</th>
+                        <th>Carbs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.TodayNutrition.DailyFoods != null)
+                    {
+                        @foreach (var foods in Model.TodayNutrition.DailyFoods)
+                        {
+                            <tr class="row Hoverable" id="@foods.FoodId">
+                                <th>@foods.FoodName</th>
+                                <td>@foods.Calories</td>
+                                <td>@foods.FoodFat</td>
+                                <td>@foods.FoodProtein</td>
+                                <td>@foods.FoodCarbs</td>
+                            </tr>
+                        }
+                    }
+                    <tr class="row">
+                        <th>Total: </th>
+                        <td>@Model.CalorieTotal</td>
+                        <td>@Model.FatTotal</td>
+                        <td>@Model.ProteinTotal</td>
+                        <td>@Model.CarbTotal</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br />
+            <table class="NutritionTable table-condensed table-inverse">
+                <thead>
+                    <tr class="row">
+                        <th>Exercise</th>
+                        <th>Type</th>
+                        <th>Length</th>
+                        <th>Calories Burned</th>
+                        <th>Distance Traveled</th>
+                        <th>Weight Lifted</th>
+                        <th>Sets</th>
+                        <th>Reps</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.TodayNutrition.DailyExercises != null)
+                    {
+                        @foreach (var exercise in Model.TodayNutrition.DailyExercises)
+                        {
+                            <tr class="row Hoverable" id="@exercise.ExerciseId">
+                                <th>@exercise.Name</th>
+                                <td>@exercise.ExerciseType</td>
+                                <td>@exercise.ExerciseLengthInHours</td>
+                                <td>@exercise.CaloriesBurned</td>
+                                <td>@exercise.DistanceTraveled</td>
+                                <td>@exercise.WeightLifted</td>
+                                <td>@exercise.Sets</td>
+                                <td>@exercise.Reps</td>
+                            </tr>
+                        }
+                    }
+                    <tr class="row">
+                        <th>Total: </th>
+                        <td>@Model.ExerciseTypeTotal</td>
+                        <td>@Model.ExerciseLengthInHoursTotal</td>
+                        <td>@Model.CaloriesBurnedTotal</td>
+                        <td>@Model.DistanceTraveledTotal</td>
+                        <td>@Model.WeightLiftedTotal</td>
+                        <td>@Model.SetsTotal</td>
+                        <td>@Model.RepsTotal</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div>*@
+</div>

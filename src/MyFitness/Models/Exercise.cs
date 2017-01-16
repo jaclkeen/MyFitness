@@ -15,10 +15,6 @@ namespace MyFitness.Models
         public int DailyNutritionId { get; set; }
 
         [Required]
-        public int UserId { get; set; }
-        public ApplicationUser User { get; set; }
-
-        [Required]
         public string Name { get; set; }
 
         [Required]
@@ -33,6 +29,8 @@ namespace MyFitness.Models
         public double DistanceTraveled { get; set; }
 
         public int WeightLifted { get; set; }
+
+        public ApplicationUser User { get; set; }
 
         public int Sets { get; set; }
 

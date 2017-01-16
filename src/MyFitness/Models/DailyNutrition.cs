@@ -12,14 +12,13 @@ namespace MyFitness.Models
         public int DailyNutritionId { get; set; }
 
         [Required]
-        public int UserId { get; set; }
         public ApplicationUser User { get; set; }
 
         [Required]
         public DateTime DailyNutritionDate { get; set; }
 
         [Required]
-        public int TotalCaloriesRemaining { get; set; }
+        public double TotalCaloriesRemaining { get; set; }
 
         public List<Exercise> DailyExercises { get; set; }
 

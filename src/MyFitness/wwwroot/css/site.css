@@ -1,50 +1,216 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: darkcyan;
 }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
 
-/* Set widths on the form inputs since otherwise they're 100% wide */
-input,
+/*input,*/
 select,
 textarea {
     max-width: 280px;
 }
 
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
+
+
+.ChangeProfileImg{
+    width: 24%;
+    margin: auto;
 }
 
-/* buttons and links extension to use brackets: [ click me ] */
-.btn-bracketed::before {
-    display:inline-block;
-    content: "[";
-    padding-right: 0.5em;
-}
-.btn-bracketed::after {
-    display:inline-block;
-    content: "]";
-    padding-left: 0.5em;
+tr{
+    border: 2px solid black;
 }
 
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"]
-{
-    width: 100%;
+.NutritionTable{
+    width: 65%;
 }
 
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-  /* Hide captions */
-  .carousel-caption {
-    display: none
-  }
+th{
+    border-left: 1px solid black;
+    background-color: darkcyan;
+}
+
+td{
+    text-align: center;
+    border-left: 1px solid black;
+}
+
+td:nth-child(1), th:nth-child(1){
+    border-left: none;
+}
+
+.UserSearch{
+    width: 120%;
+    color: black;
+    border-radius: 40px;
+    padding: .5%;
+    padding-left: 3%;
+    border: 2px solid black;
+}
+
+.HomeNav{
+    background: dimgrey;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}
+
+.UserName{
+    margin-top: 0;
+}
+
+.Profile{
+    padding-bottom: 1%;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    padding-top: 2%;
+    background-color: gainsboro;
+    width: 80%;
+    margin: auto;
+}
+
+.ProfileImg{
+    border: 2px solid black;
+    cursor: pointer;
+    max-width: 100%;
+}
+
+.HomeHead{
+    text-align: center;
+}
+
+.NavItem:nth-child(1){
+    border-left: none;
+}
+
+.NavItem{
+    background-color: snow;
+    display: inline-block;
+    width: 20.46%;
+    text-align: center;
+    margin-right: -1%;
+    border-left: 2px solid black;
+}
+
+.NavItem:hover{
+    background-color: lightgray;
+    cursor: pointer;
+}
+
+.NavValue{
+    font-size: 1.5em;
+}
+
+.NavLabel{
+    font-size: 1.2em;
+    font-weight: bolder;
+}
+
+.HomeBody{
+    padding: 1%;
+}
+
+.Today{
+    display: inline-block;
+}
+
+.AddEmblems{
+    vertical-align: text-bottom;
+    display: inline-block;
+    margin-left: 2%;
+    width: 40%;
+}
+
+.AddEmblems span:hover{
+    box-shadow: none;
+    color: white;
+}
+
+.AddEmblems span{
+    box-shadow: 2px 2px 2px black;
+    padding: 1% 3% 1% 3%;
+    background: darkcyan;
+    border: 2px solid black;
+    border-radius: 30px;
+    margin-right: 5%;
+    cursor: pointer;
+}
+
+.AddFoodModal{
+    padding: 1%;
+    position: fixed;
+    z-index: 3;
+    border: 2px solid black;
+    background: darkgrey;
+    margin-top: -25%;
+    width: 50%;
+    margin-left: 10%;
+    box-shadow: 6px 6px 6px black;
+    max-height: 300px;
+    overflow-y: overlay;
+    overflow-x:hidden;
+}
+
+.AddExerciseModal{
+    padding: 1%;
+    position: fixed;
+    z-index: 3;
+    border: 2px solid black;
+    background: darkgrey;
+    margin-top: -25%;
+    width: 50%;
+    margin-left: 10%;
+    box-shadow: 6px 6px 6px black;
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+.AddExerciseModal h4{
+    margin-top: 0;
+    font-weight: bolder;
+}
+
+.AddFoodModal h3, .AddExerciseModal h3{
+    margin-top: 0;
+    display: inline-block;
+}
+
+.AddFoodModal span, .AddExerciseModal span{
+    float: right;
+    font-size: 2.5em;
+    margin-right: 2%;
+    cursor: pointer;
+}
+
+.AddFoodModal span:hover, .AddExerciseModal span:hover{
+    color: red;
+}
+
+.SubmitNewFood{
+    margin-top: 15%;
+}
+
+.Hoverable:hover{
+    background: darkgrey;
+    cursor: pointer;
+}
+
+.AddFoodModal input, .AddExerciseModal input, .AddFoodModal select, .AddExerciseModal select{
+    border: 2px solid black;
+}
+
+.FoodResult{
+    cursor: pointer;
+    background: darkcyan;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+    width: 70%;
+    margin-left: 27.55%;
+    font-weight: bolder;
+    text-align: center;
 }
