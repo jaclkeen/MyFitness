@@ -94,13 +94,6 @@ td:nth-child(1), th:nth-child(1){
     display: inline-block;
 }
 
-/*.NavItem{
-    background-color: snow;
-    text-align: left;
-    padding: 3%;
-    border-bottom: 2px solid black;
-}*/
-
 .NavItem:nth-child(3), .NavItem:nth-child(5), .NavItem:nth-child(8), .NavItem:nth-child(10), .NavItem:nth-child(12){
     border-right: none;
 }
@@ -252,6 +245,10 @@ td:nth-child(1), th:nth-child(1){
     padding-top: 3%;
 }
 
+.line{
+    border-bottom: 1.5px solid darkcyan;
+}
+
 .HomeBodyBody{
     width: 116%;
 }
@@ -267,4 +264,16 @@ td:nth-child(1), th:nth-child(1){
     padding: 2%;
     border-bottom: 2px solid black;
     margin-bottom: 0%;
+}
+
+.FirstPieChart{
+    height: 260px!important;
+    width: 400px!important;
+}
+
+.PieChartContainer{
+    width: 50%;
+    margin-top: -36%;
+    margin-left: 63%;
+    position: absolute;
 }

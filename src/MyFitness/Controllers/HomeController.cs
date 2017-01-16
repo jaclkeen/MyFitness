@@ -164,9 +164,19 @@ namespace MyFitness.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Error()
+        [HttpGet]
+        public async Task<int[]> CaloriesEatenAndRemaining()
         {
-            return View();
+            int[] Calories = new int[2];
+
+            ApplicationUser CurrentUser = await GetCurrentUserAsync();
+            DailyNutrition n = context.DailyNutrition.Where(dn => dn.DailyNutritionDate == DateTime.Today && dn.User == CurrentUser).SingleOrDefault();
+            int CaloriesEaten = context.Foods.Where(f => f.DailyNutritionId == n.DailyNutritionId).ToList().Sum(c => c.Calories);
+
+            Calories[0] = CaloriesEaten;
+            Calories[1] = Convert.ToInt16(n.TotalCaloriesRemaining) - CaloriesEaten;
+
+            return Calories;
         }
     }
 }
