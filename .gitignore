@@ -16,6 +16,7 @@
 */obj
 */bin
 *debug
+src/MyFitness/wwwroot/lib
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
