@@ -8,7 +8,7 @@ using MyFitness.Data;
 namespace MyFitness.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170116211615_UpdatedMigrations")]
+    [Migration("20170117203531_UpdatedMigrations")]
     partial class UpdatedMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -211,6 +211,8 @@ namespace MyFitness.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("DailyNutritionDate");
+
+                    b.Property<double>("StartingCaloriesToday");
 
                     b.Property<double>("TotalCaloriesRemaining");
 

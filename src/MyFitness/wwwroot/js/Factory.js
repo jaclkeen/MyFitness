@@ -31,7 +31,34 @@ function CaloriesEatenAndRemaining() {
         }).done(function (CalInfo) {
             resolve(CalInfo)
         }).error(function (err) {
-            resolve(err)
+            reject(err)
+        })
+    })
+}
+
+function GetNutritionInformation() {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: "/Home/NutritionInformation"
+        }).done(function (NInfo) {
+            resolve(NInfo)
+        }).error(function (err) {
+            reject(err)
+        })
+    })
+}
+
+function GetCaloriesConsumedInDateRange(DateRange) {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: `/Home/CaloriesConsumedInDateRange`,
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(DateRange)
+        }).done(function (CaloriesList) {
+            resolve(CaloriesList)
+        }).error(function (err) {
+            reject(err)
         })
     })
 }

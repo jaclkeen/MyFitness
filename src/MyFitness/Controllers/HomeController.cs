@@ -52,7 +52,8 @@ namespace MyFitness.Controllers
                 {
                     DailyNutritionDate = today,
                     TotalCaloriesRemaining = UserCalories,
-                    User = CurrentUser
+                    User = CurrentUser,
+                    StartingCaloriesToday = UserCalories
                 };
 
                 context.Add(NewNutrition);
@@ -177,6 +178,69 @@ namespace MyFitness.Controllers
             Calories[1] = Convert.ToInt16(n.TotalCaloriesRemaining) - CaloriesEaten;
 
             return Calories;
+        }
+
+        [HttpGet]
+        public async Task<double[]> NutritionInformation()
+        {
+            double[] NInfo = new double[4];
+            ApplicationUser CurrentUser = await GetCurrentUserAsync();
+            DailyNutrition n = context.DailyNutrition.Where(dn => dn.DailyNutritionDate == DateTime.Today && dn.User == CurrentUser).SingleOrDefault();
+            NInfo[0] = context.Foods.Where(f => f.DailyNutritionId == n.DailyNutritionId).ToList().Sum(c => c.Calories);
+            NInfo[1] = Math.Round(context.Foods.Where(f => f.DailyNutritionId == n.DailyNutritionId).ToList().Sum(c => c.FoodProtein * 4));
+            NInfo[2] = Math.Round(context.Foods.Where(f => f.DailyNutritionId == n.DailyNutritionId).ToList().Sum(c => c.FoodCarbs * 4));
+            NInfo[3] = Math.Round(context.Foods.Where(f => f.DailyNutritionId == n.DailyNutritionId).ToList().Sum(c => c.FoodFat * 9));
+
+            return NInfo;
+        }
+
+        [HttpPost]
+        public async Task<int[,]> CaloriesConsumedInDateRange([FromBody] int DayRange)
+        {
+            int[,] Values = new int[2, DayRange];  
+            DateTime Today = DateTime.Today;
+            DateTime Then = Today.AddDays(-DayRange);
+            ApplicationUser CurrentUser = await GetCurrentUserAsync();
+
+            List<double> DailyCaloricAllowance = (from nd in context.DailyNutrition
+                                               where nd.DailyNutritionDate <= Today && nd.DailyNutritionDate >= Then && nd.User == CurrentUser
+                                               select nd.StartingCaloriesToday).Distinct().ToList();
+
+            List<int> Cals = (from nd in context.DailyNutrition
+                              join f in context.Foods on nd.DailyNutritionId equals f.DailyNutritionId
+                              where nd.DailyNutritionDate <= Today && nd.DailyNutritionDate >= Then && nd.User == CurrentUser
+                              select nd.DailyFoods.Sum(foods => foods.Calories)).Distinct().ToList();
+            
+            Cals.Reverse();
+            DailyCaloricAllowance.Reverse();
+
+            if (Cals.Count < DayRange)
+            {
+                int MissingDays = DayRange - Cals.Count;
+
+                for(int i = 0; i < MissingDays; i++)
+                {
+                    Cals.Insert(i, 0);
+                }
+            }
+
+            if(DailyCaloricAllowance.Count < DayRange)
+            {
+                int MissingDays = DayRange - DailyCaloricAllowance.Count;
+
+                for (int i = 0; i < MissingDays; i++)
+                {
+                    DailyCaloricAllowance.Insert(i, 0);
+                }
+            }
+
+            for(int i = 0; i < Cals.Count; i++)
+            {
+                Values[0, i] = Cals[i];
+                Values[1, i] = Convert.ToInt16(DailyCaloricAllowance[i]);
+            }
+
+            return Values;
         }
     }
 }
