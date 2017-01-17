@@ -88,3 +88,13 @@ CaloriesEatenAndRemaining()
 .then(function (CalRemaining) {
     MakePieChart(CalRemaining)
 })
+
+GetNutritionInformation()
+.then(function (NutritionArray) {
+    CreateBarChart(NutritionArray)
+})
+
+GetCaloriesConsumedInDateRange(7)
+.then(function (CalorieInfo) {
+    CreateLineChart(CalorieInfo)
+})

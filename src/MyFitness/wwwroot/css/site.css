@@ -1,7 +1,17 @@
 ﻿body {
     padding-top: 50px;
-    padding-bottom: 20px;
     background-color: darkcyan;
+}
+
+.tables{
+    padding: 1%;
+    border-radius: 10px;
+    background: silver;
+    height: 300px;
+    min-height: 300px;
+    max-height: 300px;
+    overflow-x: overlay;
+    width: 62%;
 }
 
 .body-content {
@@ -34,7 +44,7 @@ tr{
 
 .NutritionTable{
     display: inline-block;
-    width: 55%;
+    width: 100%;
 }
 
 th{
@@ -87,7 +97,7 @@ td:nth-child(1), th:nth-child(1){
 }
 
 .HomeHead{
-    width: 20%;
+    width: 18%;
     margin-top: -2%;
     text-align: center;
     border-right: 2px solid black;
@@ -119,7 +129,7 @@ td:nth-child(1), th:nth-child(1){
 .NavValue{
     color: darkcyan;
     font-weight: bolder;
-    font-size: 1em;
+    font-size: 1.2em;
 }
 
 .NavLabel{
@@ -264,16 +274,47 @@ td:nth-child(1), th:nth-child(1){
     padding: 2%;
     border-bottom: 2px solid black;
     margin-bottom: 0%;
+    font-weight: bolder;
+}
+
+.FirstLineChart{
+    height: 270px!important;
+    width: 95%!important;
+}
+
+.FirstBarChart{
+    height: 270px!important;
+    width: 390px!important;
 }
 
 .FirstPieChart{
-    height: 260px!important;
-    width: 400px!important;
+    height: 250px!important;
+    width: 390px!important;
 }
 
 .PieChartContainer{
     width: 50%;
-    margin-top: -36%;
-    margin-left: 63%;
+    margin-left: 70%;
+    top: 110px;
     position: absolute;
+}
+
+.BarChartContainer{
+    border-bottom: 2px solid darkcyan;
+    border-top: 2px solid darkcyan;
+    margin-top: 12%;
+    width: 50%;
+    margin-left: 65%;
+    top: 330px;
+    position: absolute;
+}
+
+.LineChartContainer{
+    border-bottom: 2px solid darkcyan;
+    border-top: 2px solid darkcyan;
+    margin-top: 12%;
+    width: 65%;
+    top: 330px;
+    position: absolute;
+    border-right: 2px solid darkcyan;
 }

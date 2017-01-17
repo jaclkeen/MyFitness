@@ -169,6 +169,7 @@ namespace MyFitness.Migrations
                     DailyNutritionId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     DailyNutritionDate = table.Column<DateTime>(nullable: false),
+                    StartingCaloriesToday = table.Column<double>(nullable: false),
                     TotalCaloriesRemaining = table.Column<double>(nullable: false),
                     UserId = table.Column<string>(nullable: false)
                 },

@@ -17,17 +17,17 @@
         <div class="HomeNav">
             <p class="ProfileHeader">@Model.CurrentUser.FirstName's Information: </p>
             <div class="NavItem">
-                <p class="NavLabel">Age: </p>
+                <span class="NavLabel">Age: </span><br /><br />
                 <span class="NavValue">@Model.CurrentUser.Age</span>
             </div>
 
             <div class="NavItem">
-                <p class="NavLabel">Gender: </p>
+                <span class="NavLabel">Gender: </span><br /><br />
                 <span class="NavValue">@Model.CurrentUser.Gender</span>
             </div>
 
             <div class="NavItem">
-                <p class="NavLabel">Height: </p>
+                <span class="NavLabel">Height: </span><br /><br />
                 <span class="NavValue">@Model.CurrentUser.HeightFeet ft. @Model.CurrentUser.HeightInches in.</span>
             </div>
 
@@ -64,7 +64,7 @@
             </div>
 
             <div class="NavItem">
-                <span class="NavLabel special">Goal Weight: </span><br />
+                <span class="NavLabel special">Goal Weight: </span><br /><br />
                 <strong class="NavValue">@Model.CurrentUser.GoalWeight</strong>
             </div>
         </div>
@@ -89,87 +89,102 @@
             <h4>Calories Remaining: @Model.TodayNutrition.TotalCaloriesRemaining</h4>
         </div>
         <div class="HomeBodyBody">
-            <table class="NutritionTable table-condensed table-inverse">
-                <thead>
-                    <tr class="row">
-                        <th>Food Name</th>
-                        <th>Calories</th>
-                        <th>Fat</th>
-                        <th>Protein</th>
-                        <th>Carbs</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (Model.TodayNutrition.DailyFoods != null)
-                    {
-                        @foreach (var foods in Model.TodayNutrition.DailyFoods)
+            <div class="tables">
+                <table class="NutritionTable table-condensed table-inverse">
+                    <thead>
+                        <tr class="row">
+                            <th>Food Name</th>
+                            <th>Calories</th>
+                            <th>Fat</th>
+                            <th>Protein</th>
+                            <th>Carbs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.TodayNutrition.DailyFoods != null)
                         {
-                            <tr class="row Hoverable" id="@foods.FoodId">
-                                <th>@foods.FoodName</th>
-                                <td>@foods.Calories</td>
-                                <td>@foods.FoodFat</td>
-                                <td>@foods.FoodProtein</td>
-                                <td>@foods.FoodCarbs</td>
-                            </tr>
+                            @foreach (var foods in Model.TodayNutrition.DailyFoods)
+                            {
+                                <tr class="row Hoverable" id="@foods.FoodId">
+                                    <th>@foods.FoodName</th>
+                                    <td>@foods.Calories</td>
+                                    <td>@foods.FoodFat</td>
+                                    <td>@foods.FoodProtein</td>
+                                    <td>@foods.FoodCarbs</td>
+                                </tr>
+                            }
                         }
-                    }
-                    <tr class="row">
-                        <th>Total: </th>
-                        <td>@Model.CalorieTotal</td>
-                        <td>@Model.FatTotal</td>
-                        <td>@Model.ProteinTotal</td>
-                        <td>@Model.CarbTotal</td>
-                    </tr>
-                </tbody>
-            </table>
-            <br />
-            <table class="NutritionTable table-condensed table-inverse">
-                <thead>
-                    <tr class="row">
-                        <th>Exercise</th>
-                        <th>Type</th>
-                        <th>Time (Hours)</th>
-                        <th>Calories Burned</th>
-                        <th>Miles Traveled</th>
-                        <th>Weight Lifted</th>
-                        <th>Sets</th>
-                        <th>Reps</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (Model.TodayNutrition.DailyExercises != null)
-                    {
-                        @foreach (var exercise in Model.TodayNutrition.DailyExercises)
+                        <tr class="row">
+                            <th>Total: </th>
+                            <td>@Model.CalorieTotal</td>
+                            <td>@Model.FatTotal</td>
+                            <td>@Model.ProteinTotal</td>
+                            <td>@Model.CarbTotal</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br />
+                <table class="NutritionTable table-condensed table-inverse">
+                    <thead>
+                        <tr class="row">
+                            <th>Exercise</th>
+                            <th>Type</th>
+                            <th>Time (Hours)</th>
+                            <th>Calories Burned</th>
+                            <th>Miles Traveled</th>
+                            <th>Weight Lifted</th>
+                            <th>Sets</th>
+                            <th>Reps</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.TodayNutrition.DailyExercises.Count > 0)
                         {
-                            <tr class="row Hoverable" id="@exercise.ExerciseId">
-                                <th>@exercise.Name</th>
-                                <td>@exercise.ExerciseType</td>
-                                <td>@exercise.ExerciseLengthInHours</td>
-                                <td>@exercise.CaloriesBurned</td>
-                                <td>@exercise.DistanceTraveled</td>
-                                <td>@exercise.WeightLifted</td>
-                                <td>@exercise.Sets</td>
-                                <td>@exercise.Reps</td>
-                            </tr>
+                            @foreach (var exercise in Model.TodayNutrition.DailyExercises)
+                            {
+                                <tr class="row Hoverable" id="@exercise.ExerciseId">
+                                    <th>@exercise.Name</th>
+                                    <td>@exercise.ExerciseType</td>
+                                    <td>@exercise.ExerciseLengthInHours</td>
+                                    <td>@exercise.CaloriesBurned</td>
+                                    <td>@exercise.DistanceTraveled</td>
+                                    <td>@exercise.WeightLifted</td>
+                                    <td>@exercise.Sets</td>
+                                    <td>@exercise.Reps</td>
+                                </tr>
+                            }
                         }
-                    }
-                    <tr class="row">
-                        <th>Total: </th>
-                        <td>@Model.ExerciseTypeTotal</td>
-                        <td>@Model.ExerciseLengthInHoursTotal</td>
-                        <td>@Model.CaloriesBurnedTotal</td>
-                        <td>@Model.DistanceTraveledTotal</td>
-                        <td>@Model.WeightLiftedTotal</td>
-                        <td>@Model.SetsTotal</td>
-                        <td>@Model.RepsTotal</td>
-                    </tr>
-                </tbody>
-            </table>
+
+                        <tr class="row">
+                            <th>Total: </th>
+                            <td>@Model.ExerciseTypeTotal</td>
+                            <td>@Model.ExerciseLengthInHoursTotal</td>
+                            <td>@Model.CaloriesBurnedTotal</td>
+                            <td>@Model.DistanceTraveledTotal</td>
+                            <td>@Model.WeightLiftedTotal</td>
+                            <td>@Model.SetsTotal</td>
+                            <td>@Model.RepsTotal</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <div class="PieChartContainer">
                 <canvas id="FirstPieChart" class="FirstPieChart"></canvas>
             </div>
 
-        <hr class="line" /></div>
+            <div class="BarChartContainer">
+                <canvas id="FirstBarChart" class="FirstBarChart"></canvas>
+            </div>
+
+            <div class="LineChartContainer">
+                <canvas id="FirstLineChart" class="FirstLineChart"></canvas>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="ProfileBody2">
+
     </div>
 </div>

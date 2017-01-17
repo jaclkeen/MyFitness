@@ -211,6 +211,8 @@ namespace MyFitness.Migrations
 
                     b.Property<DateTime>("DailyNutritionDate");
 
+                    b.Property<double>("StartingCaloriesToday");
+
                     b.Property<double>("TotalCaloriesRemaining");
 
                     b.Property<string>("UserId")
