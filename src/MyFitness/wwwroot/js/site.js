@@ -57,17 +57,24 @@ $(".CloseExerciseModal").on("click", function () {
     $(".AddExerciseModal").fadeOut(1000)
 })
 
+$(".CloseEditModal").on("click", function () {
+    $(".EditItem").fadeOut(1000)
+})
+
 $(".AddFood").on("click", function () {
     $(".AddExerciseModal").hide()
     $(".AddFoodModal").fadeIn(1000)
+    $(".EditItem").hide()
 })
 
 $(".AddWorkout").on("click", function () {
     $(".AddFoodModal").hide()
     $(".AddExerciseModal").fadeIn(1000)
+    $(".EditItem").hide()
 })
 
-$(".SecondaryLogin, .AddFoodModal, .AddExerciseModal").hide()
+
+$(".SecondaryLogin, .AddFoodModal, .AddExerciseModal, .EditItem").hide()
 $(".ShowNextRegister").on("click", function () {
     $(".InitialRegister").fadeOut(1000, function () {
         $(".SecondaryLogin").fadeIn(1000)
@@ -97,4 +104,65 @@ GetNutritionInformation()
 GetCaloriesConsumedInDateRange(7)
 .then(function (CalorieInfo) {
     CreateLineChart(CalorieInfo)
+})
+
+$(".Editable").on("click", function () {
+    let LabelText = $(this).children(".NavLabel").text()
+    let Value = $(this).children(".NavValue").text()
+
+    $(".EditItemModal").html("")
+    //$(".EditHeader").text(`Edit ${LabelText}`)
+
+    if(!$(this).hasClass("Height")){
+        $(".EditItemModal").prepend(`
+            <div class ="form-group">
+                <label for="EditSomething" class ="col-md-4 control-label">${LabelText} </label>
+                <div class ="col-md-6">
+                    <input type="number" step="0.5" min="0" value="${Value}" class ="EditedValue form-control"></input>
+                </div>
+            </div>
+        `)
+    }
+    else {
+        let HeightVal = Value.split(" ")
+
+        $(".EditItemModal").prepend(`
+            <div class="form-group">
+            <label class="col-md-1 control-label">Feet: </label>
+            <div class="col-md-4">
+                <select class="form-control EditFeet">
+                    <option value="-1">Please select a value...</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                </select>
+            </div>
+
+            <label class="col-md-2 control-label">Inches: </label>
+            <div class="col-md-4">
+                <select class="form-control EditInches" value="${HeightVal[2]}">
+                    <option value="None">Please select a value...</option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                </select>
+            </div>
+        </div>`)
+
+        $(".EditFeet").val(HeightVal[0])
+        $(".EditInches").val(HeightVal[2])
+    }
+    $(".AddFoodModal").hide()
+    $(".AddExerciseModal").hide()
+    $(".EditItem").fadeIn(1000)
 })

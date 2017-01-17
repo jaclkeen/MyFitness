@@ -121,7 +121,7 @@ td:nth-child(1), th:nth-child(1){
     display: inline-block;
 }
 
-.NavItem:hover{
+.Editable:hover{
     background-color: lightgray;
     cursor: pointer;
 }
@@ -172,7 +172,7 @@ td:nth-child(1), th:nth-child(1){
     cursor: pointer;
 }
 
-.AddFoodModal{
+.AddFoodModal, .EditItem{
     padding: 1%;
     position: fixed;
     z-index: 3;
@@ -206,19 +206,19 @@ td:nth-child(1), th:nth-child(1){
     font-weight: bolder;
 }
 
-.AddFoodModal h3, .AddExerciseModal h3{
+.AddFoodModal h3, .AddExerciseModal h3, .EditItem h3{
     margin-top: 0;
     display: inline-block;
 }
 
-.AddFoodModal span, .AddExerciseModal span{
+.AddFoodModal span, .AddExerciseModal span, .EditItem span{
     float: right;
     font-size: 2.5em;
     margin-right: 2%;
     cursor: pointer;
 }
 
-.AddFoodModal span:hover, .AddExerciseModal span:hover{
+.AddFoodModal span:hover, .AddExerciseModal span:hover, .EditItem span:hover{
     color: red;
 }
 

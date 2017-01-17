@@ -53,7 +53,8 @@ namespace MyFitness.Controllers
                     DailyNutritionDate = today,
                     TotalCaloriesRemaining = UserCalories,
                     User = CurrentUser,
-                    StartingCaloriesToday = UserCalories
+                    StartingCaloriesToday = UserCalories,
+                    WeightLostToday = 0
                 };
 
                 context.Add(NewNutrition);

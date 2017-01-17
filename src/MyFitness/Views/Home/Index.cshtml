@@ -16,7 +16,7 @@
 
         <div class="HomeNav">
             <p class="ProfileHeader">@Model.CurrentUser.FirstName's Information: </p>
-            <div class="NavItem">
+            <div class="NavItem Editable">
                 <span class="NavLabel">Age: </span><br /><br />
                 <span class="NavValue">@Model.CurrentUser.Age</span>
             </div>
@@ -26,12 +26,12 @@
                 <span class="NavValue">@Model.CurrentUser.Gender</span>
             </div>
 
-            <div class="NavItem">
+            <div class="NavItem Editable Height">
                 <span class="NavLabel">Height: </span><br /><br />
                 <span class="NavValue">@Model.CurrentUser.HeightFeet ft. @Model.CurrentUser.HeightInches in.</span>
             </div>
 
-            <div class="NavItem">
+            <div class="NavItem Editable">
                 <span class="NavLabel">Current Weight: </span><br />
                 <span class="NavValue">@Model.CurrentUser.CurrentWeight</span>
             </div>
@@ -63,7 +63,7 @@
                 <strong class="NavValue">@Model.CurrentUser.WeightLostToday</strong>
             </div>
 
-            <div class="NavItem">
+            <div class="NavItem Editable">
                 <span class="NavLabel special">Goal Weight: </span><br /><br />
                 <strong class="NavValue">@Model.CurrentUser.GoalWeight</strong>
             </div>
@@ -78,6 +78,10 @@
 
         <div class="AddExerciseModal">
             @{Html.RenderPartial("ExerciseModal");}
+        </div>
+
+        <div class="EditItem">
+            @{Html.RenderPartial("EditItemModal");}
         </div>
 
         <div class="HomeBodyHead">
