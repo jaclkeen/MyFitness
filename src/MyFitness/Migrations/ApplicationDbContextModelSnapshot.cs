@@ -218,6 +218,8 @@ namespace MyFitness.Migrations
                     b.Property<string>("UserId")
                         .IsRequired();
 
+                    b.Property<double>("WeightLostToday");
+
                     b.HasKey("DailyNutritionId");
 
                     b.HasIndex("UserId");

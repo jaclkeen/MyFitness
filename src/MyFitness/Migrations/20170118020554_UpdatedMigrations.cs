@@ -171,7 +171,8 @@ namespace MyFitness.Migrations
                     DailyNutritionDate = table.Column<DateTime>(nullable: false),
                     StartingCaloriesToday = table.Column<double>(nullable: false),
                     TotalCaloriesRemaining = table.Column<double>(nullable: false),
-                    UserId = table.Column<string>(nullable: false)
+                    UserId = table.Column<string>(nullable: false),
+                    WeightLostToday = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {

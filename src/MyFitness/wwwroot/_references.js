@@ -4,6 +4,7 @@
 /// <reference path="js/factory.js" />
 /// <reference path="js/keys.js" />
 /// <reference path="js/linechart.js" />
+/// <reference path="js/polarchart.js" />
 /// <reference path="js/site.js" />
 /// <reference path="lib/bootstrap/dist/js/bootstrap.js" />
 /// <reference path="lib/chart.js/dist/Chart.js" />

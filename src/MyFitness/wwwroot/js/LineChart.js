@@ -41,6 +41,16 @@
                 pointHoverBackgroundColor: "white",
                 pointHoverBorderColor: "rgba(75,192,192,1)",
                 data: CalorieInfo[1]
+            },
+            {
+                label: "Calories Burned",
+                borderColor: "dodgerblue",
+                borderCapStyle: 'butt',
+                pointBorderColor: "white",
+                pointBackgroundColor: "dodgerblue",
+                pointHoverBackgroundColor: "dodgerblue",
+                pointHoverBorderColor: "white",
+                data: CalorieInfo[2]
             }
         ]
     };

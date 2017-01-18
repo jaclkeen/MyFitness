@@ -60,8 +60,7 @@ namespace MyFitness.Controllers
                 context.Add(NewNutrition);
                 context.SaveChanges();
 
-                model.TodayNutrition = NewNutrition;
-                return View(model);
+                n = NewNutrition;
             }
 
             //USED TO GET TOTALS OF FOOD NUTRITION
@@ -198,7 +197,7 @@ namespace MyFitness.Controllers
         [HttpPost]
         public async Task<int[,]> CaloriesConsumedInDateRange([FromBody] int DayRange)
         {
-            int[,] Values = new int[2, DayRange];  
+            int[,] Values = new int[3, DayRange];  
             DateTime Today = DateTime.Today;
             DateTime Then = Today.AddDays(-DayRange);
             ApplicationUser CurrentUser = await GetCurrentUserAsync();
@@ -207,13 +206,29 @@ namespace MyFitness.Controllers
                                                where nd.DailyNutritionDate <= Today && nd.DailyNutritionDate >= Then && nd.User == CurrentUser
                                                select nd.StartingCaloriesToday).Distinct().ToList();
 
+            List<int> CaloriesBurned = (from nd in context.DailyNutrition
+                                        join e in context.Exercise on nd.DailyNutritionId equals e.DailyNutritionId
+                                        where nd.DailyNutritionDate <= Today && nd.DailyNutritionDate >= Then && nd.User == CurrentUser
+                                        select nd.DailyExercises.Sum(exercises => exercises.CaloriesBurned)).Distinct().ToList();
+
             List<int> Cals = (from nd in context.DailyNutrition
                               join f in context.Foods on nd.DailyNutritionId equals f.DailyNutritionId
                               where nd.DailyNutritionDate <= Today && nd.DailyNutritionDate >= Then && nd.User == CurrentUser
                               select nd.DailyFoods.Sum(foods => foods.Calories)).Distinct().ToList();
-            
+
             Cals.Reverse();
             DailyCaloricAllowance.Reverse();
+            CaloriesBurned.Reverse();
+
+            if (CaloriesBurned.Count < DayRange)
+            {
+                int MissingDays = DayRange - Cals.Count;
+
+                for (int i = 0; i < MissingDays; i++)
+                {
+                    CaloriesBurned.Insert(i, 0);
+                }
+            }
 
             if (Cals.Count < DayRange)
             {
@@ -239,6 +254,7 @@ namespace MyFitness.Controllers
             {
                 Values[0, i] = Cals[i];
                 Values[1, i] = Convert.ToInt16(DailyCaloricAllowance[i]);
+                Values[2, i] = CaloriesBurned[i];
             }
 
             return Values;

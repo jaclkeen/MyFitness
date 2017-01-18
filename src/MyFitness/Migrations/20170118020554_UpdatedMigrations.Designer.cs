@@ -8,7 +8,7 @@ using MyFitness.Data;
 namespace MyFitness.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170117203531_UpdatedMigrations")]
+    [Migration("20170118020554_UpdatedMigrations")]
     partial class UpdatedMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -218,6 +218,8 @@ namespace MyFitness.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired();
+
+                    b.Property<double>("WeightLostToday");
 
                     b.HasKey("DailyNutritionId");
 
