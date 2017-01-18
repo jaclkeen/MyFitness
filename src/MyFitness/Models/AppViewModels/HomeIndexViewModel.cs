@@ -29,6 +29,11 @@ namespace MyFitness.Models.AppViewModels
         public double SetsTotal { get; set; }
         public double RepsTotal { get; set; }
 
+        public double TotalWeightLost { get; set; }
+        public double YearlyWeightLost { get; set; }
+        public double MonthlyWeightLost { get; set; }
+        public double WeeklyWeightLost { get; set; }
+
         public HomeIndexViewModel()
         {
             this.FatTotal = 0;

@@ -23,6 +23,9 @@ namespace MyFitness.Models
         [Required]
         public double StartingCaloriesToday { get; set; }
 
+        [Required]
+        public double WeightLostToday { get; set; }
+
         public List<Exercise> DailyExercises { get; set; }
 
         public List<Foods> DailyFoods { get; set; }

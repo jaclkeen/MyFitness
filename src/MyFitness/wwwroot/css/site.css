@@ -3,6 +3,10 @@
     background-color: darkcyan;
 }
 
+input{
+    border: 2px solid black;
+}
+
 .tables{
     padding: 1%;
     border-radius: 10px;
@@ -11,17 +15,13 @@
     min-height: 300px;
     max-height: 300px;
     overflow-x: overlay;
-    width: 62%;
-}
-
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    width: 68%;
 }
 
 select,
 textarea {
     max-width: 280px;
+    border: 2px solid black!important;
 }
 
 .ChangeImageLabel{
@@ -121,7 +121,7 @@ td:nth-child(1), th:nth-child(1){
     display: inline-block;
 }
 
-.NavItem:hover{
+.Editable:hover{
     background-color: lightgray;
     cursor: pointer;
 }
@@ -172,7 +172,7 @@ td:nth-child(1), th:nth-child(1){
     cursor: pointer;
 }
 
-.AddFoodModal{
+.AddFoodModal, .EditItem{
     padding: 1%;
     position: fixed;
     z-index: 3;
@@ -206,19 +206,19 @@ td:nth-child(1), th:nth-child(1){
     font-weight: bolder;
 }
 
-.AddFoodModal h3, .AddExerciseModal h3{
+.AddFoodModal h3, .AddExerciseModal h3, .EditItem h3{
     margin-top: 0;
     display: inline-block;
 }
 
-.AddFoodModal span, .AddExerciseModal span{
+.AddFoodModal span, .AddExerciseModal span, .EditItem span{
     float: right;
     font-size: 2.5em;
     margin-right: 2%;
     cursor: pointer;
 }
 
-.AddFoodModal span:hover, .AddExerciseModal span:hover{
+.AddFoodModal span:hover, .AddExerciseModal span:hover, .EditItem span:hover{
     color: red;
 }
 
@@ -227,7 +227,7 @@ td:nth-child(1), th:nth-child(1){
 }
 
 .Hoverable:hover{
-    background: darkgrey;
+    background: darkgrey!important;
     cursor: pointer;
 }
 
@@ -287,15 +287,29 @@ td:nth-child(1), th:nth-child(1){
     width: 390px!important;
 }
 
+.PieChart2{
+    height: 200px!important;
+    width: 365px!important;
+}
+
 .FirstPieChart{
-    height: 250px!important;
-    width: 390px!important;
+    width: 352px!important;
+    height: 200px!important;
+    padding-bottom: 2%;
+    border-bottom: 2px solid darkcyan;
 }
 
 .PieChartContainer{
-    width: 50%;
-    margin-left: 70%;
-    top: 110px;
+    width: 48%;
+    margin-left: 79%;
+    top: 15px;
+    position: absolute;
+}
+
+.PieChart2Container{
+    width: 48%;
+    margin-left: 79%;
+    top: 215px;
     position: absolute;
 }
 
@@ -304,7 +318,7 @@ td:nth-child(1), th:nth-child(1){
     border-top: 2px solid darkcyan;
     margin-top: 12%;
     width: 50%;
-    margin-left: 65%;
+    margin-left: 74%;
     top: 330px;
     position: absolute;
 }
@@ -313,8 +327,16 @@ td:nth-child(1), th:nth-child(1){
     border-bottom: 2px solid darkcyan;
     border-top: 2px solid darkcyan;
     margin-top: 12%;
-    width: 65%;
+    width: 74%;
     top: 330px;
     position: absolute;
     border-right: 2px solid darkcyan;
+}
+
+.EditHeader{
+    font-weight: bolder;
+}
+
+.EditItem input{
+    border: 2px solid black;
 }

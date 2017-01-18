@@ -11,6 +11,7 @@ using MyFitness.Models.AppViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace MyFitness.Controllers
 {
@@ -53,14 +54,14 @@ namespace MyFitness.Controllers
                     DailyNutritionDate = today,
                     TotalCaloriesRemaining = UserCalories,
                     User = CurrentUser,
-                    StartingCaloriesToday = UserCalories
+                    StartingCaloriesToday = UserCalories,
+                    WeightLostToday = 0
                 };
 
                 context.Add(NewNutrition);
                 context.SaveChanges();
 
-                model.TodayNutrition = NewNutrition;
-                return View(model);
+                n = NewNutrition;
             }
 
             //USED TO GET TOTALS OF FOOD NUTRITION
@@ -80,6 +81,12 @@ namespace MyFitness.Controllers
             model.DistanceTraveledTotal = n.DailyExercises.Sum(de => de.DistanceTraveled);
             model.WeightLiftedTotal = n.DailyExercises.Sum(de => de.WeightLifted);
             model.ExerciseTypeTotal = n.DailyExercises.Count();
+
+            //GET WEIGHT LOST VALUES
+            model.TotalWeightLost = context.DailyNutrition.Where(dn => dn.User == CurrentUser).ToList().Sum(wl => wl.WeightLostToday);
+            model.YearlyWeightLost = context.DailyNutrition.Where(dn => dn.User == CurrentUser && dn.DailyNutritionDate.Year == today.Year).ToList().Sum(wl => wl.WeightLostToday);
+            model.MonthlyWeightLost = context.DailyNutrition.Where(dn => dn.User == CurrentUser && dn.DailyNutritionDate.Month == today.Month).ToList().Sum(wl => wl.WeightLostToday);
+            model.WeeklyWeightLost = context.DailyNutrition.Where(dn => dn.User == CurrentUser && dn.DailyNutritionDate >= today.AddDays(-7) && dn.DailyNutritionDate <= today).ToList().Sum(wl => wl.WeightLostToday);
 
             model.TodayNutrition = n;
             return View(model);
@@ -197,22 +204,33 @@ namespace MyFitness.Controllers
         [HttpPost]
         public async Task<int[,]> CaloriesConsumedInDateRange([FromBody] int DayRange)
         {
-            int[,] Values = new int[2, DayRange];  
+            int[,] Values = new int[3, DayRange];  
             DateTime Today = DateTime.Today;
             DateTime Then = Today.AddDays(-DayRange);
             ApplicationUser CurrentUser = await GetCurrentUserAsync();
 
             List<double> DailyCaloricAllowance = (from nd in context.DailyNutrition
                                                where nd.DailyNutritionDate <= Today && nd.DailyNutritionDate >= Then && nd.User == CurrentUser
-                                               select nd.StartingCaloriesToday).Distinct().ToList();
+                                               select nd.StartingCaloriesToday).ToList();
+
+            List<int> CaloriesBurned = (from nd in context.DailyNutrition
+                                        where nd.DailyNutritionDate <= Today && nd.DailyNutritionDate >= Then && nd.User == CurrentUser
+                                        select nd.DailyExercises.Sum(exercises => exercises.CaloriesBurned)).ToList();
 
             List<int> Cals = (from nd in context.DailyNutrition
-                              join f in context.Foods on nd.DailyNutritionId equals f.DailyNutritionId
                               where nd.DailyNutritionDate <= Today && nd.DailyNutritionDate >= Then && nd.User == CurrentUser
-                              select nd.DailyFoods.Sum(foods => foods.Calories)).Distinct().ToList();
-            
-            Cals.Reverse();
+                              select nd.DailyFoods.Sum(foods => foods.Calories)).ToList();
+
             DailyCaloricAllowance.Reverse();
+            if (CaloriesBurned.Count < DayRange)
+            {
+                int MissingDays = DayRange - Cals.Count;
+
+                for (int i = 0; i < MissingDays; i++)
+                {
+                    CaloriesBurned.Insert(i, 0);
+                }
+            }
 
             if (Cals.Count < DayRange)
             {
@@ -238,9 +256,59 @@ namespace MyFitness.Controllers
             {
                 Values[0, i] = Cals[i];
                 Values[1, i] = Convert.ToInt16(DailyCaloricAllowance[i]);
+                Values[2, i] = CaloriesBurned[i];
             }
 
             return Values;
+        }
+
+        [HttpGet]
+        public async Task<double[]> NutrientGrams()
+        {
+            double[] NutrientArray = new double[3];
+            ApplicationUser CurrentUser = await GetCurrentUserAsync();
+            DailyNutrition n = context.DailyNutrition.Where(dn => dn.DailyNutritionDate == DateTime.Today && dn.User == CurrentUser).SingleOrDefault();
+            List<Foods> UserFoods = context.Foods.Where(f => f.DailyNutritionId == n.DailyNutritionId).ToList();
+
+            NutrientArray[0] = UserFoods.Sum(uf => uf.FoodFat);
+            NutrientArray[1] = UserFoods.Sum(uf => uf.FoodCarbs);
+            NutrientArray[2] = UserFoods.Sum(uf => uf.FoodProtein);
+
+            return NutrientArray;
+        }
+
+        [HttpPatch]
+        public async Task UserHeight([FromBody] EditUserInformation model)
+        {
+            ApplicationUser CurrentUser = await GetCurrentUserAsync();
+            CurrentUser.HeightFeet = model.feet;
+            CurrentUser.HeightInches = model.inches;
+
+            var result = await _userManager.UpdateAsync(CurrentUser);
+        }
+
+        [HttpPatch]
+        public async Task UserInformation([FromBody] EditUserInformation model)
+        {
+            ApplicationUser CurrentUser = await GetCurrentUserAsync();
+            DailyNutrition n = context.DailyNutrition.Where(dn => dn.DailyNutritionDate == DateTime.Today && dn.User == CurrentUser).SingleOrDefault();
+
+            if (model.EditType == "CurrentWeight")
+            {
+                n.WeightLostToday += CurrentUser.CurrentWeight - model.CurrentWeight;
+                CurrentUser.CurrentWeight = model.CurrentWeight;
+            }
+            else if(model.EditType == "GoalWeight")
+            {
+                CurrentUser.GoalWeight = Convert.ToInt16(model.GoalWeight);
+            }
+            else
+            {
+                CurrentUser.Age = Convert.ToInt16(model.Age);
+            }
+
+            await context.SaveChangesAsync();
+            var result = await _userManager.UpdateAsync(CurrentUser);
         }
     }
 }
