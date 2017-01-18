@@ -10,5 +10,10 @@ namespace MyFitness.Models.AppViewModels
     {
         public int inches { get; set; }
         public int feet { get; set; }
+
+        public string EditType { get; set; }
+        public double Age { get; set; }
+        public double GoalWeight { get; set; }
+        public double CurrentWeight { get; set; }
     }
 }

@@ -79,7 +79,7 @@ function EditUserHeight(f, i) {
     return new Promise(function (resolve, reject) {
         $.ajax({
             url: "Home/UserHeight",
-            method: "POST",
+            method: "PATCH",
             contentType: "application/json",
             data: JSON.stringify({ feet: f, inches: i })
         }).done(function (n) {
@@ -90,13 +90,13 @@ function EditUserHeight(f, i) {
     })
 }
 
-function EditUserValues(EditedValue, EditType) {
+function EditUserValues(DataObj) {
     return new Promise(function (resolve, reject) {
         $.ajax({
             url: "Home/UserInformation",
             method: "PATCH",
             contentType: "application/json",
-            data: JSON.stringify({ value: EditedValue, type: EditType })
+            data: JSON.stringify(DataObj)
         }).done(function (n) {
             resolve(n)
         }).error(function (err) {

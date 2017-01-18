@@ -126,6 +126,9 @@ $(".Editable").on("click", function () {
                 </div>
             </div>
         `)
+        LabelText === "Age: " ? $(".SubmitEdit").attr("id", "EditAge") : false;
+        LabelText === "Goal Weight: " ? $(".SubmitEdit").attr("id", "GoalWeight") : false;
+        LabelText === "Current Weight: " ? $(".SubmitEdit").attr("id", "CurrentWeight") : false;
     }
     else {
         let HeightVal = Value.split(" ")
@@ -135,7 +138,6 @@ $(".Editable").on("click", function () {
             <label class="col-md-1 control-label">Feet: </label>
             <div class="col-md-4">
                 <select class ="form-control EditFeet EditedValue">
-                    <option value="-1">Please select a value...</option>
                     <option>4</option>
                     <option>5</option>
                     <option>6</option>
@@ -146,7 +148,6 @@ $(".Editable").on("click", function () {
             <label class="col-md-2 control-label">Inches: </label>
             <div class="col-md-4">
                 <select class="form-control EditInches EditedValue" value="${HeightVal[2]}">
-                    <option value="None">Please select a value...</option>
                     <option>0</option>
                     <option>1</option>
                     <option>2</option>
@@ -182,11 +183,40 @@ $(".SubmitEdit").on("click", function () {
             location.reload();
         })
     }
-    else {
+    else if ($(this).attr("id") === "EditAge") {
         let EditedValues = $(Values[0]).val()
-        EditUserValues(EditedValues)
+        let AjaxObj = {
+            "Age": EditedValues,
+            "EditType": "Age"
+        }
+        EditUserValues(AjaxObj)
         .then(function () {
             location.reload();
         })
     }
+    else if ($(this).attr("id") === "GoalWeight") {
+        let EditedValues = $(Values[0]).val()
+        let AjaxObj = {
+            "GoalWeight": EditedValues,
+            "EditType": "GoalWeight"
+        }
+
+        EditUserValues(AjaxObj)
+        .then(function () {
+            location.reload();
+        })
+    }
+    else if ($(this).attr("id") === "CurrentWeight") {
+        let EditedValues = $(Values[0]).val()
+        let AjaxObj = {
+            "CurrentWeight": EditedValues,
+            "EditType": "CurrentWeight"
+        }
+
+        EditUserValues(AjaxObj)
+        .then(function () {
+            location.reload();
+        })
+    }
+
 })

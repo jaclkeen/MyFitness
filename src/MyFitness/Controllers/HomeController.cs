@@ -271,13 +271,37 @@ namespace MyFitness.Controllers
             return NutrientArray;
         }
 
-        [HttpPost]
+        [HttpPatch]
         public async Task UserHeight([FromBody] EditUserInformation model)
         {
             ApplicationUser CurrentUser = await GetCurrentUserAsync();
             CurrentUser.HeightFeet = model.feet;
             CurrentUser.HeightInches = model.inches;
 
+            var result = await _userManager.UpdateAsync(CurrentUser);
+        }
+
+        [HttpPatch]
+        public async Task UserInformation([FromBody] EditUserInformation model)
+        {
+            ApplicationUser CurrentUser = await GetCurrentUserAsync();
+            DailyNutrition n = context.DailyNutrition.Where(dn => dn.DailyNutritionDate == DateTime.Today && dn.User == CurrentUser).SingleOrDefault();
+
+            if (model.EditType == "CurrentWeight")
+            {
+                n.WeightLostToday += CurrentUser.CurrentWeight - model.CurrentWeight;
+                CurrentUser.CurrentWeight = model.CurrentWeight;
+            }
+            else if(model.EditType == "GoalWeight")
+            {
+                CurrentUser.GoalWeight = Convert.ToInt16(model.GoalWeight);
+            }
+            else
+            {
+                CurrentUser.Age = Convert.ToInt16(model.Age);
+            }
+
+            await context.SaveChangesAsync();
             var result = await _userManager.UpdateAsync(CurrentUser);
         }
     }
