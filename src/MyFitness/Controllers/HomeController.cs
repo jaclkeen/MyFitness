@@ -204,21 +204,19 @@ namespace MyFitness.Controllers
 
             List<double> DailyCaloricAllowance = (from nd in context.DailyNutrition
                                                where nd.DailyNutritionDate <= Today && nd.DailyNutritionDate >= Then && nd.User == CurrentUser
-                                               select nd.StartingCaloriesToday).Distinct().ToList();
+                                               select nd.StartingCaloriesToday).ToList();
 
             List<int> CaloriesBurned = (from nd in context.DailyNutrition
-                                        join e in context.Exercise on nd.DailyNutritionId equals e.DailyNutritionId
                                         where nd.DailyNutritionDate <= Today && nd.DailyNutritionDate >= Then && nd.User == CurrentUser
-                                        select nd.DailyExercises.Sum(exercises => exercises.CaloriesBurned)).Distinct().ToList();
+                                        select nd.DailyExercises.Sum(exercises => exercises.CaloriesBurned)).ToList();
 
             List<int> Cals = (from nd in context.DailyNutrition
-                              join f in context.Foods on nd.DailyNutritionId equals f.DailyNutritionId
                               where nd.DailyNutritionDate <= Today && nd.DailyNutritionDate >= Then && nd.User == CurrentUser
-                              select nd.DailyFoods.Sum(foods => foods.Calories)).Distinct().ToList();
+                              select nd.DailyFoods.Sum(foods => foods.Calories)).ToList();
 
-            Cals.Reverse();
+            //Cals.Reverse();
             DailyCaloricAllowance.Reverse();
-            CaloriesBurned.Reverse();
+            //CaloriesBurned.Reverse();
 
             if (CaloriesBurned.Count < DayRange)
             {

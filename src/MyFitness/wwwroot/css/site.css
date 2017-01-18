@@ -15,7 +15,7 @@ input{
     min-height: 300px;
     max-height: 300px;
     overflow-x: overlay;
-    width: 62%;
+    width: 68%;
 }
 
 select,
@@ -300,15 +300,15 @@ td:nth-child(1), th:nth-child(1){
 }
 
 .PieChartContainer{
-    width: 50%;
-    margin-left: 70%;
+    width: 48%;
+    margin-left: 79%;
     top: 10px;
     position: absolute;
 }
 
 .PieChart2Container{
-    width: 50%;
-    margin-left: 70%;
+    width: 48%;
+    margin-left: 79%;
     top: 210px;
     position: absolute;
 }
@@ -318,7 +318,7 @@ td:nth-child(1), th:nth-child(1){
     border-top: 2px solid darkcyan;
     margin-top: 12%;
     width: 50%;
-    margin-left: 65%;
+    margin-left: 74%;
     top: 330px;
     position: absolute;
 }
@@ -327,7 +327,7 @@ td:nth-child(1), th:nth-child(1){
     border-bottom: 2px solid darkcyan;
     border-top: 2px solid darkcyan;
     margin-top: 12%;
-    width: 65%;
+    width: 74%;
     top: 330px;
     position: absolute;
     border-right: 2px solid darkcyan;
