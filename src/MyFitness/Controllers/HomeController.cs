@@ -82,6 +82,12 @@ namespace MyFitness.Controllers
             model.WeightLiftedTotal = n.DailyExercises.Sum(de => de.WeightLifted);
             model.ExerciseTypeTotal = n.DailyExercises.Count();
 
+            //GET WEIGHT LOST VALUES
+            model.TotalWeightLost = context.DailyNutrition.Where(dn => dn.User == CurrentUser).ToList().Sum(wl => wl.WeightLostToday);
+            model.YearlyWeightLost = context.DailyNutrition.Where(dn => dn.User == CurrentUser && dn.DailyNutritionDate.Year == today.Year).ToList().Sum(wl => wl.WeightLostToday);
+            model.MonthlyWeightLost = context.DailyNutrition.Where(dn => dn.User == CurrentUser && dn.DailyNutritionDate.Month == today.Month).ToList().Sum(wl => wl.WeightLostToday);
+            model.WeeklyWeightLost = context.DailyNutrition.Where(dn => dn.User == CurrentUser && dn.DailyNutritionDate >= today.AddDays(-7) && dn.DailyNutritionDate <= today).ToList().Sum(wl => wl.WeightLostToday);
+
             model.TodayNutrition = n;
             return View(model);
         }
