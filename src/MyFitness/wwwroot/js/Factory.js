@@ -62,3 +62,45 @@ function GetCaloriesConsumedInDateRange(DateRange) {
         })
     })
 }
+
+function GetNutritionGramsConsumedInformation() {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: "Home/NutrientGrams"
+        }).done(function (NGrams) {
+            resolve(NGrams)
+        }).error(function (err) {
+            reject(err)
+        })
+    })
+}
+
+function EditUserHeight(f, i) {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: "Home/UserHeight",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({ feet: f, inches: i })
+        }).done(function (n) {
+            resolve(n)
+        }).error(function (err) {
+            reject(err)
+        })
+    })
+}
+
+function EditUserValues(EditedValue, EditType) {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: "Home/UserInformation",
+            method: "PATCH",
+            contentType: "application/json",
+            data: JSON.stringify({ value: EditedValue, type: EditType })
+        }).done(function (n) {
+            resolve(n)
+        }).error(function (err) {
+            reject(err)
+        })
+    })
+}

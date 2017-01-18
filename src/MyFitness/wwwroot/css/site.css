@@ -52,7 +52,6 @@ th{
 }
 
 td{
-    background: white;
     text-align: center;
     border-left: 1px solid black;
 }
@@ -227,7 +226,7 @@ td:nth-child(1), th:nth-child(1){
 }
 
 .Hoverable:hover{
-    background: darkgrey;
+    background: darkgrey!important;
     cursor: pointer;
 }
 
@@ -302,14 +301,14 @@ td:nth-child(1), th:nth-child(1){
 .PieChartContainer{
     width: 48%;
     margin-left: 79%;
-    top: 10px;
+    top: 15px;
     position: absolute;
 }
 
 .PieChart2Container{
     width: 48%;
     margin-left: 79%;
-    top: 210px;
+    top: 215px;
     position: absolute;
 }
 

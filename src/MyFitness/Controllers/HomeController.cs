@@ -11,6 +11,7 @@ using MyFitness.Models.AppViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace MyFitness.Controllers
 {
@@ -214,10 +215,7 @@ namespace MyFitness.Controllers
                               where nd.DailyNutritionDate <= Today && nd.DailyNutritionDate >= Then && nd.User == CurrentUser
                               select nd.DailyFoods.Sum(foods => foods.Calories)).ToList();
 
-            //Cals.Reverse();
             DailyCaloricAllowance.Reverse();
-            //CaloriesBurned.Reverse();
-
             if (CaloriesBurned.Count < DayRange)
             {
                 int MissingDays = DayRange - Cals.Count;
@@ -256,6 +254,31 @@ namespace MyFitness.Controllers
             }
 
             return Values;
+        }
+
+        [HttpGet]
+        public async Task<double[]> NutrientGrams()
+        {
+            double[] NutrientArray = new double[3];
+            ApplicationUser CurrentUser = await GetCurrentUserAsync();
+            DailyNutrition n = context.DailyNutrition.Where(dn => dn.DailyNutritionDate == DateTime.Today && dn.User == CurrentUser).SingleOrDefault();
+            List<Foods> UserFoods = context.Foods.Where(f => f.DailyNutritionId == n.DailyNutritionId).ToList();
+
+            NutrientArray[0] = UserFoods.Sum(uf => uf.FoodFat);
+            NutrientArray[1] = UserFoods.Sum(uf => uf.FoodCarbs);
+            NutrientArray[2] = UserFoods.Sum(uf => uf.FoodProtein);
+
+            return NutrientArray;
+        }
+
+        [HttpPost]
+        public async Task UserHeight([FromBody] EditUserInformation model)
+        {
+            ApplicationUser CurrentUser = await GetCurrentUserAsync();
+            CurrentUser.HeightFeet = model.feet;
+            CurrentUser.HeightInches = model.inches;
+
+            var result = await _userManager.UpdateAsync(CurrentUser);
         }
     }
 }

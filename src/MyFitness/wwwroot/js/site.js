@@ -106,12 +106,16 @@ GetCaloriesConsumedInDateRange(7)
     CreateLineChart(CalorieInfo)
 })
 
+GetNutritionGramsConsumedInformation()
+.then(function (NInfo) {
+    MakeCaloricPieChart(NInfo)
+})
+
 $(".Editable").on("click", function () {
     let LabelText = $(this).children(".NavLabel").text()
     let Value = $(this).children(".NavValue").text()
 
     $(".EditItemModal").html("")
-    //$(".EditHeader").text(`Edit ${LabelText}`)
 
     if(!$(this).hasClass("Height")){
         $(".EditItemModal").prepend(`
@@ -130,7 +134,7 @@ $(".Editable").on("click", function () {
             <div class="form-group">
             <label class="col-md-1 control-label">Feet: </label>
             <div class="col-md-4">
-                <select class="form-control EditFeet">
+                <select class ="form-control EditFeet EditedValue">
                     <option value="-1">Please select a value...</option>
                     <option>4</option>
                     <option>5</option>
@@ -141,7 +145,7 @@ $(".Editable").on("click", function () {
 
             <label class="col-md-2 control-label">Inches: </label>
             <div class="col-md-4">
-                <select class="form-control EditInches" value="${HeightVal[2]}">
+                <select class="form-control EditInches EditedValue" value="${HeightVal[2]}">
                     <option value="None">Please select a value...</option>
                     <option>0</option>
                     <option>1</option>
@@ -165,4 +169,24 @@ $(".Editable").on("click", function () {
     $(".AddFoodModal").hide()
     $(".AddExerciseModal").hide()
     $(".EditItem").fadeIn(1000)
+})
+
+$(".SubmitEdit").on("click", function () {
+    let Values = $(".EditedValue").toArray();
+    if (Values.length > 1) {
+        let Height = $(Values[0]).val()
+        let Inches = $(Values[1]).val()
+    
+        EditUserHeight(Height, Inches)
+        .then(function () {
+            location.reload();
+        })
+    }
+    else {
+        let EditedValues = $(Values[0]).val()
+        EditUserValues(EditedValues)
+        .then(function () {
+            location.reload();
+        })
+    }
 })

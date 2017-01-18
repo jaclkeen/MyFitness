@@ -36,23 +36,26 @@
     });
 }
 
-function MakeCaloricPieChart(){
+function MakeCaloricPieChart(CalorieInfo) {
     //CalorieInfo[1] < 0 ? CalorieInfo[1] = 0 : false;
-    //CalorieInfo[2] < 0 ? CalorieInfo[1] = 2 : false;
+    //CalorieInfo[2] < 0 ? CalorieInfo[2] = 0 : false;
+    //CalorieInfo[3] < 0 ? CalorieInfo[3] = 0 : false;
 
     let data = {
         labels: [
-            "Protein",
             "Fat",
             "Carbs",
+            "Protein",
         ],
         datasets: [{
-            data: [89, 105, 90],
+            data: CalorieInfo,
             backgroundColor: [
-                "darkcyan",
-                "grey"
+                "salmon",
+                "dodgerblue",
+                "yellow"
             ],
             hoverBackgroundColor: [
+                "#222",
                 "#222",
                 "#222"
             ]
@@ -69,9 +72,8 @@ function MakeCaloricPieChart(){
         options: {
             title: {
                 display: true,
-                text: "Calories Consumed Today"
+                text: "Nutrients Consumed Today (In Grams)"
             }
         }
     });
 }
-MakeCaloricPieChart()
