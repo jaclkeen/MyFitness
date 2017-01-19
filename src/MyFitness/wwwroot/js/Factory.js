@@ -1,5 +1,32 @@
 ﻿let APIkey = GetKey();
 
+function GetCaloriesBurnedInRange(TimeRange) {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: `/Home/CaloriesBurnedInTimeRange`,
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(TimeRange)
+        }).done(function (CalsBurned) {
+            resolve(CalsBurned)
+        }).error(function (err) {
+            reject(err)
+        })
+    })
+}
+
+function GetWeeklyInformationForLineChart() {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: "Home/WeeklyGoalWeightLossInformation"
+        }).done(function (WLInfo) {
+            resolve(WLInfo)
+        }).error(function (err) {
+            reject(err)
+        })
+    })
+}
+
 function SearchForFoods(FoodName) {
     return new Promise(function (resolve, reject) {
         $.ajax({
@@ -99,6 +126,21 @@ function EditUserValues(DataObj) {
             data: JSON.stringify(DataObj)
         }).done(function (n) {
             resolve(n)
+        }).error(function (err) {
+            reject(err)
+        })
+    })
+}
+
+function GetPercentOfCaloriesInRange(DateRange) {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: `/Home/CaloricPercentageInformationInDateRage`,
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(DateRange)
+        }).done(function (CaloriesList) {
+            resolve(CaloriesList)
         }).error(function (err) {
             reject(err)
         })

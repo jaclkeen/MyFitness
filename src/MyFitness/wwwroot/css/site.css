@@ -1,10 +1,30 @@
-﻿body {
+﻿.ProfileBody2, .ProfileBody3, .ProfileBody4{
+    padding: 0 2% 2% 2%;
+}
+
+.ProfileBody2{
+    border-top: 2px solid darkcyan;
+    padding-top: 1%;
+    background: silver;
+}
+
+.Body2Heading, .Body3Heading, .Body4Heading{
+    font-weight: bolder;
+    margin-top: 10px;
+}
+
+body {
     padding-top: 50px;
     background-color: darkcyan;
 }
 
 input{
     border: 2px solid black;
+}
+
+.tables h4{
+    font-weight: bolder;
+    margin-top: 5px;
 }
 
 .tables{
@@ -277,6 +297,11 @@ td:nth-child(1), th:nth-child(1){
     font-weight: bolder;
 }
 
+.WWLineChart{
+    height: 300px!important;
+    width: 100%!important;
+}
+
 .FirstLineChart{
     height: 270px!important;
     width: 95%!important;
@@ -313,8 +338,17 @@ td:nth-child(1), th:nth-child(1){
     position: absolute;
 }
 
+.BarGraphGramTotalsContainer{
+    margin-top: -18%;
+    width: 43%;
+    margin-left: 57%;
+    background: gainsboro;
+    display: inline-block;
+    padding: 1%;
+    border-radius: 30px;
+}
+
 .BarChartContainer{
-    border-bottom: 2px solid darkcyan;
     border-top: 2px solid darkcyan;
     margin-top: 12%;
     width: 50%;
@@ -323,8 +357,30 @@ td:nth-child(1), th:nth-child(1){
     position: absolute;
 }
 
+.PolarChartContainer{
+    background: gainsboro;
+    border-radius: 30px;
+    margin-left: 2%;
+    width: 30%;
+    display: inline-block;
+    position: absolute;
+}
+
+.FirstPolarChart{
+    margin: auto;
+    width: 350px!important;
+    height: 350px!important;
+}
+
+.WeeklyWeightLostLineChart{
+    padding: 1%;
+    background: gainsboro;
+    border-radius: 30px;
+    width: 65%;
+    display: inline-block;
+}
+
 .LineChartContainer{
-    border-bottom: 2px solid darkcyan;
     border-top: 2px solid darkcyan;
     margin-top: 12%;
     width: 74%;
@@ -339,4 +395,13 @@ td:nth-child(1), th:nth-child(1){
 
 .EditItem input{
     border: 2px solid black;
+}
+
+.WeekSummaryTable{
+    width: 55%;
+}
+
+.WeekSummaryTable thead th{
+    border-bottom: none!important;
+    text-align: center;
 }

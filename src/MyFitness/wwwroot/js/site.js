@@ -91,25 +91,6 @@ $(".ChangePImageInput").on("change", function () {
     $(".ChangeProfileImg").submit()
 })
 
-CaloriesEatenAndRemaining()
-.then(function (CalRemaining) {
-    MakePieChart(CalRemaining)
-})
-
-GetNutritionInformation()
-.then(function (NutritionArray) {
-    CreateBarChart(NutritionArray)
-})
-
-GetCaloriesConsumedInDateRange(7)
-.then(function (CalorieInfo) {
-    CreateLineChart(CalorieInfo)
-})
-
-GetNutritionGramsConsumedInformation()
-.then(function (NInfo) {
-    MakeCaloricPieChart(NInfo)
-})
 
 $(".Editable").on("click", function () {
     let LabelText = $(this).children(".NavLabel").text()
@@ -219,4 +200,39 @@ $(".SubmitEdit").on("click", function () {
         })
     }
 
+})
+
+CaloriesEatenAndRemaining()
+.then(function (CalRemaining) {
+    MakePieChart(CalRemaining)
+})
+
+GetNutritionInformation()
+.then(function (NutritionArray) {
+    CreateBarChart(NutritionArray)
+})
+
+GetCaloriesConsumedInDateRange(7)
+.then(function (CalorieInfo) {
+    CreateLineChart(CalorieInfo)
+})
+
+GetNutritionGramsConsumedInformation()
+.then(function (NInfo) {
+    MakeCaloricPieChart(NInfo)
+})
+
+GetWeeklyInformationForLineChart()
+.then(function (WLInfo) {
+    WeeklyWeightLostLineChart(WLInfo)
+})
+
+GetPercentOfCaloriesInRange(7)
+.then(function (CInfo) {
+    CreatePolarChart(CInfo)
+})
+
+GetCaloriesBurnedInRange(7)
+.then(function (CBurned) {
+    CreateBarChartForCaloriesBurnedInTimeRange(CBurned)
 })

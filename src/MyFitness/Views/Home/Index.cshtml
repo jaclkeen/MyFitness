@@ -94,6 +94,7 @@
         </div>
         <div class="HomeBodyBody">
             <div class="tables">
+                <h4>Food You've Eaten Today: </h4>
                 <table class="NutritionTable table-condensed table-inverse">
                     <thead>
                         <tr class="row">
@@ -128,6 +129,7 @@
                     </tbody>
                 </table>
                 <br />
+                <h4>Exercises You've Completed Today: </h4>
                 <table class="NutritionTable table-condensed table-inverse">
                     <thead>
                         <tr class="row">
@@ -185,10 +187,6 @@
                 <canvas id="FirstLineChart" class="FirstLineChart"></canvas>
             </div>
 
-            <div class="PolarChartContainer">
-                <canvas id="FirstPolarChart" class="FirstPolarChart"></canvas>
-            </div>
-
             <div class="PieChart2Container">
                 <canvas id="PieChart2" class="PieChart2"></canvas>
             </div>
@@ -197,6 +195,61 @@
     </div>
 
     <div class="ProfileBody2">
+        <h3 class="Body2Heading">Weekly Weight Loss Information:</h3>
 
+        <div class="WeeklyWeightLostLineChart">
+            <canvas id="WWLineChart" class="WWLineChart"></canvas>
+        </div>
+
+        <div class="PolarChartContainer">
+            <canvas id="FirstPolarChart" class="FirstPolarChart"></canvas>
+        </div>
+
+        <h4 class="Body2Heading">Your Nutrition The Past 7 Days: </h4>
+        <table class="table table-inverse WeekSummaryTable">
+            <thead>
+                <tr class="row">
+                    <th>Date</th>
+                    <th>Calories</th>
+                    <th>Fat</th>
+                    <th>Protein</th>
+                    <th>Carbs</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.WeeklyFoodInfo != null)
+                {
+                    @foreach (var n in Model.WeeklyFoodInfo)
+                    {
+                        <tr class="row">
+                            <th>@Model.FormatTodayDate(n.DailyNutritionDate)</th>
+                            <td>@n.DailyFoods.Sum(df => df.Calories)</td>
+                            <td>@n.DailyFoods.Sum(df => df.FoodFat)g</td>
+                            <td>@n.DailyFoods.Sum(df => df.FoodProtein)g</td>
+                            <td>@n.DailyFoods.Sum(df => df.FoodCarbs)g</td>
+                        </tr>
+                    }
+                }
+                <tr class="row">
+                    <th>Total: </th>
+                    <td>@Model.WeeklyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.Calories))</td>
+                    <td>@Model.WeeklyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.FoodFat))g</td>
+                    <td>@Model.WeeklyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.FoodProtein))g</td>
+                    <td>@Model.WeeklyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.FoodCarbs))g</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="BarGraphGramTotalsContainer">
+            <canvas class="BGGramTotalsGraph" id="BGGramTotalsGraph"></canvas>
+        </div>
+    </div>
+
+    <div class="ProfileBody3">
+        <h3 class="Body3Heading">Monthly Weight Loss Information:</h3>
+    </div>
+
+    <div class="ProfileBody4">
+        <h3 class="Body4Heading">Yearly Weight Loss Information:</h3>
     </div>
 </div>
