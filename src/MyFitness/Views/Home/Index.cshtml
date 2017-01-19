@@ -121,10 +121,10 @@
                         }
                         <tr class="row">
                             <th>Total: </th>
-                            <td>@Model.CalorieTotal</td>
-                            <td>@Model.FatTotal</td>
-                            <td>@Model.ProteinTotal</td>
-                            <td>@Model.CarbTotal</td>
+                            <td class="totals">@Model.CalorieTotal</td>
+                            <td class="totals">@Model.FatTotal</td>
+                            <td class="totals">@Model.ProteinTotal</td>
+                            <td class="totals">@Model.CarbTotal</td>
                         </tr>
                     </tbody>
                 </table>
@@ -163,13 +163,13 @@
 
                         <tr class="row">
                             <th>Total: </th>
-                            <td>@Model.ExerciseTypeTotal</td>
-                            <td>@Model.ExerciseLengthInHoursTotal</td>
-                            <td>@Model.CaloriesBurnedTotal</td>
-                            <td>@Model.DistanceTraveledTotal</td>
-                            <td>@Model.WeightLiftedTotal</td>
-                            <td>@Model.SetsTotal</td>
-                            <td>@Model.RepsTotal</td>
+                            <td class="totals">@Model.ExerciseTypeTotal</td>
+                            <td class="totals">@Model.ExerciseLengthInHoursTotal</td>
+                            <td class="totals">@Model.CaloriesBurnedTotal</td>
+                            <td class="totals">@Model.DistanceTraveledTotal</td>
+                            <td class="totals">@Model.WeightLiftedTotal</td>
+                            <td class="totals">@Model.SetsTotal</td>
+                            <td class="totals">@Model.RepsTotal</td>
                         </tr>
                     </tbody>
                 </table>
@@ -221,7 +221,7 @@
                 {
                     @foreach (var n in Model.WeeklyFoodInfo)
                     {
-                        <tr class="row">
+                        <tr class="row Hoverable">
                             <th>@Model.FormatTodayDate(n.DailyNutritionDate)</th>
                             <td>@n.DailyFoods.Sum(df => df.Calories)</td>
                             <td>@n.DailyFoods.Sum(df => df.FoodFat)g</td>
@@ -231,11 +231,11 @@
                     }
                 }
                 <tr class="row">
-                    <th>Total: </th>
-                    <td>@Model.WeeklyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.Calories))</td>
-                    <td>@Model.WeeklyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.FoodFat))g</td>
-                    <td>@Model.WeeklyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.FoodProtein))g</td>
-                    <td>@Model.WeeklyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.FoodCarbs))g</td>
+                    <th>Daily Average: </th>
+                    <td class="totals">@Model.WeeklyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.Calories) / @Model.WeeklyFoodInfo.Count())</td>
+                    <td class="totals">@Model.WeeklyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.FoodFat) / @Model.WeeklyFoodInfo.Count())g</td>
+                    <td class="totals">@Math.Round(Model.WeeklyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.FoodProtein) / @Model.WeeklyFoodInfo.Count()))g</td>
+                    <td class="totals">@Model.WeeklyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.FoodCarbs) / @Model.WeeklyFoodInfo.Count())g</td>
                 </tr>
             </tbody>
         </table>
@@ -247,6 +247,52 @@
 
     <div class="ProfileBody3">
         <h3 class="Body3Heading">Monthly Weight Loss Information:</h3>
+
+        <div class="MonthlyWWLineChartContainer">
+            <canvas class="MonthlyWWLineChart" id="MonthlyWWLineChart"></canvas>
+        </div>
+
+        <h4 class="Body2Heading">Your Nutrition The Past 30 Days: </h4>
+        <div class="Body3Tables">
+            <table class="table table-inverse MonthSummaryTable">
+                <thead>
+                    <tr class="row">
+                        <th>Date</th>
+                        <th>Calories</th>
+                        <th>Fat</th>
+                        <th>Protein</th>
+                        <th>Carbs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.WeeklyFoodInfo != null)
+                    {
+                        @foreach (var n in Model.MonthlyFoodInfo)
+                        {
+                            <tr class="row Hoverable">
+                                <th>@Model.FormatTodayDate(n.DailyNutritionDate)</th>
+                                <td>@n.DailyFoods.Sum(df => df.Calories)</td>
+                                <td>@n.DailyFoods.Sum(df => df.FoodFat)g</td>
+                                <td>@n.DailyFoods.Sum(df => df.FoodProtein)g</td>
+                                <td>@n.DailyFoods.Sum(df => df.FoodCarbs)g</td>
+                            </tr>
+                        }
+                    }
+                    <tr class="row">
+                        <th>Daily Average: </th>
+                        <td class="totals">@Model.MonthlyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.Calories) / @Model.MonthlyFoodInfo.Count())</td>
+                        <td class="totals">@Model.MonthlyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.FoodFat) / @Model.MonthlyFoodInfo.Count())g</td>
+                        <td class="totals">@Math.Round(Model.MonthlyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.FoodProtein) / @Model.MonthlyFoodInfo.Count()))g</td>
+                        <td class="totals">@Model.MonthlyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.FoodCarbs) / @Model.MonthlyFoodInfo.Count())g</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="DoubleBarChartDiv">
+            <canvas class="DoubleBarChart" id="DoubleBarChart"></canvas>
+        </div>
+
     </div>
 
     <div class="ProfileBody4">

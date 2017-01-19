@@ -15,10 +15,13 @@ function GetCaloriesBurnedInRange(TimeRange) {
     })
 }
 
-function GetWeeklyInformationForLineChart() {
+function GetInformationForLineChartInRange(DayRange) {
     return new Promise(function (resolve, reject) {
         $.ajax({
-            url: "Home/WeeklyGoalWeightLossInformation"
+            url: "Home/WeightLossInformationInRange",
+            method: "POST",
+            contentType: 'application/json',
+            data: JSON.stringify(DayRange)
         }).done(function (WLInfo) {
             resolve(WLInfo)
         }).error(function (err) {

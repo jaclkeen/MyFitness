@@ -41,7 +41,7 @@ function CreateBarChartForCaloriesBurnedInTimeRange(CaloricData) {
     let ctx = document.getElementById('BGGramTotalsGraph').getContext('2d');
 
     var data = {
-        labels: ["7 Days Ago", "6 Days Ago", "5 Days Ago", "4 Days Ago", "3 Days Ago", "Yesterday", "Today"],
+        labels: ["6 Days Ago", "5 Days Ago", "4 Days Ago", "3 Days Ago", "2 Days Ago", "Yesterday", "Today"],
         datasets: [
             {
                 label: "Breakdown",
@@ -75,3 +75,54 @@ function CreateBarChartForCaloriesBurnedInTimeRange(CaloricData) {
         }
     });
 }
+
+
+function CreateMonthlyDoubleBarChart(CaloricData) {
+    let ctx = document.getElementById('DoubleBarChart').getContext('2d');
+
+    var data = {
+        labels: ["29 Days Ago", "28 Days Ago", "27 Days Ago", "26 Days Ago", "25 Days Ago", "24 Days Ago",
+            "23 Days Ago", "22 Days Ago", "21 Days Ago", "20 Days Ago", "19 Days Ago", "18 Days Ago", "17 Days Ago",
+            "16 Days Ago", "15 Days Ago", "14 Days Ago", "13 Days Ago", "12 Days Ago", "11 Days Ago", "10 Days Ago",
+            "9 Days Ago", "8 Days Ago", "7 Days Ago", "6 Days Ago", "5 Days Ago", "4 Days Ago", "3 Days Ago",
+            "2 Days Ago", "Yesterday", "Today",
+        ],
+        datasets: [
+            {
+                label: "Calories Burned",
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(353, 102, 255, 0.6)',
+                    'rgba(54, 162, 235, 0.6)'
+
+                ],
+                borderColor: [
+                    "black", "black", "black", "black", "black", "black", "black"
+                ],
+                borderWidth: 1,
+                data: [23, 82, 90, 89, 23, 01, 20],
+            }, {
+                label: "Calories Eaten",
+                data: [90, 23, 48, 10, 48, 02, 32],
+                backgroundColor: "rgba(255,153,0,1)"
+            }
+        ]
+    };
+
+    new Chart(ctx, {
+        type: "bar",
+        data: data,
+        options: {
+            title: {
+                display: true,
+                text: "Calories Burned and Consumed the Last 30 Days"
+            }
+        }
+    });
+}
+
+CreateMonthlyDoubleBarChart(4)

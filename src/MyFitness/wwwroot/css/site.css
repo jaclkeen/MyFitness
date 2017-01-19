@@ -8,6 +8,39 @@
     background: silver;
 }
 
+.ProfileBody3{
+    border-top: 2px solid darkcyan;
+    padding-top: 1%;
+    background-color: black;
+    opacity: .8;
+    color: white;
+}
+
+.Body3Tables{
+    position: absolute;
+    background: white;
+    width: 35%;
+    max-height: 200px;
+    overflow-x: overlay;
+    display: inline-block;
+}
+
+.Body3Tables table {
+    width: 100%;
+}
+
+.MonthSummaryTable{
+    margin-bottom: 0;
+    border: 2px solid darkcyan;
+    color: black;
+    background: lightgrey;
+    width: 45%;
+}
+
+.MonthSummaryTable th{
+    border-bottom: 2px solid black!important;
+}
+
 .Body2Heading, .Body3Heading, .Body4Heading{
     font-weight: bolder;
     margin-top: 10px;
@@ -372,6 +405,17 @@ td:nth-child(1), th:nth-child(1){
     height: 350px!important;
 }
 
+.DoubleBarChartDiv{
+    opacity: 1!important;
+    border-radius: 40px;
+    background: silver;
+    width: 63%;
+    margin-left: 38%;
+    display: inline-block;
+    padding: 1%;
+    margin-top: -3%;
+}
+
 .WeeklyWeightLostLineChart{
     padding: 1%;
     background: gainsboro;
@@ -404,4 +448,15 @@ td:nth-child(1), th:nth-child(1){
 .WeekSummaryTable thead th{
     border-bottom: none!important;
     text-align: center;
+}
+
+.MonthlyWWLineChartContainer{
+    margin-bottom: 2%;
+    border-bottom: 2px solid darkcyan;
+    height: 350px;
+    width: 100%;
+}
+
+.totals{
+    background-color: white!important;
 }

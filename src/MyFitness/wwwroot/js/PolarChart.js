@@ -31,7 +31,7 @@
             options: {
                 title: {
                     display: true,
-                    text: "Total Percentage of Macronutrient Consumed"
+                    text: "Total Percentage of Macronutrient Consumed This Week"
                 }
             }
         });

@@ -89,11 +89,19 @@ namespace MyFitness.Controllers
             model.WeeklyWeightLost = context.DailyNutrition.Where(dn => dn.User == CurrentUser && dn.DailyNutritionDate >= today.AddDays(-7) && dn.DailyNutritionDate <= today).ToList().Sum(wl => wl.WeightLostToday);
 
             model.TodayNutrition = n;
+            //FOR WEEKLY NUTRITION TABLE INFO
             model.WeeklyFoodInfo = (from dn in context.DailyNutrition
                                     join f in context.Foods on dn.DailyNutritionId equals f.DailyNutritionId
                                     where dn.User == CurrentUser && dn.DailyNutritionDate >= today.AddDays(-7) && dn.DailyNutritionDate <= today
                                     select dn).Distinct().ToList();
             model.WeeklyFoodInfo.ForEach(dn => dn.DailyFoods = context.Foods.Where(f => f.DailyNutritionId == dn.DailyNutritionId).ToList());
+
+            //FOR MONTHLY NUTRITION TABLE INFO
+            model.MonthlyFoodInfo = (from dn in context.DailyNutrition
+                                    join f in context.Foods on dn.DailyNutritionId equals f.DailyNutritionId
+                                    where dn.User == CurrentUser && dn.DailyNutritionDate >= today.AddDays(-30) && dn.DailyNutritionDate <= today
+                                    select dn).Distinct().ToList();
+            model.MonthlyFoodInfo.ForEach(dn => dn.DailyFoods = context.Foods.Where(f => f.DailyNutritionId == dn.DailyNutritionId).ToList());
 
             return View(model);
         }
@@ -235,25 +243,7 @@ namespace MyFitness.Controllers
                 for (int i = 0; i < MissingDays; i++)
                 {
                     CaloriesBurned.Insert(i, 0);
-                }
-            }
-
-            if (Cals.Count < DayRange)
-            {
-                int MissingDays = DayRange - Cals.Count;
-
-                for(int i = 0; i < MissingDays; i++)
-                {
                     Cals.Insert(i, 0);
-                }
-            }
-
-            if(DailyCaloricAllowance.Count < DayRange)
-            {
-                int MissingDays = DayRange - DailyCaloricAllowance.Count;
-
-                for (int i = 0; i < MissingDays; i++)
-                {
                     DailyCaloricAllowance.Insert(i, 0);
                 }
             }
@@ -268,32 +258,32 @@ namespace MyFitness.Controllers
             return Values;
         }
 
-        [HttpGet]
-        public async Task<double[,]> WeeklyGoalWeightLossInformation()
+        [HttpPost]
+        public async Task<double[,]> WeightLossInformationInRange([FromBody] int DateRange)
         {
-            double[,] WWLArray = new double[4, 7];
+            double[,] WWLArray = new double[4, DateRange];
             ApplicationUser CurrentUser = await GetCurrentUserAsync();
 
             List<double> WeeklyWeightLost = (from dn in context.DailyNutrition
-                                             where dn.User == CurrentUser && dn.DailyNutritionDate >= DateTime.Today.AddDays(-7) && dn.DailyNutritionDate <= DateTime.Today
+                                             where dn.User == CurrentUser && dn.DailyNutritionDate >= DateTime.Today.AddDays(-DateRange) && dn.DailyNutritionDate <= DateTime.Today
                                              select dn.WeightLostToday).ToList();
 
             List<double> WeeklyCarbsEat = (from dn in context.DailyNutrition
-                                           where dn.User == CurrentUser && dn.DailyNutritionDate >= DateTime.Today.AddDays(-7) && dn.DailyNutritionDate <= DateTime.Today
+                                           where dn.User == CurrentUser && dn.DailyNutritionDate >= DateTime.Today.AddDays(-DateRange) && dn.DailyNutritionDate <= DateTime.Today
                                            select dn.DailyFoods.Sum(f => f.FoodCarbs)).ToList();
 
             List<double> WeeklyProteinEat = (from dn in context.DailyNutrition
-                                           where dn.User == CurrentUser && dn.DailyNutritionDate >= DateTime.Today.AddDays(-7) && dn.DailyNutritionDate <= DateTime.Today
+                                           where dn.User == CurrentUser && dn.DailyNutritionDate >= DateTime.Today.AddDays(-DateRange) && dn.DailyNutritionDate <= DateTime.Today
                                            select dn.DailyFoods.Sum(f => f.FoodProtein)).ToList();
 
             List<double> WeeklyFatsEat = (from dn in context.DailyNutrition
-                                           where dn.User == CurrentUser && dn.DailyNutritionDate >= DateTime.Today.AddDays(-7) && dn.DailyNutritionDate <= DateTime.Today
+                                           where dn.User == CurrentUser && dn.DailyNutritionDate >= DateTime.Today.AddDays(-DateRange) && dn.DailyNutritionDate <= DateTime.Today
                                            select dn.DailyFoods.Sum(f => f.FoodFat)).ToList();
 
 
-            if (WeeklyWeightLost.Count < 7)
+            if (WeeklyWeightLost.Count < DateRange)
             {
-                int MissingValues = 7 - WeeklyWeightLost.Count;
+                int MissingValues = DateRange - WeeklyWeightLost.Count;
                 for(int i = 0; i < MissingValues; i++)
                 {
                     WeeklyWeightLost.Insert(i, 0);
@@ -303,7 +293,7 @@ namespace MyFitness.Controllers
                 }
             }
 
-            for(int i = 0; i < 7; i++)
+            for(int i = 0; i < DateRange; i++)
             {
                 WWLArray[0, i] = WeeklyWeightLost[i];
                 WWLArray[1, i] = WeeklyCarbsEat[i];
