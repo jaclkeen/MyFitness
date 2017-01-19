@@ -10,7 +10,7 @@
 
 .Body2Heading, .Body3Heading, .Body4Heading{
     font-weight: bolder;
-    margin-top: 0;
+    margin-top: 10px;
 }
 
 body {
@@ -338,6 +338,16 @@ td:nth-child(1), th:nth-child(1){
     position: absolute;
 }
 
+.BarGraphGramTotalsContainer{
+    margin-top: -18%;
+    width: 43%;
+    margin-left: 57%;
+    background: gainsboro;
+    display: inline-block;
+    padding: 1%;
+    border-radius: 30px;
+}
+
 .BarChartContainer{
     border-top: 2px solid darkcyan;
     margin-top: 12%;
@@ -348,10 +358,8 @@ td:nth-child(1), th:nth-child(1){
 }
 
 .PolarChartContainer{
-    background: white;
+    background: gainsboro;
     border-radius: 30px;
-    border: 2px solid darkcyan;
-    margin-top: -2%;
     margin-left: 2%;
     width: 30%;
     display: inline-block;
@@ -366,10 +374,9 @@ td:nth-child(1), th:nth-child(1){
 
 .WeeklyWeightLostLineChart{
     padding: 1%;
-    border: 2px solid darkcyan;
-    background: white;
+    background: gainsboro;
     border-radius: 30px;
-    width: 66%;
+    width: 65%;
     display: inline-block;
 }
 
@@ -388,4 +395,13 @@ td:nth-child(1), th:nth-child(1){
 
 .EditItem input{
     border: 2px solid black;
+}
+
+.WeekSummaryTable{
+    width: 55%;
+}
+
+.WeekSummaryTable thead th{
+    border-bottom: none!important;
+    text-align: center;
 }

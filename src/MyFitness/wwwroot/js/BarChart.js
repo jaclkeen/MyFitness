@@ -31,7 +31,43 @@
         options: {
             title: {
                 display: true,
-                text: "Macronutrient Breakdown (In Calories)"
+                text: "Macronutrient Breakdown of Calories Eaten Today"
+            }
+        }
+    });
+}
+
+function CreateBarChartForCaloriesBurnedInTimeRange(CaloricData) {
+    let ctx = document.getElementById('BGGramTotalsGraph').getContext('2d');
+
+    var data = {
+        labels: ["7 Days Ago", "6 Days Ago", "5 Days Ago", "4 Days Ago", "3 Days Ago", "Yesterday", "Today"],
+        datasets: [
+            {
+                label: "Breakdown",
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    "black", "black", "black", "black", "black", "black", "black"
+                ],
+                borderWidth: 2,
+                data: CaloricData,
+            }
+        ]
+    };
+
+    new Chart(ctx, {
+        type: "bar",
+        data: data,
+        options: {
+            title: {
+                display: true,
+                text: "Calories Burned the Last 7 Days"
             }
         }
     });

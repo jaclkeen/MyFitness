@@ -15,6 +15,8 @@ namespace MyFitness.Models.AppViewModels
 
         public Exercise ExerciseBeingAdded { get; set; }
 
+        public List<DailyNutrition> WeeklyFoodInfo { get; set; }
+
         public string Today { get; set; }
         public double FatTotal { get; set; }
         public int CalorieTotal { get; set; }

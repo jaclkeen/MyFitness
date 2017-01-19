@@ -23,8 +23,8 @@
 
     if ($(".FirstPolarChart").is(":visible")) {
         var ctx = $(".FirstPolarChart").get(0).getContext("2d");
-        ctx.canvas.width = "100";
-        ctx.canvas.height = "100";
+        ctx.canvas.width = "200";
+        ctx.canvas.height = "200";
         new Chart(ctx, {
             data: data,
             type: 'polarArea',

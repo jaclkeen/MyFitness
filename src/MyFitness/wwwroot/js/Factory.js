@@ -1,5 +1,20 @@
 ﻿let APIkey = GetKey();
 
+function GetCaloriesBurnedInRange(TimeRange) {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: `/Home/CaloriesBurnedInTimeRange`,
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(TimeRange)
+        }).done(function (CalsBurned) {
+            resolve(CalsBurned)
+        }).error(function (err) {
+            reject(err)
+        })
+    })
+}
+
 function GetWeeklyInformationForLineChart() {
     return new Promise(function (resolve, reject) {
         $.ajax({

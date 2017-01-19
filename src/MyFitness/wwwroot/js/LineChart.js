@@ -77,7 +77,43 @@ function WeeklyWeightLostLineChart(WeightLost) {
                 pointHoverBackgroundColor: "darkcyan",
                 pointHoverBorderColor: "white",
                 data: WeightLost[0]
-            }
+            },
+            {
+                label: "Carbs Eaten",
+                backgroundColor: "rgba(54, 162, 235, 0.2)",
+                borderColor: "dodgerblue",
+                borderCapStyle: 'butt',
+                borderJoinStyle: 'miter',
+                pointBorderColor: "white",
+                pointBackgroundColor: "dodgerblue",
+                pointHoverBackgroundColor: "dodgerblue",
+                pointHoverBorderColor: "white",
+                data: WeightLost[1]
+            },
+            {
+                label: "Protein Eaten",
+                backgroundColor: "rgba(255, 159, 64, 0.2)",
+                borderColor: "orange",
+                borderCapStyle: 'butt',
+                borderJoinStyle: 'miter',
+                pointBorderColor: "white",
+                pointBackgroundColor: "orange",
+                pointHoverBackgroundColor: "orange",
+                pointHoverBorderColor: "white",
+                data: WeightLost[2]
+            },
+            {
+                label: "Fat Eaten",
+                backgroundColor: "rgba(153, 102, 255, 0.2)",
+                borderColor: "salmon",
+                borderCapStyle: 'butt',
+                borderJoinStyle: 'miter',
+                pointBorderColor: "white",
+                pointBackgroundColor: "salmon",
+                pointHoverBackgroundColor: "salmon",
+                pointHoverBorderColor: "white",
+                data: WeightLost[3]
+            },
         ]
     };
 
@@ -87,7 +123,7 @@ function WeeklyWeightLostLineChart(WeightLost) {
         options: {
             title: {
                 display: true,
-                text: "Weight Lost This Week"
+                text: "Weight Lost This Week vs. Macronutrients Consumed In Grams"
             }
         }
     });

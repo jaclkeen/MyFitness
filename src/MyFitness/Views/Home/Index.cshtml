@@ -205,34 +205,44 @@
             <canvas id="FirstPolarChart" class="FirstPolarChart"></canvas>
         </div>
 
-        <h4>Exercises You've Completed Today: </h4>
-        <table class="NutritionTable table-condensed table-inverse">
+        <h4 class="Body2Heading">Your Nutrition The Past 7 Days: </h4>
+        <table class="table table-inverse WeekSummaryTable">
             <thead>
                 <tr class="row">
-                    <th>Exercise</th>
-                    <th>Type</th>
-                    <th>Time (Hours)</th>
-                    <th>Calories Burned</th>
-                    <th>Miles Traveled</th>
-                    <th>Weight Lifted</th>
-                    <th>Sets</th>
-                    <th>Reps</th>
+                    <th>Date</th>
+                    <th>Calories</th>
+                    <th>Fat</th>
+                    <th>Protein</th>
+                    <th>Carbs</th>
                 </tr>
             </thead>
             <tbody>
+                @if (Model.WeeklyFoodInfo != null)
+                {
+                    @foreach (var n in Model.WeeklyFoodInfo)
+                    {
+                        <tr class="row">
+                            <th>@Model.FormatTodayDate(n.DailyNutritionDate)</th>
+                            <td>@n.DailyFoods.Sum(df => df.Calories)</td>
+                            <td>@n.DailyFoods.Sum(df => df.FoodFat)g</td>
+                            <td>@n.DailyFoods.Sum(df => df.FoodProtein)g</td>
+                            <td>@n.DailyFoods.Sum(df => df.FoodCarbs)g</td>
+                        </tr>
+                    }
+                }
                 <tr class="row">
                     <th>Total: </th>
-                    <td>@Model.ExerciseTypeTotal</td>
-                    <td>@Model.ExerciseLengthInHoursTotal</td>
-                    <td>@Model.CaloriesBurnedTotal</td>
-                    <td>@Model.DistanceTraveledTotal</td>
-                    <td>@Model.WeightLiftedTotal</td>
-                    <td>@Model.SetsTotal</td>
-                    <td>@Model.RepsTotal</td>
+                    <td>@Model.WeeklyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.Calories))</td>
+                    <td>@Model.WeeklyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.FoodFat))g</td>
+                    <td>@Model.WeeklyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.FoodProtein))g</td>
+                    <td>@Model.WeeklyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.FoodCarbs))g</td>
                 </tr>
             </tbody>
         </table>
 
+        <div class="BarGraphGramTotalsContainer">
+            <canvas class="BGGramTotalsGraph" id="BGGramTotalsGraph"></canvas>
+        </div>
     </div>
 
     <div class="ProfileBody3">
