@@ -1,10 +1,23 @@
-﻿body {
+﻿.ProfileBody2, .ProfileBody3, .ProfileBody4{
+    padding: 0 2% 2% 2%;
+}
+
+.Body2Heading, .Body3Heading, .Body4Heading{
+    font-weight: bolder;
+}
+
+body {
     padding-top: 50px;
     background-color: darkcyan;
 }
 
 input{
     border: 2px solid black;
+}
+
+.tables h4{
+    font-weight: bolder;
+    margin-top: 5px;
 }
 
 .tables{
@@ -277,6 +290,11 @@ td:nth-child(1), th:nth-child(1){
     font-weight: bolder;
 }
 
+.WWLineChart{
+    height: 270px!important;
+    width: 95%!important;
+}
+
 .FirstLineChart{
     height: 270px!important;
     width: 95%!important;
@@ -321,6 +339,10 @@ td:nth-child(1), th:nth-child(1){
     margin-left: 74%;
     top: 330px;
     position: absolute;
+}
+
+.WeeklyWeightLostLineChart{
+    width: 48%;
 }
 
 .LineChartContainer{

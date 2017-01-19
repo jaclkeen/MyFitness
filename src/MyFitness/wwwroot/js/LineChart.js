@@ -1,13 +1,10 @@
 ﻿function CreateLineChart(CalorieInfo) {
-
-    console.log(CalorieInfo)
-
     let ctx = document.getElementById('FirstLineChart').getContext('2d');
     ctx.canvas.width = "200px";
     ctx.canvas.height = "200px";
 
     var data = {
-        labels: ["6", "5", "4", "3", "2", "Yesterday", "Today"],
+        labels: ["6 Days Ago", "5 Days Ago", "4 Days Ago", "3 Days Ago", "2 Days Ago", "Yesterday", "Today"],
         datasets: [
             {
                 label: "Calories Consumed",
@@ -54,6 +51,79 @@
             title: {
                 display: true,
                 text: "Calories Consumed The Past 7 Days"
+            }
+        }
+    });
+}
+
+function WeeklyWeightLostLineChart(WeightLost) {
+    console.log(WeightLost)
+
+    let ctx = document.getElementById('WWLineChart').getContext('2d');
+    ctx.canvas.width = "200px";
+    ctx.canvas.height = "200px";
+
+    var data = {
+        labels: ["6 Days Ago", "5 Days Ago", "4 Days Ago", "3 Days Ago", "2 Days Ago", "Yesterday", "Today"],
+        datasets: [
+            {
+                label: "Weight Lost",
+                backgroundColor: "lightgreen",
+                borderColor: "darkcyan",
+                borderCapStyle: 'butt',
+                borderJoinStyle: 'miter',
+                pointBorderColor: "white",
+                pointBackgroundColor: "darkcyan",
+                pointHoverBackgroundColor: "salmon",
+                pointHoverBorderColor: "white",
+                data: WeightLost[0]
+            },
+            {
+                label: "Fat Consumed",
+                backgroundColor: "lightblue",
+                borderColor: "#FF9999",
+                borderCapStyle: 'butt',
+                borderJoinStyle: 'miter',
+                pointBorderColor: "white",
+                pointBackgroundColor: "salmon",
+                pointHoverBackgroundColor: "salmon",
+                pointHoverBorderColor: "white",
+                data: WeightLost[1]
+            },
+            {
+                label: "Protein Consumed",
+                backgroundColor: "lightpink",
+                borderColor: "#FF9999",
+                borderCapStyle: 'butt',
+                borderJoinStyle: 'miter',
+                pointBorderColor: "white",
+                pointBackgroundColor: "salmon",
+                pointHoverBackgroundColor: "salmon",
+                pointHoverBorderColor: "white",
+                data: WeightLost[2]
+            },
+            {
+                label: "Carbs Consumed",
+                backgroundColor: "yellow",
+                borderColor: "#FF9999",
+                borderCapStyle: 'butt',
+                borderJoinStyle: 'miter',
+                pointBorderColor: "white",
+                pointBackgroundColor: "salmon",
+                pointHoverBackgroundColor: "salmon",
+                pointHoverBorderColor: "white",
+                data: WeightLost[3]
+            }
+        ]
+    };
+
+    var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: data,
+        options: {
+            title: {
+                display: true,
+                text: "Weight Lost This Week"
             }
         }
     });

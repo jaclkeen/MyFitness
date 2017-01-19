@@ -111,6 +111,11 @@ GetNutritionGramsConsumedInformation()
     MakeCaloricPieChart(NInfo)
 })
 
+GetWeeklyInformationForLineChart()
+.then(function (WLInfo) {
+    WeeklyWeightLostLineChart(WLInfo)
+})
+
 $(".Editable").on("click", function () {
     let LabelText = $(this).children(".NavLabel").text()
     let Value = $(this).children(".NavValue").text()

@@ -263,6 +263,51 @@ namespace MyFitness.Controllers
         }
 
         [HttpGet]
+        public async Task<double[,]> WeeklyGoalWeightLossInformation()
+        {
+            double[,] WWLArray = new double[4, 7];
+            ApplicationUser CurrentUser = await GetCurrentUserAsync();
+
+            List<double> WeeklyWeightLost = (from dn in context.DailyNutrition
+                                             where dn.User == CurrentUser && dn.DailyNutritionDate >= DateTime.Today.AddDays(-7) && dn.DailyNutritionDate <= DateTime.Today
+                                             select dn.WeightLostToday).ToList();
+
+            List<double> WeeklyCarbsConsumed = (from dn in context.DailyNutrition
+                                                where dn.User == CurrentUser && dn.DailyNutritionDate >= DateTime.Today.AddDays(-7) && dn.DailyNutritionDate <= DateTime.Today
+                                                select dn.DailyFoods.Sum(f => f.FoodCarbs)).ToList();
+
+            List<double> WeeklyFatsConsumed = (from dn in context.DailyNutrition
+                                                where dn.User == CurrentUser && dn.DailyNutritionDate >= DateTime.Today.AddDays(-7) && dn.DailyNutritionDate <= DateTime.Today
+                                                select dn.DailyFoods.Sum(f => f.FoodFat)).ToList();
+
+            List<double> WeeklyProteinConsumed = (from dn in context.DailyNutrition
+                                                where dn.User == CurrentUser && dn.DailyNutritionDate >= DateTime.Today.AddDays(-7) && dn.DailyNutritionDate <= DateTime.Today
+                                                select dn.DailyFoods.Sum(f => f.FoodProtein)).ToList();
+
+            if (WeeklyWeightLost.Count < 7)
+            {
+                int MissingValues = 7 - WeeklyWeightLost.Count;
+                for(int i = 0; i < MissingValues; i++)
+                {
+                    WeeklyWeightLost.Insert(i, 0);
+                    WeeklyCarbsConsumed.Insert(i, 0);
+                    WeeklyFatsConsumed.Insert(i, 0);
+                    WeeklyProteinConsumed.Insert(i, 0);
+                }
+            }
+
+            for(int i = 0; i < 7; i++)
+            {
+                WWLArray[0, i] = WeeklyWeightLost[i];
+                WWLArray[1, i] = WeeklyFatsConsumed[i];
+                WWLArray[2, i] = WeeklyProteinConsumed[i];
+                WWLArray[3, i] = WeeklyCarbsConsumed[i];
+            }
+
+            return WWLArray;
+        }
+
+        [HttpGet]
         public async Task<double[]> NutrientGrams()
         {
             double[] NutrientArray = new double[3];

@@ -1,5 +1,17 @@
 ﻿let APIkey = GetKey();
 
+function GetWeeklyInformationForLineChart() {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: "Home/WeeklyGoalWeightLossInformation"
+        }).done(function (WLInfo) {
+            resolve(WLInfo)
+        }).error(function (err) {
+            reject(err)
+        })
+    })
+}
+
 function SearchForFoods(FoodName) {
     return new Promise(function (resolve, reject) {
         $.ajax({
