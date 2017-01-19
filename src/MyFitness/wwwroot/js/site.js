@@ -116,6 +116,11 @@ GetWeeklyInformationForLineChart()
     WeeklyWeightLostLineChart(WLInfo)
 })
 
+GetPercentOfCaloriesInRange(7)
+.then(function (CInfo) {
+    CreatePolarChart(CInfo)
+})
+
 $(".Editable").on("click", function () {
     let LabelText = $(this).children(".NavLabel").text()
     let Value = $(this).children(".NavValue").text()

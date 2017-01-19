@@ -2,8 +2,15 @@
     padding: 0 2% 2% 2%;
 }
 
+.ProfileBody2{
+    border-top: 2px solid darkcyan;
+    padding-top: 1%;
+    background: silver;
+}
+
 .Body2Heading, .Body3Heading, .Body4Heading{
     font-weight: bolder;
+    margin-top: 0;
 }
 
 body {
@@ -291,8 +298,8 @@ td:nth-child(1), th:nth-child(1){
 }
 
 .WWLineChart{
-    height: 270px!important;
-    width: 95%!important;
+    height: 300px!important;
+    width: 100%!important;
 }
 
 .FirstLineChart{
@@ -332,7 +339,6 @@ td:nth-child(1), th:nth-child(1){
 }
 
 .BarChartContainer{
-    border-bottom: 2px solid darkcyan;
     border-top: 2px solid darkcyan;
     margin-top: 12%;
     width: 50%;
@@ -341,12 +347,33 @@ td:nth-child(1), th:nth-child(1){
     position: absolute;
 }
 
+.PolarChartContainer{
+    background: white;
+    border-radius: 30px;
+    border: 2px solid darkcyan;
+    margin-top: -2%;
+    margin-left: 2%;
+    width: 30%;
+    display: inline-block;
+    position: absolute;
+}
+
+.FirstPolarChart{
+    margin: auto;
+    width: 350px!important;
+    height: 350px!important;
+}
+
 .WeeklyWeightLostLineChart{
-    width: 48%;
+    padding: 1%;
+    border: 2px solid darkcyan;
+    background: white;
+    border-radius: 30px;
+    width: 66%;
+    display: inline-block;
 }
 
 .LineChartContainer{
-    border-bottom: 2px solid darkcyan;
     border-top: 2px solid darkcyan;
     margin-top: 12%;
     width: 74%;

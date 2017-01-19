@@ -116,3 +116,18 @@ function EditUserValues(DataObj) {
         })
     })
 }
+
+function GetPercentOfCaloriesInRange(DateRange) {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: `/Home/CaloricPercentageInformationInDateRage`,
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(DateRange)
+        }).done(function (CaloriesList) {
+            resolve(CaloriesList)
+        }).error(function (err) {
+            reject(err)
+        })
+    })
+}

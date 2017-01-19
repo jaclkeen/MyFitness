@@ -2,10 +2,9 @@
     var data = {
         datasets: [{
             data: [
-                11,
-                16,
-                7,
-                14
+                NutrientData[0],
+                NutrientData[1],
+                NutrientData[2],
             ],
             backgroundColor: [
                 "#FF6384",
@@ -16,20 +15,25 @@
             label: 'My dataset' // for legend
         }],
         labels: [
-            "Red",
-            "Green",
-            "Yellow",
-            "Blue"
+            "Carbs",
+            "Protein",
+            "Fat",
         ]
     };
 
     if ($(".FirstPolarChart").is(":visible")) {
         var ctx = $(".FirstPolarChart").get(0).getContext("2d");
-        ctx.canvas.width = "200";
-        ctx.canvas.height = "200";
+        ctx.canvas.width = "100";
+        ctx.canvas.height = "100";
         new Chart(ctx, {
             data: data,
-            type: 'polarArea'
+            type: 'polarArea',
+            options: {
+                title: {
+                    display: true,
+                    text: "Total Percentage of Macronutrient Consumed"
+                }
+            }
         });
     }
 }

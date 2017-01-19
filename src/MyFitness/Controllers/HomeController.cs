@@ -265,24 +265,12 @@ namespace MyFitness.Controllers
         [HttpGet]
         public async Task<double[,]> WeeklyGoalWeightLossInformation()
         {
-            double[,] WWLArray = new double[4, 7];
+            double[,] WWLArray = new double[1, 7];
             ApplicationUser CurrentUser = await GetCurrentUserAsync();
 
             List<double> WeeklyWeightLost = (from dn in context.DailyNutrition
                                              where dn.User == CurrentUser && dn.DailyNutritionDate >= DateTime.Today.AddDays(-7) && dn.DailyNutritionDate <= DateTime.Today
                                              select dn.WeightLostToday).ToList();
-
-            List<double> WeeklyCarbsConsumed = (from dn in context.DailyNutrition
-                                                where dn.User == CurrentUser && dn.DailyNutritionDate >= DateTime.Today.AddDays(-7) && dn.DailyNutritionDate <= DateTime.Today
-                                                select dn.DailyFoods.Sum(f => f.FoodCarbs)).ToList();
-
-            List<double> WeeklyFatsConsumed = (from dn in context.DailyNutrition
-                                                where dn.User == CurrentUser && dn.DailyNutritionDate >= DateTime.Today.AddDays(-7) && dn.DailyNutritionDate <= DateTime.Today
-                                                select dn.DailyFoods.Sum(f => f.FoodFat)).ToList();
-
-            List<double> WeeklyProteinConsumed = (from dn in context.DailyNutrition
-                                                where dn.User == CurrentUser && dn.DailyNutritionDate >= DateTime.Today.AddDays(-7) && dn.DailyNutritionDate <= DateTime.Today
-                                                select dn.DailyFoods.Sum(f => f.FoodProtein)).ToList();
 
             if (WeeklyWeightLost.Count < 7)
             {
@@ -290,18 +278,12 @@ namespace MyFitness.Controllers
                 for(int i = 0; i < MissingValues; i++)
                 {
                     WeeklyWeightLost.Insert(i, 0);
-                    WeeklyCarbsConsumed.Insert(i, 0);
-                    WeeklyFatsConsumed.Insert(i, 0);
-                    WeeklyProteinConsumed.Insert(i, 0);
                 }
             }
 
             for(int i = 0; i < 7; i++)
             {
                 WWLArray[0, i] = WeeklyWeightLost[i];
-                WWLArray[1, i] = WeeklyFatsConsumed[i];
-                WWLArray[2, i] = WeeklyProteinConsumed[i];
-                WWLArray[3, i] = WeeklyCarbsConsumed[i];
             }
 
             return WWLArray;
@@ -354,6 +336,34 @@ namespace MyFitness.Controllers
 
             await context.SaveChangesAsync();
             var result = await _userManager.UpdateAsync(CurrentUser);
+        }
+
+        [HttpPost]
+        public async Task<double[]> CaloricPercentageInformationInDateRage([FromBody] int days)
+        {
+            double[] CalInfo = new double[3];
+            double CarbTotal = 0;
+            double ProteinTotal = 0;
+            double FatTotal = 0;
+            double Total = 0;
+            ApplicationUser CurrentUser = await GetCurrentUserAsync();
+            List<DailyNutrition> UserN = context.DailyNutrition.Where(dn => dn.DailyNutritionDate <= DateTime.Today && dn.DailyNutritionDate >= DateTime.Today.AddDays(-7) && dn.User == CurrentUser).ToList();
+            UserN.ForEach(n => n.DailyFoods = context.Foods.Where(f => f.DailyNutritionId == n.DailyNutritionId).ToList());
+
+            foreach (DailyNutrition n in UserN)
+            {
+                CarbTotal += n.DailyFoods.Sum(df => df.FoodCarbs);
+                ProteinTotal += n.DailyFoods.Sum(df => df.FoodProtein);
+                FatTotal += n.DailyFoods.Sum(df => df.FoodFat);
+                Total += n.DailyFoods.Sum(df => df.Calories);
+                //Total += n.DailyFoods.Sum(df => df.FoodCarbs) + n.DailyFoods.Sum(df => df.FoodProtein) + n.DailyFoods.Sum(df => df.FoodFat);
+            }
+
+            CalInfo[0] = ((CarbTotal / Total) * 100) * 4;
+            CalInfo[1] = ((ProteinTotal / Total) * 100) * 4;
+            CalInfo[2] = ((FatTotal / Total) * 100) * 9;
+
+            return CalInfo;
         }
     }
 }

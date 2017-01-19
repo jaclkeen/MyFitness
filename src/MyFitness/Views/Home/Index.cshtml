@@ -187,10 +187,6 @@
                 <canvas id="FirstLineChart" class="FirstLineChart"></canvas>
             </div>
 
-            <div class="PolarChartContainer">
-                <canvas id="FirstPolarChart" class="FirstPolarChart"></canvas>
-            </div>
-
             <div class="PieChart2Container">
                 <canvas id="PieChart2" class="PieChart2"></canvas>
             </div>
@@ -200,9 +196,43 @@
 
     <div class="ProfileBody2">
         <h3 class="Body2Heading">Weekly Weight Loss Information:</h3>
+
         <div class="WeeklyWeightLostLineChart">
             <canvas id="WWLineChart" class="WWLineChart"></canvas>
         </div>
+
+        <div class="PolarChartContainer">
+            <canvas id="FirstPolarChart" class="FirstPolarChart"></canvas>
+        </div>
+
+        <h4>Exercises You've Completed Today: </h4>
+        <table class="NutritionTable table-condensed table-inverse">
+            <thead>
+                <tr class="row">
+                    <th>Exercise</th>
+                    <th>Type</th>
+                    <th>Time (Hours)</th>
+                    <th>Calories Burned</th>
+                    <th>Miles Traveled</th>
+                    <th>Weight Lifted</th>
+                    <th>Sets</th>
+                    <th>Reps</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="row">
+                    <th>Total: </th>
+                    <td>@Model.ExerciseTypeTotal</td>
+                    <td>@Model.ExerciseLengthInHoursTotal</td>
+                    <td>@Model.CaloriesBurnedTotal</td>
+                    <td>@Model.DistanceTraveledTotal</td>
+                    <td>@Model.WeightLiftedTotal</td>
+                    <td>@Model.SetsTotal</td>
+                    <td>@Model.RepsTotal</td>
+                </tr>
+            </tbody>
+        </table>
+
     </div>
 
     <div class="ProfileBody3">

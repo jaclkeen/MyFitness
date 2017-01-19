@@ -68,51 +68,15 @@ function WeeklyWeightLostLineChart(WeightLost) {
         datasets: [
             {
                 label: "Weight Lost",
-                backgroundColor: "lightgreen",
+                backgroundColor: "rgba(75, 192, 192, 0.2)",
                 borderColor: "darkcyan",
                 borderCapStyle: 'butt',
                 borderJoinStyle: 'miter',
                 pointBorderColor: "white",
                 pointBackgroundColor: "darkcyan",
-                pointHoverBackgroundColor: "salmon",
+                pointHoverBackgroundColor: "darkcyan",
                 pointHoverBorderColor: "white",
                 data: WeightLost[0]
-            },
-            {
-                label: "Fat Consumed",
-                backgroundColor: "lightblue",
-                borderColor: "#FF9999",
-                borderCapStyle: 'butt',
-                borderJoinStyle: 'miter',
-                pointBorderColor: "white",
-                pointBackgroundColor: "salmon",
-                pointHoverBackgroundColor: "salmon",
-                pointHoverBorderColor: "white",
-                data: WeightLost[1]
-            },
-            {
-                label: "Protein Consumed",
-                backgroundColor: "lightpink",
-                borderColor: "#FF9999",
-                borderCapStyle: 'butt',
-                borderJoinStyle: 'miter',
-                pointBorderColor: "white",
-                pointBackgroundColor: "salmon",
-                pointHoverBackgroundColor: "salmon",
-                pointHoverBorderColor: "white",
-                data: WeightLost[2]
-            },
-            {
-                label: "Carbs Consumed",
-                backgroundColor: "yellow",
-                borderColor: "#FF9999",
-                borderCapStyle: 'butt',
-                borderJoinStyle: 'miter',
-                pointBorderColor: "white",
-                pointBackgroundColor: "salmon",
-                pointHoverBackgroundColor: "salmon",
-                pointHoverBorderColor: "white",
-                data: WeightLost[3]
             }
         ]
     };
