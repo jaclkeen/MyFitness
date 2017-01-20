@@ -30,6 +30,7 @@ $(".FoodSearchResults").on("click", function (e) {
         FindFoodNutritionalValue(FoodId)
         .then(function (FoodNutritionValues) {
             let ProteinValue = (FoodNutritionValues[0].nutrients[0].gm - (FoodNutritionValues[0].nutrients[2].gm * 9 + FoodNutritionValues[0].nutrients[3].gm * 4)) / 4;
+            ProteinValue < 0 ? ProteinValue = 0 : false;
             $(".FoodSearchResults").html("")
             $(".FoodSearch").val(`${FoodNutritionValues[0].name}`)
             $(".Fat").val(`${FoodNutritionValues[0].nutrients[2].gm}`)
@@ -43,6 +44,7 @@ $(".FoodSearchResults").on("click", function (e) {
         FindFoodNutritionalValue(FoodId)
         .then(function (FoodNutritionValues) {
             let ProteinValue = (FoodNutritionValues[0].nutrients[0].gm - (FoodNutritionValues[0].nutrients[2].gm * 9 + FoodNutritionValues[0].nutrients[3].gm * 4)) / 4;
+            ProteinValue < 0 ? ProteinValue = 0 : false;
             $(".FoodSearchResults").html("")
             $(".FoodSearch").val(`${FoodNutritionValues[0].name}`)
             $(".Fat").val(`${FoodNutritionValues[0].nutrients[2].gm}`)

@@ -103,6 +103,21 @@ namespace MyFitness.Controllers
                                     select dn).Distinct().ToList();
             model.MonthlyFoodInfo.ForEach(dn => dn.DailyFoods = context.Foods.Where(f => f.DailyNutritionId == dn.DailyNutritionId).ToList());
 
+            //FOR YEARLY NUTRITION TABLE INFO ORGANIZED BY EACH INDIVIDUAL MONTH
+            model.YearlyFoodInfo = (from dn in context.DailyNutrition
+                                    where dn.User == CurrentUser
+                                    group dn by dn.DailyNutritionDate.Month into Group
+                                    select Group).ToList();
+
+            foreach(var group in model.YearlyFoodInfo)
+            {
+                foreach(var g in group)
+                {
+                    g.DailyExercises = context.Exercise.Where(e => e.DailyNutritionId == g.DailyNutritionId).ToList();
+                    g.DailyFoods = context.Foods.Where(f => f.DailyNutritionId == g.DailyNutritionId).ToList();
+                }
+            }
+
             return View(model);
         }
 
@@ -371,13 +386,12 @@ namespace MyFitness.Controllers
                 CarbTotal += n.DailyFoods.Sum(df => df.FoodCarbs);
                 ProteinTotal += n.DailyFoods.Sum(df => df.FoodProtein);
                 FatTotal += n.DailyFoods.Sum(df => df.FoodFat);
-                Total += n.DailyFoods.Sum(df => df.Calories);
-                //Total += n.DailyFoods.Sum(df => df.FoodCarbs) + n.DailyFoods.Sum(df => df.FoodProtein) + n.DailyFoods.Sum(df => df.FoodFat);
+                Total += n.DailyFoods.Sum(df => df.FoodCarbs) + n.DailyFoods.Sum(df => df.FoodProtein) + n.DailyFoods.Sum(df => df.FoodFat);
             }
 
-            CalInfo[0] = Math.Round(((CarbTotal / Total) * 100) * 4);
-            CalInfo[1] = Math.Round(((ProteinTotal / Total) * 100) * 4);
-            CalInfo[2] = Math.Round(((FatTotal / Total) * 100) * 9);
+            CalInfo[0] = Math.Round(((CarbTotal / Total) * 100));
+            CalInfo[1] = Math.Round(((ProteinTotal / Total) * 100));
+            CalInfo[2] = Math.Round(((FatTotal / Total) * 100));
 
             return CalInfo;
         }
@@ -433,6 +447,15 @@ namespace MyFitness.Controllers
             }
 
             return CalorieInformation;
+        }
+
+        [HttpGet]
+        public async Task<int[,]> YearlyNutritionInfo()
+        {
+            int[,] NutritionInformation = new int[2, 12];
+            ApplicationUser CurrentUser = await GetCurrentUserAsync();
+
+            return NutritionInformation;
         }
     }
 }

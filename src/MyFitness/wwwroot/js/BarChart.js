@@ -1,10 +1,11 @@
 ﻿function CreateBarChart(ChartData) {
+    console.log(ChartData)
     let ctx = document.getElementById('FirstBarChart').getContext('2d');
     ctx.canvas.width = "200px";
     ctx.canvas.height = "200px";
 
     var data = {
-        labels: ["Carbs", "Protein", "Fat"],
+        labels: ["Fat", "Protein", "Carbs"],
         datasets: [
             {
                 label: "Breakdown",
@@ -12,14 +13,12 @@
                     'rgba(54, 162, 235, 0.7)',
                     'rgba(255, 206, 86, 0.7)',
                     'rgba(75, 192, 192, 0.7)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
                 ],
                 borderColor: [
                     "black", "black", "black"
                 ],
                 borderWidth: 2,
-                data: ChartData,
+                data: [ChartData[3], ChartData[1], ChartData[2]],
             }
         ]
     };

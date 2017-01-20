@@ -17,6 +17,7 @@ namespace MyFitness.Models.AppViewModels
 
         public List<DailyNutrition> WeeklyFoodInfo { get; set; }
         public List<DailyNutrition> MonthlyFoodInfo { get; set; }
+        public List<IGrouping<int, DailyNutrition>> YearlyFoodInfo { get; set; }
 
         public string Today { get; set; }
         public double FatTotal { get; set; }
@@ -66,7 +67,6 @@ namespace MyFitness.Models.AppViewModels
                     MonthName = (today.Month == 10) ? "October" :
                     MonthName = (today.Month == 11) ? "November" :
                     MonthName = (today.Month == 12) ? "December" : null;
-
 
             string DateString = $"{MonthName} {today.Day}, {today.Year}";
 

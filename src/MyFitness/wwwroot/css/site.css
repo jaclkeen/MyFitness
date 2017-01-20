@@ -17,6 +17,10 @@
     padding-bottom: 5%;
 }
 
+.ProfileBody4{
+    border-top: 2px solid darkcyan;
+}
+
 .Body3Tables{
     border: 2px solid darkcyan;
     position: absolute;
@@ -379,7 +383,7 @@ td:nth-child(1), th:nth-child(1){
 }
 
 .BarGraphGramTotalsContainer{
-    margin-top: -18%;
+    margin-top: -22%;
     width: 43%;
     margin-left: 57%;
     background: gainsboro;

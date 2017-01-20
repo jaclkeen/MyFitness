@@ -113,18 +113,18 @@
                                 <tr class="row Hoverable" id="@foods.FoodId">
                                     <th>@foods.FoodName</th>
                                     <td>@foods.Calories</td>
-                                    <td>@foods.FoodFat</td>
-                                    <td>@foods.FoodProtein</td>
-                                    <td>@foods.FoodCarbs</td>
+                                    <td>@(foods.FoodFat)g</td>
+                                    <td>@(foods.FoodProtein)g</td>
+                                    <td>@(foods.FoodCarbs)g</td>
                                 </tr>
                             }
                         }
                         <tr class="row">
                             <th>Total: </th>
                             <td class="totals">@Model.CalorieTotal</td>
-                            <td class="totals">@Model.FatTotal</td>
-                            <td class="totals">@Model.ProteinTotal</td>
-                            <td class="totals">@Model.CarbTotal</td>
+                            <td class="totals">@(Model.FatTotal)g</td>
+                            <td class="totals">@(Model.ProteinTotal)g</td>
+                            <td class="totals">@(Model.CarbTotal)g</td>
                         </tr>
                     </tbody>
                 </table>
@@ -301,5 +301,14 @@
 
     <div class="ProfileBody4">
         <h3 class="Body4Heading">Yearly Weight Loss Information:</h3>
+        @foreach(var dn in Model.YearlyFoodInfo)
+        {
+            <p>@dn.Key</p>
+            @foreach(var item in dn)
+            {
+                <p>@item.DailyExercises.Sum(e => e.CaloriesBurned)</p>
+            }
+        }
+
     </div>
 </div>
