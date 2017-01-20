@@ -155,6 +155,7 @@ namespace MyFitness.Controllers
 
         public async Task<IActionResult> AddEatenFoods(Foods FoodBeingAdded)
         {
+            FoodBeingAdded.Servings = FoodBeingAdded.Servings == 0 ? 1 : FoodBeingAdded.Servings;
             DateTime today = DateTime.Today;
             ApplicationUser CurrentUser = await GetCurrentUserAsync();
             DailyNutrition n = context.DailyNutrition.Where(dn => dn.DailyNutritionDate == today && dn.User == CurrentUser).SingleOrDefault();
@@ -400,6 +401,38 @@ namespace MyFitness.Controllers
             }
 
             return CaloriesBurned;
+        }
+
+        [HttpPost]
+        public async Task<int[,]> StartingDailyCalorieInformation ([FromBody] int TimeRange)
+        {
+            int[,] CalorieInformation = new int[2, TimeRange];
+            ApplicationUser CurrentUser = await GetCurrentUserAsync();
+
+            List<double> DailyStartingCalories = context.DailyNutrition.Where(dn => dn.User == CurrentUser && dn.DailyNutritionDate >= DateTime.Today.AddDays(-TimeRange) && dn.DailyNutritionDate <= DateTime.Today).Select(c => c.StartingCaloriesToday).ToList();
+            List<int> DailyCaloriesEaten = new List<int> { };
+
+            List<DailyNutrition> nutrition = context.DailyNutrition.Where(dn => dn.User == CurrentUser && dn.DailyNutritionDate >= DateTime.Today.AddDays(-TimeRange) && dn.DailyNutritionDate <= DateTime.Today).ToList();
+            nutrition.ForEach(dn => dn.DailyFoods = context.Foods.Where(f => f.DailyNutritionId == dn.DailyNutritionId).ToList());
+            nutrition.ForEach(n => DailyCaloriesEaten.Add(n.DailyFoods.Sum(f => f.Calories)));
+
+            if (DailyStartingCalories.Count < TimeRange)
+            {
+                int ValsMissing = TimeRange - DailyStartingCalories.Count;
+                for (int i = 0; i < ValsMissing; i++)
+                {
+                    DailyStartingCalories.Insert(i, 0);
+                    DailyCaloriesEaten.Insert(i, 0);
+                }
+            }
+
+            for(var i = 0; i < TimeRange; i++)
+            {
+                CalorieInformation[0, i] = Convert.ToInt16(DailyStartingCalories[i]);
+                CalorieInformation[1, i] = DailyCaloriesEaten[i];
+            }
+
+            return CalorieInformation;
         }
     }
 }

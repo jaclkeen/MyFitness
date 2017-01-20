@@ -14,15 +14,18 @@
     background-color: black;
     opacity: .8;
     color: white;
+    padding-bottom: 5%;
 }
 
 .Body3Tables{
+    border: 2px solid darkcyan;
     position: absolute;
     background: white;
     width: 35%;
     max-height: 200px;
     overflow-x: overlay;
     display: inline-block;
+    margin-left: -1%;
 }
 
 .Body3Tables table {
@@ -44,6 +47,10 @@
 .Body2Heading, .Body3Heading, .Body4Heading{
     font-weight: bolder;
     margin-top: 10px;
+}
+
+.Body2Heading{
+    margin-left:-1%;
 }
 
 body {
@@ -413,7 +420,8 @@ td:nth-child(1), th:nth-child(1){
     margin-left: 38%;
     display: inline-block;
     padding: 1%;
-    margin-top: -3%;
+    margin-top: 1%;
+    border: 2px solid darkcyan;
 }
 
 .WeeklyWeightLostLineChart{
@@ -459,4 +467,19 @@ td:nth-child(1), th:nth-child(1){
 
 .totals{
     background-color: white!important;
+}
+
+.HorizontalBarDiv{
+    margin-left: -1%;
+    position:absolute;
+    width: 35%;
+    height: 200px;
+    background: silver;
+    margin-top: -15%;
+    border-radius: 30px;
+    border: 2px solid darkcyan;
+}
+
+.HorizontalBarChart{
+    width: 415px!important;
 }

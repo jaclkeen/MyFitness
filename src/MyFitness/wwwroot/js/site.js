@@ -245,3 +245,13 @@ GetInformationForLineChartInRange(30)
 .then(function (WLInfo) {
     MonthlyWeightLostLineChart(WLInfo)
 })
+
+GetCaloriesStartedAndGoalInDayRange(30)
+.then(function (CInfo) {
+    CreateMonthlyDoubleBarChart(CInfo)
+})
+
+GetPercentOfCaloriesInRange(30)
+.then(function (CInfo) {
+    CreateCaloriePercantageHorizontalBarChart(CInfo)
+})

@@ -4,23 +4,22 @@
     ctx.canvas.height = "200px";
 
     var data = {
-        labels: ["Protein", "Fat", "Carbs"],
+        labels: ["Carbs", "Protein", "Fat"],
         datasets: [
             {
                 label: "Breakdown",
                 backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(255, 206, 86, 0.7)',
+                    'rgba(75, 192, 192, 0.7)',
                     'rgba(153, 102, 255, 0.2)',
                     'rgba(255, 159, 64, 0.2)'
                 ],
                 borderColor: [
                     "black", "black", "black"
-                    //'rgba(54, 162, 235, 1)'
                 ],
                 borderWidth: 2,
-                data: [ChartData[1], ChartData[3], ChartData[2]],
+                data: ChartData,
             }
         ]
     };
@@ -89,26 +88,17 @@ function CreateMonthlyDoubleBarChart(CaloricData) {
         ],
         datasets: [
             {
-                label: "Calories Burned",
-                backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(353, 102, 255, 0.6)',
-                    'rgba(54, 162, 235, 0.6)'
-
-                ],
-                borderColor: [
-                    "black", "black", "black", "black", "black", "black", "black"
-                ],
-                borderWidth: 1,
-                data: [23, 82, 90, 89, 23, 01, 20],
+                label: "Calories Consumed",
+                backgroundColor: 'salmon',
+                borderColor: "black",
+                borderWidth: 2,
+                data: CaloricData[1],
             }, {
-                label: "Calories Eaten",
-                data: [90, 23, 48, 10, 48, 02, 32],
-                backgroundColor: "rgba(255,153,0,1)"
+                label: "Daily Calorie Goal",
+                data: CaloricData[0],
+                borderWidth: 2,
+                borderColor: "black",
+                backgroundColor: "darkcyan"
             }
         ]
     };
@@ -119,10 +109,46 @@ function CreateMonthlyDoubleBarChart(CaloricData) {
         options: {
             title: {
                 display: true,
-                text: "Calories Burned and Consumed the Last 30 Days"
+                text: "Calorie Goal and Calories Consumed the Last 30 Days"
             }
         }
     });
 }
 
-CreateMonthlyDoubleBarChart(4)
+function CreateCaloriePercantageHorizontalBarChart(CalPercentData){
+    let ctx = document.getElementById('HorizontalBarChart').getContext('2d');
+    ctx.canvas.width = "200px";
+    ctx.canvas.height = "200px";
+
+    var data = {
+        labels: ["Carbs", "Protein", "Fat"],
+        datasets: [
+            {
+                label: "Breakdown",
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(255, 206, 86, 0.7)',
+                    'rgba(255, 159, 64, 0.7)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                ],
+                borderColor: [
+                    "black", "black", "black"
+                ],
+                borderWidth: 2,
+                data: CalPercentData,
+            }
+        ]
+    };
+
+    new Chart(ctx, {
+        type: "horizontalBar",
+        data: data,
+        options: {
+            title: {
+                display: true,
+                text: "Macronutrient Percentage of Calories Eaten This Month"
+            }
+        }
+    });
+}

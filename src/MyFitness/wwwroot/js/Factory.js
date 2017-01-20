@@ -1,5 +1,20 @@
 ﻿let APIkey = GetKey();
 
+function GetCaloriesStartedAndGoalInDayRange(TimeRange) {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: `/Home/StartingDailyCalorieInformation`,
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(TimeRange)
+        }).done(function (CalsBurned) {
+            resolve(CalsBurned)
+        }).error(function (err) {
+            reject(err)
+        })
+    })
+}
+
 function GetCaloriesBurnedInRange(TimeRange) {
     return new Promise(function (resolve, reject) {
         $.ajax({

@@ -233,9 +233,9 @@
                 <tr class="row">
                     <th>Daily Average: </th>
                     <td class="totals">@Model.WeeklyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.Calories) / @Model.WeeklyFoodInfo.Count())</td>
-                    <td class="totals">@Model.WeeklyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.FoodFat) / @Model.WeeklyFoodInfo.Count())g</td>
+                    <td class="totals">@Math.Round(Model.WeeklyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.FoodFat) / @Model.WeeklyFoodInfo.Count()))g</td>
                     <td class="totals">@Math.Round(Model.WeeklyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.FoodProtein) / @Model.WeeklyFoodInfo.Count()))g</td>
-                    <td class="totals">@Model.WeeklyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.FoodCarbs) / @Model.WeeklyFoodInfo.Count())g</td>
+                    <td class="totals">@Math.Round(Model.WeeklyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.FoodCarbs) / @Model.WeeklyFoodInfo.Count()))g</td>
                 </tr>
             </tbody>
         </table>
@@ -281,9 +281,9 @@
                     <tr class="row">
                         <th>Daily Average: </th>
                         <td class="totals">@Model.MonthlyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.Calories) / @Model.MonthlyFoodInfo.Count())</td>
-                        <td class="totals">@Model.MonthlyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.FoodFat) / @Model.MonthlyFoodInfo.Count())g</td>
+                        <td class="totals">@Math.Round(Model.MonthlyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.FoodFat) / @Model.MonthlyFoodInfo.Count()))g</td>
                         <td class="totals">@Math.Round(Model.MonthlyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.FoodProtein) / @Model.MonthlyFoodInfo.Count()))g</td>
-                        <td class="totals">@Model.MonthlyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.FoodCarbs) / @Model.MonthlyFoodInfo.Count())g</td>
+                        <td class="totals">@Math.Round(Model.MonthlyFoodInfo.Sum(fi => fi.DailyFoods.Sum(f => f.FoodCarbs) / @Model.MonthlyFoodInfo.Count()))g</td>
                     </tr>
                 </tbody>
             </table>
@@ -291,6 +291,10 @@
 
         <div class="DoubleBarChartDiv">
             <canvas class="DoubleBarChart" id="DoubleBarChart"></canvas>
+        </div>
+
+        <div class="HorizontalBarDiv">
+            <canvas class="HorizontalBarChart" id="HorizontalBarChart"></canvas>
         </div>
 
     </div>
