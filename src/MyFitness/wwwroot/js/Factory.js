@@ -1,5 +1,20 @@
 ﻿let APIkey = GetKey();
 
+function GetCaloriesStartedAndGoalInDayRange(TimeRange) {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: `/Home/StartingDailyCalorieInformation`,
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(TimeRange)
+        }).done(function (CalsBurned) {
+            resolve(CalsBurned)
+        }).error(function (err) {
+            reject(err)
+        })
+    })
+}
+
 function GetCaloriesBurnedInRange(TimeRange) {
     return new Promise(function (resolve, reject) {
         $.ajax({
@@ -15,10 +30,13 @@ function GetCaloriesBurnedInRange(TimeRange) {
     })
 }
 
-function GetWeeklyInformationForLineChart() {
+function GetInformationForLineChartInRange(DayRange) {
     return new Promise(function (resolve, reject) {
         $.ajax({
-            url: "Home/WeeklyGoalWeightLossInformation"
+            url: "Home/WeightLossInformationInRange",
+            method: "POST",
+            contentType: 'application/json',
+            data: JSON.stringify(DayRange)
         }).done(function (WLInfo) {
             resolve(WLInfo)
         }).error(function (err) {

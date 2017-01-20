@@ -29,22 +29,26 @@ $(".FoodSearchResults").on("click", function (e) {
         let FoodId = context.attr("id")
         FindFoodNutritionalValue(FoodId)
         .then(function (FoodNutritionValues) {
+            let ProteinValue = (FoodNutritionValues[0].nutrients[0].gm - (FoodNutritionValues[0].nutrients[2].gm * 9 + FoodNutritionValues[0].nutrients[3].gm * 4)) / 4;
             $(".FoodSearchResults").html("")
             $(".FoodSearch").val(`${FoodNutritionValues[0].name}`)
             $(".Fat").val(`${FoodNutritionValues[0].nutrients[2].gm}`)
             $(".Calories").val(`${FoodNutritionValues[0].nutrients[0].gm}`)
             $(".Carbs").val(`${FoodNutritionValues[0].nutrients[3].gm}`)
+            $(".Protein").val(`${ProteinValue.toFixed(1)}`)
         })
     }
     else if (context.hasClass("FoodResultText")) {
         let FoodId = context.parent().attr("id")
         FindFoodNutritionalValue(FoodId)
         .then(function (FoodNutritionValues) {
+            let ProteinValue = (FoodNutritionValues[0].nutrients[0].gm - (FoodNutritionValues[0].nutrients[2].gm * 9 + FoodNutritionValues[0].nutrients[3].gm * 4)) / 4;
             $(".FoodSearchResults").html("")
             $(".FoodSearch").val(`${FoodNutritionValues[0].name}`)
             $(".Fat").val(`${FoodNutritionValues[0].nutrients[2].gm}`)
             $(".Calories").val(`${FoodNutritionValues[0].nutrients[0].gm}`)
             $(".Carbs").val(`${FoodNutritionValues[0].nutrients[3].gm}`)
+            $(".Protein").val(`${ProteinValue.toFixed(1)}`)
         })
     }
 })
@@ -222,7 +226,7 @@ GetNutritionGramsConsumedInformation()
     MakeCaloricPieChart(NInfo)
 })
 
-GetWeeklyInformationForLineChart()
+GetInformationForLineChartInRange(7)
 .then(function (WLInfo) {
     WeeklyWeightLostLineChart(WLInfo)
 })
@@ -235,4 +239,19 @@ GetPercentOfCaloriesInRange(7)
 GetCaloriesBurnedInRange(7)
 .then(function (CBurned) {
     CreateBarChartForCaloriesBurnedInTimeRange(CBurned)
+})
+
+GetInformationForLineChartInRange(30)
+.then(function (WLInfo) {
+    MonthlyWeightLostLineChart(WLInfo)
+})
+
+GetCaloriesStartedAndGoalInDayRange(30)
+.then(function (CInfo) {
+    CreateMonthlyDoubleBarChart(CInfo)
+})
+
+GetPercentOfCaloriesInRange(30)
+.then(function (CInfo) {
+    CreateCaloriePercantageHorizontalBarChart(CInfo)
 })
