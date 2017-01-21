@@ -104,17 +104,37 @@ namespace MyFitness.Controllers
             model.MonthlyFoodInfo.ForEach(dn => dn.DailyFoods = context.Foods.Where(f => f.DailyNutritionId == dn.DailyNutritionId).ToList());
 
             //FOR YEARLY NUTRITION TABLE INFO ORGANIZED BY EACH INDIVIDUAL MONTH
-            model.YearlyFoodInfo = (from dn in context.DailyNutrition
-                                    where dn.User == CurrentUser
-                                    group dn by dn.DailyNutritionDate.Month into Group
-                                    select Group).ToList();
+            model.YearlyCalCount = new List<double> { };
+            model.YearlyCarbCount = new List<double> { };
+            model.YearlyFatCount = new List<double> { };
+            model.YearlyProteinCount = new List<double> { };
+            model.MonthsForYearlyData = new List<string> { };
 
-            foreach(var group in model.YearlyFoodInfo)
+            for (int i = 1; i <= 12; i++)
             {
-                foreach(var g in group)
+                double TotalCal = 0; double TotalFat = 0; double Protein = 0; double Carbs = 0; int Year = 0;
+
+                List<DailyNutrition> MonthNutrition = context.DailyNutrition.Where(nut => nut.User == CurrentUser && nut.DailyNutritionDate.Month == i).ToList();
+
+                foreach(DailyNutrition nu in MonthNutrition)
                 {
-                    g.DailyExercises = context.Exercise.Where(e => e.DailyNutritionId == g.DailyNutritionId).ToList();
-                    g.DailyFoods = context.Foods.Where(f => f.DailyNutritionId == g.DailyNutritionId).ToList();
+                    nu.DailyExercises = context.Exercise.Where(e => e.DailyNutritionId == nu.DailyNutritionId).ToList();
+                    nu.DailyFoods = context.Foods.Where(f => f.DailyNutritionId == nu.DailyNutritionId).ToList();
+
+                    TotalCal += nu.DailyFoods.Sum(c => c.Calories) / MonthNutrition.Count;
+                    TotalFat += nu.DailyFoods.Sum(f => f.FoodFat) / MonthNutrition.Count;
+                    Protein += nu.DailyFoods.Sum(p => p.FoodProtein) / MonthNutrition.Count;
+                    Carbs += nu.DailyFoods.Sum(c => c.FoodCarbs) / MonthNutrition.Count;
+                    Year = nu.DailyNutritionDate.Year;
+                }
+
+                if (TotalCal != 0 && TotalFat != 0 && Protein != 0 && Carbs != 0)
+                {
+                    model.MonthsForYearlyData.Add(new DateTime(Year, i, 10).ToString("MMMM, yyyy"));
+                    model.YearlyCalCount.Add(TotalCal);
+                    model.YearlyCarbCount.Add(Carbs);
+                    model.YearlyFatCount.Add(TotalFat);
+                    model.YearlyProteinCount.Add(Protein);
                 }
             }
 
