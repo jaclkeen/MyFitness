@@ -24,7 +24,7 @@
     };
 
     new Chart(ctx, {
-        type: "bar",
+        type: "horizontalBar",
         data: data,
         options: {
             title: {

@@ -3,7 +3,7 @@
 function GetCaloriesStartedAndGoalInDayRange(TimeRange) {
     return new Promise(function (resolve, reject) {
         $.ajax({
-            url: `/Home/StartingDailyCalorieInformation`,
+            url: `/DailyAndWeekly/StartingDailyCalorieInformation`,
             method: "POST",
             contentType: "application/json",
             data: JSON.stringify(TimeRange)
@@ -18,7 +18,7 @@ function GetCaloriesStartedAndGoalInDayRange(TimeRange) {
 function GetCaloriesBurnedInRange(TimeRange) {
     return new Promise(function (resolve, reject) {
         $.ajax({
-            url: `/Home/CaloriesBurnedInTimeRange`,
+            url: `/DailyAndWeekly/CaloriesBurnedInTimeRange`,
             method: "POST",
             contentType: "application/json",
             data: JSON.stringify(TimeRange)
@@ -33,7 +33,7 @@ function GetCaloriesBurnedInRange(TimeRange) {
 function GetInformationForLineChartInRange(DayRange) {
     return new Promise(function (resolve, reject) {
         $.ajax({
-            url: "Home/WeightLossInformationInRange",
+            url: "DailyAndWeekly/WeightLossInformationInRange",
             method: "POST",
             contentType: 'application/json',
             data: JSON.stringify(DayRange)
@@ -72,7 +72,7 @@ function FindFoodNutritionalValue(FoodId) {
 function CaloriesEatenAndRemaining() {
     return new Promise(function (resolve, reject) {
         $.ajax({
-            url: "/Home/CaloriesEatenAndRemaining"
+            url: "/DailyAndWeekly/CaloriesEatenAndRemaining"
         }).done(function (CalInfo) {
             resolve(CalInfo)
         }).error(function (err) {
@@ -84,7 +84,7 @@ function CaloriesEatenAndRemaining() {
 function GetNutritionInformation() {
     return new Promise(function (resolve, reject) {
         $.ajax({
-            url: "/Home/NutritionInformation"
+            url: "/DailyAndWeekly/NutritionInformation"
         }).done(function (NInfo) {
             resolve(NInfo)
         }).error(function (err) {
@@ -96,7 +96,7 @@ function GetNutritionInformation() {
 function GetCaloriesConsumedInDateRange(DateRange) {
     return new Promise(function (resolve, reject) {
         $.ajax({
-            url: `/Home/CaloriesConsumedInDateRange`,
+            url: `/DailyAndWeekly/CaloriesConsumedInDateRange`,
             method: "POST",
             contentType: "application/json",
             data: JSON.stringify(DateRange)
@@ -111,7 +111,7 @@ function GetCaloriesConsumedInDateRange(DateRange) {
 function GetNutritionGramsConsumedInformation() {
     return new Promise(function (resolve, reject) {
         $.ajax({
-            url: "Home/NutrientGrams"
+            url: "DailyAndWeekly/NutrientGrams"
         }).done(function (NGrams) {
             resolve(NGrams)
         }).error(function (err) {
@@ -153,7 +153,7 @@ function EditUserValues(DataObj) {
 function GetPercentOfCaloriesInRange(DateRange) {
     return new Promise(function (resolve, reject) {
         $.ajax({
-            url: `/Home/CaloricPercentageInformationInDateRage`,
+            url: `/DailyAndWeekly/CaloricPercentageInformationInDateRage`,
             method: "POST",
             contentType: "application/json",
             data: JSON.stringify(DateRange)
