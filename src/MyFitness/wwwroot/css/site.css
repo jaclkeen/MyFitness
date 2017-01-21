@@ -9,12 +9,22 @@
 }
 
 .ProfileBody3{
+    padding-bottom: 1%;
+    padding-left: 0;
+    padding-right: 0;
     border-top: 2px solid darkcyan;
-    padding-top: 1%;
-    background-color: black;
-    opacity: .8;
+    background-color: gainsboro;
     color: white;
-    padding-bottom: 5%;
+}
+
+.Body3Heading{
+    margin-left: 1%;
+}
+
+.ProfileBody3 .Body2Heading{
+    color: black;
+    margin-left: 1%;
+    display: inline-block;
 }
 
 .ProfileBody4{
@@ -22,14 +32,12 @@
 }
 
 .Body3Tables{
-    border: 2px solid darkcyan;
     position: absolute;
     background: white;
     width: 35%;
     max-height: 200px;
     overflow-x: overlay;
-    display: inline-block;
-    margin-left: -1%;
+    margin-left: 1%;
 }
 
 .Body3Tables table {
@@ -416,16 +424,17 @@ td:nth-child(1), th:nth-child(1){
     height: 350px!important;
 }
 
+.DoubleBarChart{
+    height: 450px!important;
+}
+
 .DoubleBarChartDiv{
+    border-left: 2px solid darkcyan;
     opacity: 1!important;
-    border-radius: 40px;
-    background: silver;
-    width: 63%;
+    width: 61%;
     margin-left: 38%;
+    margin-top: -2.5%;
     display: inline-block;
-    padding: 1%;
-    margin-top: 1%;
-    border: 2px solid darkcyan;
 }
 
 .WeeklyWeightLostLineChart{
@@ -463,10 +472,16 @@ td:nth-child(1), th:nth-child(1){
 }
 
 .MonthlyWWLineChartContainer{
-    margin-bottom: 2%;
+    padding: 1%;
     border-bottom: 2px solid darkcyan;
-    height: 350px;
+    height: 450px!important;
     width: 100%;
+    background: black;
+    opacity: .8;
+}
+
+.MonthlyWWLineChart{
+    height: 390px!important;
 }
 
 .totals{
@@ -474,14 +489,11 @@ td:nth-child(1), th:nth-child(1){
 }
 
 .HorizontalBarDiv{
-    margin-left: -1%;
-    position:absolute;
-    width: 35%;
+    width: 36%;
     height: 200px;
-    background: silver;
-    margin-top: -15%;
-    border-radius: 30px;
-    border: 2px solid darkcyan;
+    margin-top: -17%;
+    margin-left: 1%;
+    border-top: 2px solid darkcyan;
 }
 
 .HorizontalBarChart{
