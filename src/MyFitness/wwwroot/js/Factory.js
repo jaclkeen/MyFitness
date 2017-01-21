@@ -1,5 +1,17 @@
 ﻿let APIkey = GetKey();
 
+function MacronutrientBreakdown() {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: "/YearInformation/MacronutrientBreakdown"
+        }).done(function (NBreakdown) {
+            resolve(NBreakdown)
+        }).error(function (err) {
+            reject(err)
+        })
+    })
+}
+
 function YearlyMonthTotalWeightLostBreakdown() {
     return new Promise(function (resolve, reject) {
         $.ajax({

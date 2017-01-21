@@ -262,3 +262,20 @@ YearlyMonthTotalWeightLostBreakdown()
 .then(function (WeightLost) {
     CreateYearlyWeightLostChart(WeightLost)
 })
+
+MacronutrientBreakdown()
+.then(function (NutBreakdown) {
+    let Cals = []
+    let Fat = []
+    let Carbs = []
+    let Protein = []
+
+    NutBreakdown.forEach(function (Nut) {
+        Cals.push(Nut[0]);
+        Fat.push(Nut[1])
+        Protein.push(Nut[3])
+        Carbs.push(Nut[2])
+    })
+
+    YearlyMacronutrientBreakdownBarGraph(Cals, Fat, Carbs, Protein)
+})

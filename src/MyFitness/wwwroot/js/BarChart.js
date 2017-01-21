@@ -76,6 +76,7 @@ function CreateBarChartForCaloriesBurnedInTimeRange(CaloricData) {
 
 
 function CreateMonthlyDoubleBarChart(CaloricData) {
+    console.log("Cdata", CaloricData)
     let ctx = document.getElementById('DoubleBarChart').getContext('2d');
 
     var data = {
@@ -180,6 +181,68 @@ function CreateYearlyWeightLostChart(WeightLostData) {
                 ],
                 borderWidth: 2,
                 data: WeightLostData,
+            }
+        ]
+    };
+
+    new Chart(ctx, {
+        type: "bar",
+        data: data,
+        options: {
+            title: {
+                display: true,
+                text: "Total Weight Lost Each Month"
+            }
+        }
+    });
+}
+
+function YearlyMacronutrientBreakdownBarGraph(Cals, Fat, Carbs, Protein) {
+    let ctx = document.getElementById('YearlyBarLineChart').getContext('2d');
+    //ctx.canvas.width = "200px";
+    //ctx.canvas.height = "200px";
+
+    var data = {
+        labels: ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September",
+            "October", "November", "December"],
+        datasets: [
+            {
+                type: "bar",
+                label: "Average Fat Consumed",
+                backgroundColor: 'salmon',
+                pointBackgroundColor: "salmon",
+                borderColor: "black",
+                pointBorderColor: "black",
+                borderWidth: 2,
+                data: Fat,
+            },
+            {
+                type: "bar",
+                label: "Average Carbs Consumed",
+                backgroundColor: 'rgba(54, 162, 235, 0.9)',
+                borderColor: "black",
+                pointBorderColor: "black",
+                borderWidth: 2,
+                data: Carbs,
+            },
+            {
+                type: "bar",
+                label: "Average Protein Consumed",
+                backgroundColor: 'yellow',
+                borderColor: "black",
+                pointBorderColor: "black",
+                borderWidth: 2,
+                data: Protein,
+            },
+            {
+                type: "line",
+                label: "Calories Consumed",
+                backgroundColor: 'rgba(75, 192, 192, 1)',
+                pointBackgroundColor: "green",
+                borderColor: "black",
+                pointBorderColor: "black",
+                borderWidth: 2,
+                data: Cals,
             }
         ]
     };
