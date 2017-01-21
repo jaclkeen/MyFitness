@@ -23,10 +23,16 @@ namespace MyFitness.Controllers
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         [HttpGet]
-        public async Task<int[,]> YearlyNutritionInfo()
+        public async Task<double[]> WeightLostBreakdown()
         {
-            int[,] NutritionInformation = new int[2, 12];
+            double[] NutritionInformation = new double[12];
             ApplicationUser CurrentUser = await GetCurrentUserAsync();
+
+            for(int i = 1; i < 12; i++)
+            {
+                List<DailyNutrition> MonthNutritions = context.DailyNutrition.Where(dn => dn.DailyNutritionDate.Month == i && dn.User == CurrentUser).ToList();
+                NutritionInformation[i - 1] = MonthNutritions.Sum(mn => mn.WeightLostToday);
+            }
 
             return NutritionInformation;
         }

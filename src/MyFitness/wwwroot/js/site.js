@@ -257,3 +257,8 @@ GetPercentOfCaloriesInRange(30)
 .then(function (CInfo) {
     CreateCaloriePercantageHorizontalBarChart(CInfo)
 })
+
+YearlyMonthTotalWeightLostBreakdown()
+.then(function (WeightLost) {
+    CreateYearlyWeightLostChart(WeightLost)
+})

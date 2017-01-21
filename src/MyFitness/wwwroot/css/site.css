@@ -28,6 +28,7 @@
 }
 
 .ProfileBody4{
+    padding-bottom: 0;
     background: silver;
     border-top: 2px solid darkcyan;
 }
@@ -154,7 +155,6 @@ td:nth-child(1), th:nth-child(1){
 }
 
 .Profile{
-    padding-bottom: 1%;
     border-left: 2px solid black;
     border-right: 2px solid black;
     padding-top: 2%;
@@ -499,4 +499,11 @@ td:nth-child(1), th:nth-child(1){
 
 .HorizontalBarChart{
     width: 415px!important;
+}
+
+.YearlyHorizontalBarChartDiv{
+    width: 45%;
+    margin-top: 1%;
+    height: 400px;
+    border-top: 2px solid darkcyan;
 }

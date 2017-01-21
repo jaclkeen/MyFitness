@@ -87,18 +87,23 @@ function CreateMonthlyDoubleBarChart(CaloricData) {
         ],
         datasets: [
             {
-                label: "Calories Consumed",
-                backgroundColor: 'salmon',
-                borderColor: "black",
-                borderWidth: 2,
-                data: CaloricData[1],
-            }, {
+                type: "line",
                 label: "Daily Calorie Goal",
                 data: CaloricData[0],
                 borderWidth: 2,
                 borderColor: "black",
-                backgroundColor: "darkcyan"
-            }
+                backgroundColor: "rgba(75, 192, 192, 0.6)"
+            },
+            {
+                type: "bar",
+                label: "Calories Consumed",
+                backgroundColor: 'salmon',
+                pointBackgroundColor: "salmon",
+                borderColor: "black",
+                pointBorderColor: "black",
+                borderWidth: 2,
+                data: CaloricData[1],
+            },
         ]
     };
 
@@ -147,6 +152,45 @@ function CreateCaloriePercantageHorizontalBarChart(CalPercentData){
             title: {
                 display: true,
                 text: "Macronutrient Percentage of Calories Eaten This Month"
+            }
+        }
+    });
+}
+
+function CreateYearlyWeightLostChart(WeightLostData) {
+    let ctx = document.getElementById('YearlyHorizontalBarChart').getContext('2d');
+    ctx.canvas.width = "200px";
+    ctx.canvas.height = "200px";
+
+    var data = {
+        labels: ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September",
+            "October", "November", "December"],
+        datasets: [
+            {
+                label: "Breakdown",
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(255, 206, 86, 0.7)',
+                    'rgba(255, 159, 64, 0.7)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                ],
+                borderColor: [
+                    "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black"
+                ],
+                borderWidth: 2,
+                data: WeightLostData,
+            }
+        ]
+    };
+
+    new Chart(ctx, {
+        type: "bar",
+        data: data,
+        options: {
+            title: {
+                display: true,
+                text: "Total Weight Lost Each Month"
             }
         }
     });

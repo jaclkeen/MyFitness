@@ -1,5 +1,17 @@
 ﻿let APIkey = GetKey();
 
+function YearlyMonthTotalWeightLostBreakdown() {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: "/YearInformation/WeightLostBreakdown"
+        }).done(function (WeightLossInfo) {
+            resolve(WeightLossInfo)
+        }).error(function (err) {
+            reject(err)
+        })
+    })
+}
+
 function GetCaloriesStartedAndGoalInDayRange(TimeRange) {
     return new Promise(function (resolve, reject) {
         $.ajax({
