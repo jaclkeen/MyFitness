@@ -301,10 +301,38 @@
 
     <div class="ProfileBody4">
         <h3 class="Body4Heading">Yearly Weight Loss Information:</h3>
-        @for(int i = 0; i < Model.YearlyCalCount.Count; i++)
-        {
-            <p>date: @Model.MonthsForYearlyData[i]</p>
-            <p>Cals: @Model.YearlyCalCount[i] Carbs: @Model.YearlyCarbCount[i] Fat: @Model.YearlyFatCount[i] Protein: @Model.YearlyProteinCount[i]</p>
-        }
+        <table class="table table-inverse MonthSummaryTable">
+            <thead>
+                <tr class="row">
+                    <th>Date</th>
+                    <th>Calories</th>
+                    <th>Fat</th>
+                    <th>Protein</th>
+                    <th>Carbs</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.WeeklyFoodInfo != null)
+                {
+                    @for (int i = 0; i < Model.YearlyCalCount.Count; i++)
+                    {
+                        <tr class="row Hoverable">
+                            <th>@Model.MonthsForYearlyData[i]</th>
+                            <td>@Model.YearlyCalCount[i]</td>
+                            <td>@Model.YearlyCarbCount[i]</td>
+                            <td>@Model.YearlyFatCount[i]</td>
+                            <td>@Model.YearlyProteinCount[i]</td>
+                        </tr>
+                    }
+                }
+                <tr class="row">
+                    <th>Daily Average: </th>
+                    <td class="totals">@(Model.YearlyCalCount.Sum() / Model.YearlyCalCount.Count)</td>
+                    <td class="totals">@(Model.YearlyCarbCount.Sum() / Model.YearlyCalCount.Count)</td>           
+                    <td class="totals">@(Model.YearlyFatCount.Sum() / Model.YearlyCalCount.Count)</td>
+                    <td class="totals">@(Model.YearlyProteinCount.Sum() / Model.YearlyCalCount.Count)</td>     
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
