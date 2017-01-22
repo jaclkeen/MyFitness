@@ -300,7 +300,7 @@
 
     <div class="ProfileBody4">
         <h3 class="Body4Heading">Yearly Weight Loss Information:</h3>
-        <table class="table table-inverse MonthSummaryTable">
+        <table class="table table-inverse MonthSummaryTable YSummary">
             <thead>
                 <tr class="row">
                     <th>Date</th>
@@ -318,18 +318,18 @@
                         <tr class="row Hoverable">
                             <th>@Model.MonthsForYearlyData[i]</th>
                             <td>@Model.YearlyCalCount[i]</td>
-                            <td>@Model.YearlyCarbCount[i]</td>
-                            <td>@Model.YearlyFatCount[i]</td>
-                            <td>@Model.YearlyProteinCount[i]</td>
+                            <td>@(Math.Round(Model.YearlyCarbCount[i]))g</td>
+                            <td>@(Math.Round(Model.YearlyFatCount[i]))g</td>
+                            <td>@(Math.Round(Model.YearlyProteinCount[i]))g</td>
                         </tr>
                     }
                 }
                 <tr class="row">
                     <th>Monthly Average: </th>
                     <td class="totals">@(Model.YearlyCalCount.Sum() / Model.YearlyCalCount.Count)</td>
-                    <td class="totals">@(Model.YearlyCarbCount.Sum() / Model.YearlyCalCount.Count)</td>           
-                    <td class="totals">@(Model.YearlyFatCount.Sum() / Model.YearlyCalCount.Count)</td>
-                    <td class="totals">@(Model.YearlyProteinCount.Sum() / Model.YearlyCalCount.Count)</td>     
+                    <td class="totals">@(Math.Round(Model.YearlyCarbCount.Sum() / Model.YearlyCalCount.Count))g</td>           
+                    <td class="totals">@(Math.Round(Model.YearlyFatCount.Sum() / Model.YearlyCalCount.Count))g</td>
+                    <td class="totals">@(Math.Round(Model.YearlyProteinCount.Sum() / Model.YearlyCalCount.Count))g</td>     
                 </tr>
             </tbody>
         </table>
@@ -338,9 +338,18 @@
             <canvas class="YearlyHorizontalBarChart" id="YearlyHorizontalBarChart"></canvas>
         </div>
 
-        <div class="YearlyBarLineChartDiv">a
+        <div class="YearlyBarLineChartDiv">
             <canvas class="YearlyBarLineChart" id="YearlyBarLineChart"></canvas>
         </div>
 
+        <div class="YearlyDonutChartDiv">
+            <canvas class="YearlyDonutChart" id="YearlyDonutChart"></canvas>
+        </div>
+
+        <div class="YearlyPieChartDiv">
+            <canvas class="YearlyPieChart" id="YearlyPieChart"></canvas>
+        </div>
+
+        <br />
     </div>
 </div>

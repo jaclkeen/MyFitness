@@ -508,6 +508,26 @@ td:nth-child(1), th:nth-child(1){
     border-top: 2px solid darkcyan;
 }
 
-.YearlyBarLineChartDiv{
+.YearlyBarLineChart{
+}
 
+.YearlyBarLineChartDiv{
+    width: 53%;
+    margin-top: -45%;
+    border-left: 2px solid darkcyan;
+    border-bottom: 2px solid darkcyan;
+    margin-left: 47%;
+}
+
+.YearlyDonutChartDiv{
+    width: 22%;
+    margin-left: 47%;
+}
+
+.YearlyPieChartDiv{
+    width: 27%;
+    margin-top: -22%;
+    margin-left: 73%;
+    padding-left: 4%;
+    border-left: 2px solid darkcyan;
 }

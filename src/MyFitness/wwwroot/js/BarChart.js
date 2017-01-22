@@ -186,7 +186,7 @@ function CreateYearlyWeightLostChart(WeightLostData) {
     };
 
     new Chart(ctx, {
-        type: "bar",
+        type: "horizontalBar",
         data: data,
         options: {
             title: {
@@ -208,7 +208,7 @@ function YearlyMacronutrientBreakdownBarGraph(Cals, Fat, Carbs, Protein) {
         datasets: [
             {
                 type: "bar",
-                label: "Average Fat Consumed",
+                label: "Fat Consumed",
                 backgroundColor: 'salmon',
                 pointBackgroundColor: "salmon",
                 borderColor: "black",
@@ -218,7 +218,7 @@ function YearlyMacronutrientBreakdownBarGraph(Cals, Fat, Carbs, Protein) {
             },
             {
                 type: "bar",
-                label: "Average Carbs Consumed",
+                label: "Carbs Consumed",
                 backgroundColor: 'rgba(54, 162, 235, 0.9)',
                 borderColor: "black",
                 pointBorderColor: "black",
@@ -227,7 +227,7 @@ function YearlyMacronutrientBreakdownBarGraph(Cals, Fat, Carbs, Protein) {
             },
             {
                 type: "bar",
-                label: "Average Protein Consumed",
+                label: "Protein Consumed",
                 backgroundColor: 'yellow',
                 borderColor: "black",
                 pointBorderColor: "black",
@@ -253,7 +253,7 @@ function YearlyMacronutrientBreakdownBarGraph(Cals, Fat, Carbs, Protein) {
         options: {
             title: {
                 display: true,
-                text: "Total Weight Lost Each Month"
+                text: "Monthly Macronutrient Consumed Average in Calories"
             }
         }
     });
