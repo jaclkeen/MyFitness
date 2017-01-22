@@ -1,5 +1,29 @@
 ﻿let APIkey = GetKey();
 
+function YearMacrosConsumed() {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: "/YearInformation/YearlyMacrosConsumed"
+        }).done(function (MacrosConsumed) {
+            resolve(MacrosConsumed)
+        }).error(function (err) {
+            reject(err)
+        })
+    })
+}
+
+function YearlyCaloriesConsumed() {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: "/YearInformation/YearlyCaloriesConsumed"
+        }).done(function (CConsumed) {
+            resolve(CConsumed)
+        }).error(function (err) {
+            reject(err)
+        })
+    })
+}
+
 function MacronutrientBreakdown() {
     return new Promise(function (resolve, reject) {
         $.ajax({

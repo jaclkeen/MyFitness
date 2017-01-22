@@ -279,3 +279,13 @@ MacronutrientBreakdown()
 
     YearlyMacronutrientBreakdownBarGraph(Cals, Fat, Carbs, Protein)
 })
+
+YearMacrosConsumed()
+.then(function (MConsumed) {
+    YearlyPie(MConsumed)
+})
+
+YearlyCaloriesConsumed()
+.then(function (YCConsumed) {
+    YearlyDoughnut(YCConsumed)
+})

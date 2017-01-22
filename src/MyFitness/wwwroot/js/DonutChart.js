@@ -78,10 +78,9 @@ function YearlyDoughnut(CalorieInfo) {
         labels: [
             "Fat",
             "Carbs",
-            "Protein",
         ],
         datasets: [{
-            data: [80, 47, 90],
+            data: [80, 47],
             backgroundColor: [
                 "salmon",
                 "dodgerblue",
@@ -102,21 +101,22 @@ function YearlyDoughnut(CalorieInfo) {
         options: {
             title: {
                 display: true,
-                text: "Nutrients Consumed Today (In Grams)"
+                text: "Average Calories Consumed vs. Average Calorie Limit"
             }
         }
     });
 }
 
 function YearlyPie(PieInfo) {
+    console.log(PieInfo)
     let data = {
         labels: [
-            "Fat",
             "Carbs",
+            "Fat",
             "Protein",
         ],
         datasets: [{
-            data: [80, 47, 90],
+            data: PieInfo[0],
             backgroundColor: [
                 "salmon",
                 "dodgerblue",
@@ -137,11 +137,8 @@ function YearlyPie(PieInfo) {
         options: {
             title: {
                 display: true,
-                text: "Nutrients Consumed Today (In Grams)"
+                text: "Average Macros Consumed This Year (In Grams)"
             }
         }
     });
 }
-
-YearlyDoughnut(3)
-YearlyPie(3)
