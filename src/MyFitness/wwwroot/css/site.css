@@ -508,9 +508,6 @@ td:nth-child(1), th:nth-child(1){
     border-top: 2px solid darkcyan;
 }
 
-.YearlyBarLineChart{
-}
-
 .YearlyBarLineChartDiv{
     width: 53%;
     margin-top: -45%;

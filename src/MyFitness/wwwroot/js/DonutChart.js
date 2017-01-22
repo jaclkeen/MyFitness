@@ -74,13 +74,15 @@ function MakeCaloricPieChart(CalorieInfo) {
 }
 
 function YearlyDoughnut(CalorieInfo) {
+    console.log(CalorieInfo)
+
     let data = {
         labels: [
-            "Fat",
-            "Carbs",
+            "Starting Calories",
+            "Calories Consumed",
         ],
         datasets: [{
-            data: [80, 47],
+            data: CalorieInfo,
             backgroundColor: [
                 "salmon",
                 "dodgerblue",
@@ -101,7 +103,7 @@ function YearlyDoughnut(CalorieInfo) {
         options: {
             title: {
                 display: true,
-                text: "Average Calories Consumed vs. Average Calorie Limit"
+                text: "Average Calories Consumed vs. Average Calorie Limit This Year"
             }
         }
     });
@@ -116,7 +118,7 @@ function YearlyPie(PieInfo) {
             "Protein",
         ],
         datasets: [{
-            data: PieInfo[0],
+            data: PieInfo,
             backgroundColor: [
                 "salmon",
                 "dodgerblue",
