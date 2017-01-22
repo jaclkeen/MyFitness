@@ -18,16 +18,23 @@ namespace MyFitness.Models.AppViewModels
         public List<DailyNutrition> WeeklyFoodInfo { get; set; }
         public List<DailyNutrition> MonthlyFoodInfo { get; set; }
 
+        public List<double> YearlyCalCount { get; set; }
+        public List<double> YearlyFatCount { get; set; }
+        public List<double> YearlyProteinCount { get; set; }
+        public List<double> YearlyCarbCount { get; set; }
+        public List<string> MonthsForYearlyData { get; set; }
+
+
         public string Today { get; set; }
         public double FatTotal { get; set; }
         public int CalorieTotal { get; set; }
         public double CarbTotal { get; set; }
         public double ProteinTotal { get; set; }
 
-        public int ExerciseTypeTotal { get; set; }
         public double ExerciseLengthInHoursTotal { get; set; }
         public double CaloriesBurnedTotal { get; set; }
         public double DistanceTraveledTotal { get; set; }
+        public int ExerciseTypeTotal { get; set; }
         public double WeightLiftedTotal { get; set; }
         public double SetsTotal { get; set; }
         public double RepsTotal { get; set; }
@@ -54,6 +61,7 @@ namespace MyFitness.Models.AppViewModels
 
         public string FormatTodayDate(DateTime today)
         {
+            string DateString = "";
             string MonthName = (today.Month == 1) ? "January" :
                     MonthName = (today.Month == 2) ? "February" :
                     MonthName = (today.Month == 3) ? "March" :
@@ -67,8 +75,7 @@ namespace MyFitness.Models.AppViewModels
                     MonthName = (today.Month == 11) ? "November" :
                     MonthName = (today.Month == 12) ? "December" : null;
 
-
-            string DateString = $"{MonthName} {today.Day}, {today.Year}";
+                DateString = $"{MonthName} {today.Day}, {today.Year}";
 
             return DateString;
         }

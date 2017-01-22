@@ -30,6 +30,7 @@ $(".FoodSearchResults").on("click", function (e) {
         FindFoodNutritionalValue(FoodId)
         .then(function (FoodNutritionValues) {
             let ProteinValue = (FoodNutritionValues[0].nutrients[0].gm - (FoodNutritionValues[0].nutrients[2].gm * 9 + FoodNutritionValues[0].nutrients[3].gm * 4)) / 4;
+            ProteinValue < 0 ? ProteinValue = 0 : false;
             $(".FoodSearchResults").html("")
             $(".FoodSearch").val(`${FoodNutritionValues[0].name}`)
             $(".Fat").val(`${FoodNutritionValues[0].nutrients[2].gm}`)
@@ -43,6 +44,7 @@ $(".FoodSearchResults").on("click", function (e) {
         FindFoodNutritionalValue(FoodId)
         .then(function (FoodNutritionValues) {
             let ProteinValue = (FoodNutritionValues[0].nutrients[0].gm - (FoodNutritionValues[0].nutrients[2].gm * 9 + FoodNutritionValues[0].nutrients[3].gm * 4)) / 4;
+            ProteinValue < 0 ? ProteinValue = 0 : false;
             $(".FoodSearchResults").html("")
             $(".FoodSearch").val(`${FoodNutritionValues[0].name}`)
             $(".Fat").val(`${FoodNutritionValues[0].nutrients[2].gm}`)
@@ -254,4 +256,36 @@ GetCaloriesStartedAndGoalInDayRange(30)
 GetPercentOfCaloriesInRange(30)
 .then(function (CInfo) {
     CreateCaloriePercantageHorizontalBarChart(CInfo)
+})
+
+YearlyMonthTotalWeightLostBreakdown()
+.then(function (WeightLost) {
+    CreateYearlyWeightLostChart(WeightLost)
+})
+
+MacronutrientBreakdown()
+.then(function (NutBreakdown) {
+    let Cals = []
+    let Fat = []
+    let Carbs = []
+    let Protein = []
+
+    NutBreakdown.forEach(function (Nut) {
+        Cals.push(Nut[0]);
+        Fat.push(Nut[1])
+        Protein.push(Nut[3])
+        Carbs.push(Nut[2])
+    })
+
+    YearlyMacronutrientBreakdownBarGraph(Cals, Fat, Carbs, Protein)
+})
+
+YearMacrosConsumed()
+.then(function (MConsumed) {
+    YearlyPie(MConsumed)
+})
+
+YearlyCaloriesConsumed()
+.then(function (YCConsumed) {
+    YearlyDoughnut(YCConsumed)
 })

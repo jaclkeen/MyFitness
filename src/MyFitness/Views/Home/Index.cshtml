@@ -113,18 +113,18 @@
                                 <tr class="row Hoverable" id="@foods.FoodId">
                                     <th>@foods.FoodName</th>
                                     <td>@foods.Calories</td>
-                                    <td>@foods.FoodFat</td>
-                                    <td>@foods.FoodProtein</td>
-                                    <td>@foods.FoodCarbs</td>
+                                    <td>@(foods.FoodFat)g</td>
+                                    <td>@(foods.FoodProtein)g</td>
+                                    <td>@(foods.FoodCarbs)g</td>
                                 </tr>
                             }
                         }
                         <tr class="row">
                             <th>Total: </th>
                             <td class="totals">@Model.CalorieTotal</td>
-                            <td class="totals">@Model.FatTotal</td>
-                            <td class="totals">@Model.ProteinTotal</td>
-                            <td class="totals">@Model.CarbTotal</td>
+                            <td class="totals">@(Model.FatTotal)g</td>
+                            <td class="totals">@(Model.ProteinTotal)g</td>
+                            <td class="totals">@(Model.CarbTotal)g</td>
                         </tr>
                     </tbody>
                 </table>
@@ -246,9 +246,8 @@
     </div>
 
     <div class="ProfileBody3">
-        <h3 class="Body3Heading">Monthly Weight Loss Information:</h3>
-
         <div class="MonthlyWWLineChartContainer">
+            <h3 class="Body3Heading">Monthly Weight Loss Information:</h3>
             <canvas class="MonthlyWWLineChart" id="MonthlyWWLineChart"></canvas>
         </div>
 
@@ -301,5 +300,56 @@
 
     <div class="ProfileBody4">
         <h3 class="Body4Heading">Yearly Weight Loss Information:</h3>
+        <table class="table table-inverse MonthSummaryTable YSummary">
+            <thead>
+                <tr class="row">
+                    <th>Date</th>
+                    <th>Calories</th>
+                    <th>Carbs</th>
+                    <th>Fat</th>
+                    <th>Protein</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.WeeklyFoodInfo != null)
+                {
+                    @for (int i = 0; i < Model.YearlyCalCount.Count; i++)
+                    {
+                        <tr class="row Hoverable">
+                            <th>@Model.MonthsForYearlyData[i]</th>
+                            <td>@Model.YearlyCalCount[i]</td>
+                            <td>@(Math.Round(Model.YearlyCarbCount[i]))g</td>
+                            <td>@(Math.Round(Model.YearlyFatCount[i]))g</td>
+                            <td>@(Math.Round(Model.YearlyProteinCount[i]))g</td>
+                        </tr>
+                    }
+                }
+                <tr class="row">
+                    <th>Monthly Average: </th>
+                    <td class="totals">@(Model.YearlyCalCount.Sum() / Model.YearlyCalCount.Count)</td>
+                    <td class="totals">@(Math.Round(Model.YearlyCarbCount.Sum() / Model.YearlyCalCount.Count))g</td>           
+                    <td class="totals">@(Math.Round(Model.YearlyFatCount.Sum() / Model.YearlyCalCount.Count))g</td>
+                    <td class="totals">@(Math.Round(Model.YearlyProteinCount.Sum() / Model.YearlyCalCount.Count))g</td>     
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="YearlyHorizontalBarChartDiv">
+            <canvas class="YearlyHorizontalBarChart" id="YearlyHorizontalBarChart"></canvas>
+        </div>
+
+        <div class="YearlyBarLineChartDiv">
+            <canvas class="YearlyBarLineChart" id="YearlyBarLineChart"></canvas>
+        </div>
+
+        <div class="YearlyDonutChartDiv">
+            <canvas class="YearlyDonutChart" id="YearlyDonutChart"></canvas>
+        </div>
+
+        <div class="YearlyPieChartDiv">
+            <canvas class="YearlyPieChart" id="YearlyPieChart"></canvas>
+        </div>
+
+        <br />
     </div>
 </div>

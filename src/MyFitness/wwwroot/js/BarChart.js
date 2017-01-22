@@ -1,10 +1,11 @@
 ﻿function CreateBarChart(ChartData) {
+    console.log(ChartData)
     let ctx = document.getElementById('FirstBarChart').getContext('2d');
     ctx.canvas.width = "200px";
     ctx.canvas.height = "200px";
 
     var data = {
-        labels: ["Carbs", "Protein", "Fat"],
+        labels: ["Fat", "Protein", "Carbs"],
         datasets: [
             {
                 label: "Breakdown",
@@ -12,20 +13,18 @@
                     'rgba(54, 162, 235, 0.7)',
                     'rgba(255, 206, 86, 0.7)',
                     'rgba(75, 192, 192, 0.7)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
                 ],
                 borderColor: [
                     "black", "black", "black"
                 ],
                 borderWidth: 2,
-                data: ChartData,
+                data: [ChartData[3], ChartData[1], ChartData[2]],
             }
         ]
     };
 
     new Chart(ctx, {
-        type: "bar",
+        type: "horizontalBar",
         data: data,
         options: {
             title: {
@@ -77,6 +76,7 @@ function CreateBarChartForCaloriesBurnedInTimeRange(CaloricData) {
 
 
 function CreateMonthlyDoubleBarChart(CaloricData) {
+    console.log("Cdata", CaloricData)
     let ctx = document.getElementById('DoubleBarChart').getContext('2d');
 
     var data = {
@@ -88,18 +88,23 @@ function CreateMonthlyDoubleBarChart(CaloricData) {
         ],
         datasets: [
             {
-                label: "Calories Consumed",
-                backgroundColor: 'salmon',
-                borderColor: "black",
-                borderWidth: 2,
-                data: CaloricData[1],
-            }, {
+                type: "line",
                 label: "Daily Calorie Goal",
                 data: CaloricData[0],
                 borderWidth: 2,
                 borderColor: "black",
-                backgroundColor: "darkcyan"
-            }
+                backgroundColor: "rgba(75, 192, 192, 0.6)"
+            },
+            {
+                type: "bar",
+                label: "Calories Consumed",
+                backgroundColor: 'salmon',
+                pointBackgroundColor: "salmon",
+                borderColor: "black",
+                pointBorderColor: "black",
+                borderWidth: 2,
+                data: CaloricData[1],
+            },
         ]
     };
 
@@ -148,6 +153,107 @@ function CreateCaloriePercantageHorizontalBarChart(CalPercentData){
             title: {
                 display: true,
                 text: "Macronutrient Percentage of Calories Eaten This Month"
+            }
+        }
+    });
+}
+
+function CreateYearlyWeightLostChart(WeightLostData) {
+    let ctx = document.getElementById('YearlyHorizontalBarChart').getContext('2d');
+    ctx.canvas.width = "200px";
+    ctx.canvas.height = "200px";
+
+    var data = {
+        labels: ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September",
+            "October", "November", "December"],
+        datasets: [
+            {
+                label: "Breakdown",
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(255, 206, 86, 0.7)',
+                    'rgba(255, 159, 64, 0.7)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                ],
+                borderColor: [
+                    "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black"
+                ],
+                borderWidth: 2,
+                data: WeightLostData,
+            }
+        ]
+    };
+
+    new Chart(ctx, {
+        type: "horizontalBar",
+        data: data,
+        options: {
+            title: {
+                display: true,
+                text: "Total Weight Lost Each Month"
+            }
+        }
+    });
+}
+
+function YearlyMacronutrientBreakdownBarGraph(Cals, Fat, Carbs, Protein) {
+    let ctx = document.getElementById('YearlyBarLineChart').getContext('2d');
+    //ctx.canvas.width = "200px";
+    //ctx.canvas.height = "200px";
+
+    var data = {
+        labels: ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September",
+            "October", "November", "December"],
+        datasets: [
+            {
+                type: "bar",
+                label: "Fat Consumed",
+                backgroundColor: 'salmon',
+                pointBackgroundColor: "salmon",
+                borderColor: "black",
+                pointBorderColor: "black",
+                borderWidth: 2,
+                data: Fat,
+            },
+            {
+                type: "bar",
+                label: "Carbs Consumed",
+                backgroundColor: 'rgba(54, 162, 235, 0.9)',
+                borderColor: "black",
+                pointBorderColor: "black",
+                borderWidth: 2,
+                data: Carbs,
+            },
+            {
+                type: "bar",
+                label: "Protein Consumed",
+                backgroundColor: 'yellow',
+                borderColor: "black",
+                pointBorderColor: "black",
+                borderWidth: 2,
+                data: Protein,
+            },
+            {
+                type: "line",
+                label: "Calories Consumed",
+                backgroundColor: 'rgba(75, 192, 192, 1)',
+                pointBackgroundColor: "green",
+                borderColor: "black",
+                pointBorderColor: "black",
+                borderWidth: 2,
+                data: Cals,
+            }
+        ]
+    };
+
+    new Chart(ctx, {
+        type: "bar",
+        data: data,
+        options: {
+            title: {
+                display: true,
+                text: "Monthly Macronutrient Consumed Average in Calories"
             }
         }
     });
