@@ -2,6 +2,10 @@
     padding: 0 2% 2% 2%;
 }
 
+.clearResults{
+    font-size: 15px!important;
+}
+
 .ProfileBody2{
     border-top: 2px solid darkcyan;
     padding-top: 1%;
@@ -392,9 +396,10 @@ td:nth-child(1), th:nth-child(1){
 }
 
 .BarGraphGramTotalsContainer{
-    margin-top: -22%;
-    width: 43%;
-    margin-left: 57%;
+    margin-top: -26%;
+    position: absolute;
+    width: 41%;
+    margin-left: 53%;
     background: gainsboro;
     display: inline-block;
     padding: 1%;

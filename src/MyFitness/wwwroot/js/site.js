@@ -205,7 +205,10 @@ $(".SubmitEdit").on("click", function () {
             location.reload();
         })
     }
+})
 
+$(".clearResults").on("click", function () {
+    $(".FoodSearchResults").html("")
 })
 
 CaloriesEatenAndRemaining()
