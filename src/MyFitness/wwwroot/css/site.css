@@ -1,4 +1,33 @@
-﻿.ProfileBody2, .ProfileBody3, .ProfileBody4{
+﻿.Login{
+    background: silver;
+    border: 2px solid black;
+    width: 50%;
+    margin: auto;
+    margin-top: 6%;
+}
+
+.BackToMainLogin{
+    cursor: pointer;
+}
+
+.Register{
+    background: silver;
+    border: 2px solid black;
+    width: 50%;
+    margin: auto;
+    margin-top: 6%;
+}
+
+.Login input, .Register input{
+    border: 2px solid black!important;
+}
+
+.Login h2, .Register h2{
+    text-align: center;
+    font-weight: bolder;
+}
+
+.ProfileBody2, .ProfileBody3, .ProfileBody4{
     padding: 0 2% 2% 2%;
 }
 
