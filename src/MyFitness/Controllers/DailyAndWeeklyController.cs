@@ -84,7 +84,7 @@ namespace MyFitness.Controllers
                 }
             }
 
-            for (int i = 0; i < Cals.Count; i++)
+            for (int i = 0; i < DayRange; i++)
             {
                 Values[0, i] = Cals[i];
                 Values[1, i] = Convert.ToInt16(DailyCaloricAllowance[i]);

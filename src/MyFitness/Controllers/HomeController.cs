@@ -92,14 +92,14 @@ namespace MyFitness.Controllers
             //FOR WEEKLY NUTRITION TABLE INFO
             model.WeeklyFoodInfo = (from dn in context.DailyNutrition
                                     join f in context.Foods on dn.DailyNutritionId equals f.DailyNutritionId
-                                    where dn.User == CurrentUser && dn.DailyNutritionDate >= today.AddDays(-7) && dn.DailyNutritionDate <= today
+                                    where dn.User == CurrentUser && dn.DailyNutritionDate > today.AddDays(-7) && dn.DailyNutritionDate <= today
                                     select dn).Distinct().ToList();
             model.WeeklyFoodInfo.ForEach(dn => dn.DailyFoods = context.Foods.Where(f => f.DailyNutritionId == dn.DailyNutritionId).ToList());
 
             //FOR MONTHLY NUTRITION TABLE INFO
             model.MonthlyFoodInfo = (from dn in context.DailyNutrition
                                     join f in context.Foods on dn.DailyNutritionId equals f.DailyNutritionId
-                                    where dn.User == CurrentUser && dn.DailyNutritionDate >= today.AddDays(-30) && dn.DailyNutritionDate <= today
+                                    where dn.User == CurrentUser && dn.DailyNutritionDate > today.AddDays(-30) && dn.DailyNutritionDate <= today
                                     select dn).Distinct().ToList();
             model.MonthlyFoodInfo.ForEach(dn => dn.DailyFoods = context.Foods.Where(f => f.DailyNutritionId == dn.DailyNutritionId).ToList());
 

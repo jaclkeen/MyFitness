@@ -205,7 +205,10 @@ $(".SubmitEdit").on("click", function () {
             location.reload();
         })
     }
+})
 
+$(".clearResults").on("click", function () {
+    $(".FoodSearchResults").html("")
 })
 
 CaloriesEatenAndRemaining()
@@ -220,6 +223,7 @@ GetNutritionInformation()
 
 GetCaloriesConsumedInDateRange(7)
 .then(function (CalorieInfo) {
+    console.log(CalorieInfo)
     CreateLineChart(CalorieInfo)
 })
 
